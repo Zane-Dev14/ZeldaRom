@@ -19,6 +19,8 @@
 #include "screen.h"
 #include "subtask.h"
 #include "ui.h"
+#include "roomid.h"
+#include "area.h"
 
 // copy, erase, start
 #define NUM_FILE_OPERATIONS 3
@@ -1678,6 +1680,37 @@ void ResetSaveFile(u32 save_idx) {
     MemClear(save, sizeof(SaveFile));
     save->msg_speed = 1;
     save->brightness = 1;
-    save->stats.health = 24;
-    save->stats.maxHealth = 24;
+    save->stats.health = 16;
+    save->stats.maxHealth = 16;
+    
+    // Set starting spawn position
+    save->saved_status.area_next = AREA_MINISH_VILLAGE;
+    save->saved_status.room_next = ROOM_MINISH_VILLAGE_TEST_ROOM;
+    save->saved_status.start_anim = 0;
+    save->saved_status.spawn_type = PL_SPAWN_DEFAULT;
+    save->saved_status.layer = 1;
+    save->saved_status.start_pos_x = 0x78;
+    save->saved_status.start_pos_y = 0x78;
+    
+    // Set flags to skip intro and indicate Link has left house
+    save->flags[0x13] = 1;  // START flag - skip intro cutscene
+    save->flags[0x49] = 1;  // OUTDOOR flag - Link has left house
+    
+    // Give starting items: Four Sword, Bow, and Arrows
+    // Note: inventory is stored as 2 bits per item, so we need to use SetInventoryValue
+    // But since this is a fresh save, we can directly set the bytes
+    // ITEM_FOURSWORD = 33, ITEM_BOW = 36, ITEM_ARROWS5 = 37
+    // Each byte stores 4 items (2 bits each)
+    // Item 33 goes in byte 8 (33/4 = 8), position 1 (33%4 = 1)
+    // Item 36 goes in byte 9 (36/4 = 9), position 0 (36%4 = 0)  
+    // Item 37 goes in byte 9 (37/4 = 9), position 1 (37%4 = 1)
+    
+    // Set Four Sword (item 33) - byte 8, position 1, value 1
+    save->inventory[8] |= (1 << 2);  // 2 bits starting at position 1*2 = 2
+    
+    // Set Bow (item 36) - byte 9, position 0, value 1  
+    save->inventory[9] |= (1 << 0);  // 2 bits starting at position 0*2 = 0
+    
+    // Set Arrows (item 37) - byte 9, position 1, value 1
+    save->inventory[9] |= (1 << 2);  // 2 bits starting at position 1*2 = 2
 }
