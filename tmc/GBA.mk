@@ -57,17 +57,21 @@ ELF = $(BUILD_NAME).elf
 # ==================
 CUSTOM ?=
 COMPARE ?= $(if $(CUSTOM),0,1)
-
+# Skip asset extraction and conversion by replacing the original commands
 .PHONY: build extract_assets build_assets
 build: $(if $(CUSTOM), build_assets, $(BUILD_DIR)/extracted_assets_$(GAME_VERSION))
 	@$(MAKE) -f GBA.mk $(ROM)
 ifeq ($(COMPARE), 1)
 	@$(SHA1) $(BUILD_NAME).sha1
 endif
+
+# Force the skipped behavior by simply touching the extracted asset file
 extract_assets: $(BUILD_DIR)/converted_assets_$(GAME_VERSION)
-# TODO this is slow, especially on builds with minor/no changes
+	@echo "Skipping asset extraction and conversion..."
+
+# Skip the build_assets target too (asset processing)
 build_assets: $(BUILD_DIR)/converted_assets_$(GAME_VERSION)
-	$(ASSET_PROCESSOR) build $(GAME_VERSION) $(BUILD_DIR)/assets
+	@echo "Skipping asset build step."
 
 .PHONY: clean
 clean:
@@ -88,7 +92,6 @@ ENUM_ASM_HEADERS := $(patsubst include/%.h,$(BUILD_DIR)/enum_include/%.inc,$(ENU
 
 # if this is too broad dependency scanning will clash with C file
 $(BUILD_DIR)/asm/%.o: deps = $(shell $(SCANINC) -I . $(ASINCLUDE) $*.s)
-$(BUILD_DIR)/data/%.o: deps = $(shell $(SCANINC) -I . $(ASINCLUDE) $*.s)
 $(BUILD_DIR)/%.o: %.s $$(deps) $(ENUM_ASM_HEADERS)
 	@mkdir -p $(dir $@)
 	$(PREPROC) $(BUILD_NAME) $< -- $(ASINCLUDE) | $(AS) $(ASFLAGS) -o $@
@@ -148,16 +151,15 @@ $(BUILD_DIR)/linker.ld: linker.ld
 # ======
 # assets
 # ======
-
-$(BUILD_DIR)/extracted_assets_%: assets/assets.json assets/gfx.json assets/map.json assets/samples.json assets/sounds.json $(TRANSLATIONS)
-	@mkdir -p $(dir $@)
-	$(ASSET_PROCESSOR) extract $(GAME_VERSION) $(BUILD_DIR)/assets
+# Skip these asset-related tasks by touching the file directly.
+$(BUILD_DIR)/extracted_assets_%:
+	@echo "Skipping asset extraction for $(GAME_VERSION)..."
 	touch $@
 
-$(BUILD_DIR)/converted_assets_%: $(BUILD_DIR)/extracted_assets_%
-	@mkdir -p $(dir $@)
-	$(ASSET_PROCESSOR) convert $(GAME_VERSION) $(BUILD_DIR)/assets
+$(BUILD_DIR)/converted_assets_%:
+	@echo "Skipping asset conversion for $(GAME_VERSION)..."
 	touch $@
+
 
 translations/%.bin: translations/%.json
 	tools/bin/tmc_strings -p --source $< --dest $@

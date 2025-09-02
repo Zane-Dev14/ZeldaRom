@@ -231,7 +231,6 @@ SECTIONS {
         asm/src/stack_check.o(.text);
 #endif
         asm/src/veneer.o(.text);
-        data/data_08000360.o(.rodata);
         asm/src/code_08000E44.o(.text);
         asm/lib/libgcc.o(.text);
         asm/src/code_08000F10.o(.text);

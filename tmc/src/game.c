@@ -121,9 +121,27 @@ static void GameTask_Transition(void) {
     ClearRoomMemory();
     ClearArmosData();
 
-    FinalizeSave();
+    // Force spawn in Simons Simulation room
+    gRoomTransition.player_status.area_next = AREA_SIMONS_SIMULATION; // Area ID 0x44
+    gRoomTransition.player_status.room_next = ROOM_SIMONS_SIMULATION_0; // Room ID 0x00
+    gRoomTransition.player_status.start_anim = 0;
+    gRoomTransition.player_status.spawn_type = PL_SPAWN_DEFAULT;
+    gRoomTransition.player_status.layer = 1;
+    gRoomTransition.player_status.start_pos_x = 0x98; // Center X
+    gRoomTransition.player_status.start_pos_y = 0x88; // Center Y
+
+    // Force items: Four Sword, Bow, and Arrows
+    gSave.inventory[ITEM_FOURSWORD / 4] |= (1 << ((ITEM_FOURSWORD % 4) * 2));
+    gSave.inventory[ITEM_BOW / 4] |= (1 << ((ITEM_BOW % 4) * 2));
+    gSave.inventory[ITEM_ARROWS5 / 4] |= (1 << ((ITEM_ARROWS5 % 4) * 2));
+
+    // Force flags to skip intro
+    gSave.flags[0x13] = 1;  // START flag - skip intro cutscene
+    gSave.flags[0x49] = 1;  // OUTDOOR flag - Link has left house
+
+    // FinalizeSave(); // No longer needed, as we're directly setting values
     // spawn in with saved status
-    MemCopy(&gSave.saved_status, &gRoomTransition.player_status, sizeof(gRoomTransition.player_status));
+    // MemCopy(&gSave.saved_status, &gRoomTransition.player_status, sizeof(gRoomTransition.player_status));
     gRoomTransition.type = TRANSITION_FADE_BLACK_SLOW;
     ResetTmpFlags();
 

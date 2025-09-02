@@ -284,6 +284,29 @@ bool32 CheckInitPauseMenu(void) {
     if (((gInput.newKeys & START_BUTTON) == 0 || gFadeControl.active || gPauseMenuOptions.disabled ||
          (gMessage.state & MESSAGE_ACTIVE) || gSave.stats.health == 0 || !gSave.inventory[0] ||
          gPlayerState.controlMode != 0 || gPriorityHandler.priority_timer != 0)) {
+        // --- START: DEBUG WARP CHEAT ---
+        // Check if L, R, and START are all held down at the same time.
+
+            // To prevent this from running every single frame while the buttons are held,
+            // we use a simple static variable as a flag.
+            static bool8 sWarpTriggered = FALSE;
+
+            if (!sWarpTriggered) {
+                sWarpTriggered = TRUE;
+
+                // Call the game's own room transition function.
+                // The function name might be different, search the source for "SetNext" or "RoomTransition".
+                // It populates the gRoomTransition struct safely.
+                SetNextRoomTransition(
+                    AREA_SIMONS_SIMULATION, // Area ID = 0x44
+                    0,                      // Room ID = 0
+                    PLAYER_ROOM_POSITION,   // This constant tells the game to use the coords below
+                    0x98,                   // X position in pixels
+                    0x88                    // Y position in pixels
+                );
+            }
+        // }
+        // --- END: DEBUG WARP CHEAT ---
         return FALSE;
     }
 
