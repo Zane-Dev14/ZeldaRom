@@ -407,6 +407,7 @@ static void render_maze_to_layer(MapLayer *layer, int layerIndex, u16 wallTile, 
 
 
 // ---------------- Public API ----------------
+/* DEBUG version — temporary: forces use of center-room tiles and places visible markers */
 void GenerateAndApplyMazeToLayer(int layerIndex, uint32_t seed) {
     MapLayer *layer;
     int roomW, roomH;
@@ -415,50 +416,60 @@ void GenerateAndApplyMazeToLayer(int layerIndex, uint32_t seed) {
 
     layer = GetLayerByIndex(layerIndex);
     if (!layer) return;
-    /* ensure maze_gen_data TU is linked in (prevents GC of .data) */
     MazeGen_KeepData();
     if (!layer->mapData) return;
 
     roomW = room_tile_width();
     roomH = room_tile_height();
 
-    detected_floor = 0;
-    detected_wall  = 0;
+    /* ---- pick explicit visible tiles from room center ----
+     *       this avoids auto-detection mistakes (tileset/palette mismatch) */
+    {
+        int cx = (roomW > 4) ? (roomW / 2) : 1;
+        int cy = (roomH > 4) ? (roomH / 2) : 1;
+        int pos = cy * 64 + cx;
+        detected_floor = layer->mapData[pos] & 0x0FFF;
+        /* make wall a neighboring tile so it likely uses the same tileset */
+        detected_wall = layer->mapData[(cy * 64) + ( (cx+1 < roomW) ? (cx+1) : cx )] & 0x0FFF;
 
-    if (layer->collisionData) {
-        detected_floor = find_most_common_tile_by_collision(layer, roomW, roomH, 0);
-        detected_wall  = find_most_common_tile_by_collision(layer, roomW, roomH, 1);
-    } else {
-        detected_floor = fallback_pick_tile(layer, roomW, roomH, 0);
-        detected_wall  = fallback_pick_tile(layer, roomW, roomH, 1);
+        if (detected_floor == 0) detected_floor = layer->mapData[0] & 0x0FFF;
+        if (detected_wall == 0) detected_wall = (detected_floor == 0) ? 1 : (detected_floor ^ 1);
+        if (detected_wall == detected_floor) detected_wall = (detected_floor ^ 1);
     }
 
-    if (detected_floor == 0) detected_floor = layer->mapData[0] & 0x0FFF;
-    if (detected_wall == 0) {
-        if (layer->mapData[1] && ((layer->mapData[1] & 0x0FFF) != detected_floor))
-            detected_wall = layer->mapData[1] & 0x0FFF;
-        else
-            detected_wall = (detected_floor == 0) ? 1 : (detected_floor ^ 1);
-    }
-    if (detected_wall == detected_floor) detected_wall = (detected_floor ^ 1);
-
+    /* Derive collisions conservatively */
     floorCollision = 0;
-    wallCollision  = 1;
-
+    wallCollision = 1;
     if (layer->collisionData) {
         floorCollision = find_collision_for_tile(layer, detected_floor, roomW, roomH, 0);
         wallCollision  = find_collision_for_tile(layer, detected_wall, roomW, roomH, 1);
-        if (wallCollision == floorCollision) {
-            wallCollision = (floorCollision == 1) ? 2 : 1;
-        }
+        if (wallCollision == floorCollision) wallCollision = (floorCollision == 1) ? 2 : 1;
     }
 
     if (seed == 0) seed = Random();
     if (seed == 0) seed = 0xA5A5A5A5u;
 
-    generate_cells(seed);
+    /* small visible test markers: write the center and (0,0) to the chosen layer.
+     *       This will tell us if writes are visible and whether the tile is drawn with the room's tileset. */
+    {
+        int midX = (roomW > 4) ? (roomW / 2) : 1;
+        int midY = (roomH > 4) ? (roomH / 2) : 1;
+        int posMid = midY * 64 + midX;
+        int pos00  = 0;
+        /* write a conspicuous tile (copy of detected_floor) to (0,0) and center */
+        SetTile(detected_floor, pos00, layerIndex);
+        if (layer->mapData) layer->mapData[pos00] = (layer->mapData[pos00] & 0xF000) | (detected_floor & 0x0FFF);
+        if (layer->collisionData) layer->collisionData[pos00] = floorCollision;
 
-    render_maze_to_layer(layer, layerIndex,
-                         detected_wall, detected_floor,
-                         wallCollision, floorCollision);
+        SetTile(detected_floor, posMid, layerIndex);
+        if (layer->mapData) layer->mapData[posMid] = (layer->mapData[posMid] & 0xF000) | (detected_floor & 0x0FFF);
+        if (layer->collisionData) layer->collisionData[posMid] = floorCollision;
+    }
+
+    /* Now generate & render the maze as before */
+    generate_cells(seed);
+    render_maze_to_layer(layer, layerIndex, detected_wall, detected_floor, wallCollision, floorCollision);
+
+    /* Done. Keep these test marks for now. If you see them, the writes are working. */
 }
+
