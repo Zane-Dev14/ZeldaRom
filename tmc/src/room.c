@@ -195,7 +195,7 @@ void LoadRoom(void) {
     /* Maze only for Link's House entrance (Area 34, Room 16) */
     if (gRoomControls.area == 34 && gRoomControls.room == 16) {
         /* BG selection: interiors usually render on layer 1 (top of bottom), but you can try 0/1 */
-        int layerIndex = 1; /* try 1 first; if not visible try 0 */
+        int layerIndex = 2; /* try 1 first; if not visible try 0 */
         uint32_t seed = Random();
         GenerateAndApplyMazeToLayer(layerIndex, seed);
     }

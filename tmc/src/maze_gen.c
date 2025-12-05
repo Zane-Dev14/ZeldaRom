@@ -341,63 +341,67 @@ static u8 find_collision_for_tile(MapLayer *layer, u16 tileIndex, int roomW, int
 
 // ---------------- Maze render mapping & write ----------------
 // Mapping: each cell -> 2x2 floor tiles; walls occupy the gaps -> total area = 2*cells+1
+/* Replace the existing render_maze_to_layer with this C89-safe version */
 static void render_maze_to_layer(MapLayer *layer, int layerIndex, u16 wallTile, u16 floorTile, u8 wallCollision, u8 floorCollision) {
-    int roomW = room_tile_width();
-    int roomH = room_tile_height();
+    int roomW, roomH;
+    int tileAreaW, tileAreaH;
+    int startX, startY;
+    int y, x;
+    int cy, cx;
+    int tx, ty;
 
-    int tileAreaW = MAZE_CELLS_X * 2 + 1;
-    int tileAreaH = MAZE_CELLS_Y * 2 + 1;
+    /* compute room bounds */
+    roomW = room_tile_width();
+    roomH = room_tile_height();
+
+    tileAreaW = MAZE_CELLS_X * 2 + 1;
+    tileAreaH = MAZE_CELLS_Y * 2 + 1;
 
     /* clamp to room size (avoid writing into unused map area) */
     if (tileAreaW > roomW) tileAreaW = roomW;
     if (tileAreaH > roomH) tileAreaH = roomH;
 
     /* compute start offset to center maze in room */
-    int startX = 0;
-    int startY = 0;
+    startX = 0;
+    startY = 0;
     if (roomW > tileAreaW) startX = (roomW - tileAreaW) >> 1;
     if (roomH > tileAreaH) startY = (roomH - tileAreaH) >> 1;
 
     /* write floor base */
-    {
-        int y, x;
-        for (y = 0; y < tileAreaH; ++y) {
-            for (x = 0; x < tileAreaW; ++x) {
-                safe_write_tile_and_collision(layer, layerIndex, startX + x, startY + y, floorTile, floorCollision, roomW, roomH);
-            }
+    for (y = 0; y < tileAreaH; ++y) {
+        for (x = 0; x < tileAreaW; ++x) {
+            safe_write_tile_and_collision(layer, layerIndex, startX + x, startY + y, floorTile, floorCollision, roomW, roomH);
         }
     }
 
     /* walls between cells */
-    {
-        int cy, cx;
-        int tx, ty;
-        for (cy = 0; cy < MAZE_CELLS_Y; ++cy) {
-            for (cx = 0; cx < MAZE_CELLS_X; ++cx) {
-                tx = startX + (cx * 2 + 1);
-                ty = startY + (cy * 2 + 1);
-                /* center floor */
-                safe_write_tile_and_collision(layer, layerIndex, tx, ty, floorTile, floorCollision, roomW, roomH);
+    for (cy = 0; cy < MAZE_CELLS_Y; ++cy) {
+        for (cx = 0; cx < MAZE_CELLS_X; ++cx) {
+            tx = startX + (cx * 2 + 1);
+            ty = startY + (cy * 2 + 1);
 
-                if (maze[cy][cx].walls & 1) safe_write_tile_and_collision(layer, layerIndex, tx, ty - 1, wallTile, wallCollision, roomW, roomH); /* N */
-                    if (maze[cy][cx].walls & 2) safe_write_tile_and_collision(layer, layerIndex, tx + 1, ty, wallTile, wallCollision, roomW, roomH); /* E */
-                        if (maze[cy][cx].walls & 4) safe_write_tile_and_collision(layer, layerIndex, tx, ty + 1, wallTile, wallCollision, roomW, roomH); /* S */
-                            if (maze[cy][cx].walls & 8) safe_write_tile_and_collision(layer, layerIndex, tx - 1, ty, wallTile, wallCollision, roomW, roomH); /* W */
-            }
+            /* center floor */
+            safe_write_tile_and_collision(layer, layerIndex, tx, ty, floorTile, floorCollision, roomW, roomH);
+
+            if (maze[cy][cx].walls & 1)
+                safe_write_tile_and_collision(layer, layerIndex, tx, ty - 1, wallTile, wallCollision, roomW, roomH); /* N */
+                if (maze[cy][cx].walls & 2)
+                    safe_write_tile_and_collision(layer, layerIndex, tx + 1, ty, wallTile, wallCollision, roomW, roomH); /* E */
+                    if (maze[cy][cx].walls & 4)
+                        safe_write_tile_and_collision(layer, layerIndex, tx, ty + 1, wallTile, wallCollision, roomW, roomH); /* S */
+                        if (maze[cy][cx].walls & 8)
+                            safe_write_tile_and_collision(layer, layerIndex, tx - 1, ty, wallTile, wallCollision, roomW, roomH); /* W */
         }
     }
 
     /* outer border (clamped by tileAreaW/tileAreaH) */
-    {
-        int x, y;
-        for (x = 0; x < tileAreaW; ++x) {
-            safe_write_tile_and_collision(layer, layerIndex, startX + x, startY + 0, wallTile, wallCollision, roomW, roomH);
-            safe_write_tile_and_collision(layer, layerIndex, startX + x, startY + tileAreaH - 1, wallTile, wallCollision, roomW, roomH);
-        }
-        for (y = 0; y < tileAreaH; ++y) {
-            safe_write_tile_and_collision(layer, layerIndex, startX + 0, startY + y, wallTile, wallCollision, roomW, roomH);
-            safe_write_tile_and_collision(layer, layerIndex, startX + tileAreaW - 1, startY + y, wallTile, wallCollision, roomW, roomH);
-        }
+    for (x = 0; x < tileAreaW; ++x) {
+        safe_write_tile_and_collision(layer, layerIndex, startX + x, startY + 0, wallTile, wallCollision, roomW, roomH);
+        safe_write_tile_and_collision(layer, layerIndex, startX + x, startY + tileAreaH - 1, wallTile, wallCollision, roomW, roomH);
+    }
+    for (y = 0; y < tileAreaH; ++y) {
+        safe_write_tile_and_collision(layer, layerIndex, startX + 0, startY + y, wallTile, wallCollision, roomW, roomH);
+        safe_write_tile_and_collision(layer, layerIndex, startX + tileAreaW - 1, startY + y, wallTile, wallCollision, roomW, roomH);
     }
 }
 
