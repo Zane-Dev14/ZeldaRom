@@ -12,12 +12,14 @@
 #include "functions.h" // SetTile(), Random()
 #include "room.h"      // gRoomControls, camera_target
 #include "asm.h"
-
+void MazeGen_KeepData(void);
 #include <string.h>    // memset, memcpy
 #include <stddef.h>    // NULL
-
+uint32_t g_local_rng_state = 0u;
+MazeCell maze[MAZE_CELLS_Y][MAZE_CELLS_X] = { { {0} } };
+CellPos stackArr[MAZE_CELLS_X * MAZE_CELLS_Y] = { {0} };
+int stackTop = 0;
 // ---------------- PRNG (xorshift-style) ----------------
-uint32_t g_local_rng_state;
 static uint32_t local_rng_next(void) {
     uint32_t x = g_local_rng_state;
     x ^= x << 13;
@@ -49,14 +51,9 @@ static uint32_t local_rng_range(uint32_t n) {
  * which your toolchain may GC aggressively. An explicit initializer forces
  * allocation in .bss/.data and prevents the 'defined in discarded section `COMMON`' error.
  */
-uint32_t g_local_rng_state = 0u;
 
 /* Zero-initialize the maze array (use an initializer so the object is not COMMON). */
-MazeCell maze[MAZE_CELLS_Y][MAZE_CELLS_X] = { { {0} } };
 
-/* Zero-initialize stack array and top index similarly. */
-CellPos stackArr[MAZE_CELLS_X * MAZE_CELLS_Y] = { {0} };
-int stackTop = 0;
 
 static const int DIR_DX[4] = {0, 1, 0, -1};
 static const int DIR_DY[4] = {-1, 0, 1, 0};
@@ -411,6 +408,8 @@ void GenerateAndApplyMazeToLayer(int layerIndex, uint32_t seed) {
 
     layer = GetLayerByIndex(layerIndex);
     if (!layer) return;
+    /* ensure maze_gen_data TU is linked in (prevents GC of .data) */
+    // MazeGen_KeepData();
     if (!layer->mapData) return;
 
     roomW = room_tile_width();
