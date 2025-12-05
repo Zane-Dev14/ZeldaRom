@@ -17,8 +17,8 @@
 #include <stddef.h>    // NULL
 
 // ---------------- PRNG (xorshift-style) ----------------
-static uint32_t g_local_rng_state;
-static inline uint32_t local_rng_next(void) {
+uint32_t g_local_rng_state;
+static uint32_t local_rng_next(void) {
     uint32_t x = g_local_rng_state;
     x ^= x << 13;
     x ^= x >> 17;
@@ -31,7 +31,7 @@ static inline uint32_t local_rng_next(void) {
  * n must be > 0 and reasonably small (we only use it for MAZE_CELLS_X / neighbor count).
  * Uses subtraction loop to avoid emitting __umodsi3.
  */
-static inline uint32_t local_rng_range(uint32_t n) {
+static uint32_t local_rng_range(uint32_t n) {
     uint32_t r;
     if (n == 0) return 0;
     r = local_rng_next();
@@ -41,15 +41,22 @@ static inline uint32_t local_rng_range(uint32_t n) {
 }
 
 // ---------------- Maze model ----------------
-typedef struct {
-    u8 visited;
-    u8 walls; // N=1,E=2,S=4,W=8
-} MazeCell;
+// ---------------- Maze model ----------------
+/* MazeCell and CellPos typedefs are declared in maze_gen.h. */
 
-static MazeCell maze[MAZE_CELLS_Y][MAZE_CELLS_X];
-typedef struct { int x, y; } CellPos;
-static CellPos stackArr[MAZE_CELLS_X * MAZE_CELLS_Y];
-static int stackTop;
+/* Definitions with explicit initializers to avoid COMMON linkage.
+ * Uninitialized common symbols sometimes end up in the linker 'COMMON' area
+ * which your toolchain may GC aggressively. An explicit initializer forces
+ * allocation in .bss/.data and prevents the 'defined in discarded section `COMMON`' error.
+ */
+uint32_t g_local_rng_state = 0u;
+
+/* Zero-initialize the maze array (use an initializer so the object is not COMMON). */
+MazeCell maze[MAZE_CELLS_Y][MAZE_CELLS_X] = { { {0} } };
+
+/* Zero-initialize stack array and top index similarly. */
+CellPos stackArr[MAZE_CELLS_X * MAZE_CELLS_Y] = { {0} };
+int stackTop = 0;
 
 static const int DIR_DX[4] = {0, 1, 0, -1};
 static const int DIR_DY[4] = {-1, 0, 1, 0};
@@ -68,8 +75,8 @@ static void init_cells(void) {
     stackTop = 0;
 }
 
-static inline void push_cell(int x,int y){ stackArr[stackTop].x = x; stackArr[stackTop].y = y; ++stackTop; }
-static inline CellPos pop_cell(void){ --stackTop; return stackArr[stackTop]; }
+static void push_cell(int x,int y){ stackArr[stackTop].x = x; stackArr[stackTop].y = y; ++stackTop; }
+static CellPos pop_cell(void){ --stackTop; return stackArr[stackTop]; }
 
 static int count_unvisited_neighbors(int x,int y,int *buf) {
     int n = 0;
@@ -86,7 +93,7 @@ static int count_unvisited_neighbors(int x,int y,int *buf) {
     }
     return n;
 }
-static inline void carve_between(int x,int y,int d) {
+static void carve_between(int x,int y,int d) {
     int nx = x + DIR_DX[d], ny = y + DIR_DY[d];
     maze[y][x].walls &= ~DIR_BIT[d];
     maze[ny][nx].walls &= ~OPP_BIT[d];
@@ -135,13 +142,13 @@ static void generate_cells(uint32_t seed) {
 
 // Convert gRoomControls.width/height (pixels) to tile counts (8-px tiles).
 // Use rounding up ( +7 ) then divide by 8 to match engine tile addressing.
-static inline int room_tile_width(void) {
+static int room_tile_width(void) {
     int w = (gRoomControls.width + 7) >> 3; // divide by 8 (tiles are 8 px)
     if (w < 1) w = 1;
     if (w > 64) w = 64;
     return w;
 }
-static inline int room_tile_height(void) {
+static int room_tile_height(void) {
     int h = (gRoomControls.height + 7) >> 3; // divide by 8 (tiles are 8 px)
     if (h < 1) h = 1;
     if (h > 64) h = 64;
@@ -151,7 +158,7 @@ static inline int room_tile_height(void) {
 
 // Safe write: calls engine SetTile (keeps engine runtime buffers happy) AND updates layer->mapData & collisionData
 // posX/posY are tile coords within 0..63; we guard against writing outside logical room tile extents.
-static inline void safe_write_tile_and_collision(
+static void safe_write_tile_and_collision(
     MapLayer *layer, int layerIndex,
     int posX, int posY,
     u16 tileIndex, u8 collisionValue,
@@ -189,26 +196,38 @@ static inline void safe_write_tile_and_collision(
 //  3) Fallback to camera target tile or first non-zero tile.
 //  4) If collisionData missing, use simple fallbacks.
 
-#define HIST_SIZE 4096
-static u16 find_most_common_tile_by_collision(MapLayer *layer, int roomW, int roomH, int wantCollision) {
-    static uint32_t hist[HIST_SIZE];
+/* Replacement: C89-compatible, no large static .bss, no memset.
+ * Builds a small list of unique tiles seen in the scan window and counts them.
+ * Returns the most common tile that matches the collision predicate,
+ * or 0 if none found.
+ */
+static u16 find_most_common_tile_by_collision(MapLayer *layer, int roomW, int roomH, int wantCollision)
+{
     int scanW, scanH;
-    int y, x;
+    int y, x, i;
     int pos;
     u16 raw, tile;
     int coll;
-    u16 best = 0;
-    uint32_t bestcnt = 0;
-    int i;
+    /* worst-case samples = 32*32 = 1024 */
+    u16 tiles_seen[1024];
+    u16 counts[1024];
+    int seen;
+    u16 best;
+    u16 bestcnt;
 
     if (!layer || !layer->mapData) return 0;
-
-    memset(hist, 0, sizeof(hist));
 
     scanW = (roomW < 32) ? roomW : 32;
     scanH = (roomH < 32) ? roomH : 32;
     if (scanW < 1) scanW = 1;
     if (scanH < 1) scanH = 1;
+
+    /* init */
+    seen = 0;
+    for (i = 0; i < 1024; ++i) {
+        tiles_seen[i] = 0;
+        counts[i] = 0;
+    }
 
     for (y = 0; y < scanH; ++y) {
         for (x = 0; x < scanW; ++x) {
@@ -218,20 +237,39 @@ static u16 find_most_common_tile_by_collision(MapLayer *layer, int roomW, int ro
             coll = layer->collisionData ? layer->collisionData[pos] : 0;
 
             if ((wantCollision && coll != 0) || (!wantCollision && coll == 0)) {
-                if (tile < HIST_SIZE) hist[tile]++;
+                /* find tile in tiles_seen */
+                int idx = -1;
+                for (i = 0; i < seen; ++i) {
+                    if (tiles_seen[i] == tile) { idx = i; break; }
+                }
+                if (idx >= 0) {
+                    counts[idx] = counts[idx] + 1;
+                } else {
+                    if (seen < 1024) {
+                        tiles_seen[seen] = tile;
+                        counts[seen] = 1;
+                        seen = seen + 1;
+                    }
+                }
             }
         }
     }
 
-    for (i = 0; i < HIST_SIZE; ++i) {
-        if (hist[i] > bestcnt) {
-            bestcnt = hist[i];
-            best = (u16)i;
+    if (seen == 0) return 0;
+
+    best = tiles_seen[0];
+    bestcnt = counts[0];
+    for (i = 1; i < seen; ++i) {
+        if (counts[i] > bestcnt) {
+            bestcnt = counts[i];
+            best = tiles_seen[i];
         }
     }
 
-    return (bestcnt == 0) ? 0 : best;
+    if (bestcnt == 0) return 0;
+    return best;
 }
+
 
 // If detection produced nothing, try camera target tile (if camera_target exists), then linear probe.
 static u16 fallback_pick_tile(MapLayer *layer, int roomW, int roomH, int preferCollision) {

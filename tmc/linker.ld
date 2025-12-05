@@ -263,6 +263,7 @@ SECTIONS {
         src/collision.o(.text);
         /* C source compiled without interworking */
         src/maze_gen.o(.text);
+        src/maze_gen_data.o(.text);
         src/kinstone.o(.text);
         src/playerItem/playerItemGustBig.o(.text);
 
