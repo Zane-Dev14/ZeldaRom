@@ -262,8 +262,8 @@ SECTIONS {
         src/npc.o(.text);
         src/collision.o(.text);
         /* C source compiled without interworking */
-        src/maze_gen.o(.text);
-        src/maze_gen_data.o(.text);
+        src/maze_gen_data.o(.text .data .rodata .bss);
+        src/maze_gen.o(.text .rodata .data .bss);
         src/kinstone.o(.text);
         src/playerItem/playerItemGustBig.o(.text);
 

@@ -15,10 +15,6 @@
 void MazeGen_KeepData(void);
 #include <string.h>    // memset, memcpy
 #include <stddef.h>    // NULL
-uint32_t g_local_rng_state = 0u;
-MazeCell maze[MAZE_CELLS_Y][MAZE_CELLS_X] = { { {0} } };
-CellPos stackArr[MAZE_CELLS_X * MAZE_CELLS_Y] = { {0} };
-int stackTop = 0;
 // ---------------- PRNG (xorshift-style) ----------------
 static uint32_t local_rng_next(void) {
     uint32_t x = g_local_rng_state;
@@ -352,16 +348,22 @@ static void render_maze_to_layer(MapLayer *layer, int layerIndex, u16 wallTile, 
     int tileAreaW = MAZE_CELLS_X * 2 + 1;
     int tileAreaH = MAZE_CELLS_Y * 2 + 1;
 
-    // clamp to room size (avoid writing into unused map area)
+    /* clamp to room size (avoid writing into unused map area) */
     if (tileAreaW > roomW) tileAreaW = roomW;
     if (tileAreaH > roomH) tileAreaH = roomH;
 
-    // write floor base
+    /* compute start offset to center maze in room */
+    int startX = 0;
+    int startY = 0;
+    if (roomW > tileAreaW) startX = (roomW - tileAreaW) >> 1;
+    if (roomH > tileAreaH) startY = (roomH - tileAreaH) >> 1;
+
+    /* write floor base */
     {
         int y, x;
         for (y = 0; y < tileAreaH; ++y) {
             for (x = 0; x < tileAreaW; ++x) {
-                safe_write_tile_and_collision(layer, layerIndex, x, y, floorTile, floorCollision, roomW, roomH);
+                safe_write_tile_and_collision(layer, layerIndex, startX + x, startY + y, floorTile, floorCollision, roomW, roomH);
             }
         }
     }
@@ -372,8 +374,8 @@ static void render_maze_to_layer(MapLayer *layer, int layerIndex, u16 wallTile, 
         int tx, ty;
         for (cy = 0; cy < MAZE_CELLS_Y; ++cy) {
             for (cx = 0; cx < MAZE_CELLS_X; ++cx) {
-                tx = cx * 2 + 1;
-                ty = cy * 2 + 1;
+                tx = startX + (cx * 2 + 1);
+                ty = startY + (cy * 2 + 1);
                 /* center floor */
                 safe_write_tile_and_collision(layer, layerIndex, tx, ty, floorTile, floorCollision, roomW, roomH);
 
@@ -389,15 +391,16 @@ static void render_maze_to_layer(MapLayer *layer, int layerIndex, u16 wallTile, 
     {
         int x, y;
         for (x = 0; x < tileAreaW; ++x) {
-            safe_write_tile_and_collision(layer, layerIndex, x, 0, wallTile, wallCollision, roomW, roomH);
-            safe_write_tile_and_collision(layer, layerIndex, x, tileAreaH - 1, wallTile, wallCollision, roomW, roomH);
+            safe_write_tile_and_collision(layer, layerIndex, startX + x, startY + 0, wallTile, wallCollision, roomW, roomH);
+            safe_write_tile_and_collision(layer, layerIndex, startX + x, startY + tileAreaH - 1, wallTile, wallCollision, roomW, roomH);
         }
         for (y = 0; y < tileAreaH; ++y) {
-            safe_write_tile_and_collision(layer, layerIndex, 0, y, wallTile, wallCollision, roomW, roomH);
-            safe_write_tile_and_collision(layer, layerIndex, tileAreaW - 1, y, wallTile, wallCollision, roomW, roomH);
+            safe_write_tile_and_collision(layer, layerIndex, startX + 0, startY + y, wallTile, wallCollision, roomW, roomH);
+            safe_write_tile_and_collision(layer, layerIndex, startX + tileAreaW - 1, startY + y, wallTile, wallCollision, roomW, roomH);
         }
     }
 }
+
 
 // ---------------- Public API ----------------
 void GenerateAndApplyMazeToLayer(int layerIndex, uint32_t seed) {
@@ -409,7 +412,7 @@ void GenerateAndApplyMazeToLayer(int layerIndex, uint32_t seed) {
     layer = GetLayerByIndex(layerIndex);
     if (!layer) return;
     /* ensure maze_gen_data TU is linked in (prevents GC of .data) */
-    // MazeGen_KeepData();
+    MazeGen_KeepData();
     if (!layer->mapData) return;
 
     roomW = room_tile_width();

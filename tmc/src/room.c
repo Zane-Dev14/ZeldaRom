@@ -192,9 +192,17 @@ void LoadRoom(void) {
     /* DEBUG: Force current room to Area 014 (014_Empty), Room 00_0 and apply maze.
      * This attempts to set the current room pointer for immediate debugging.
      */
+    /* Maze only for Link's House entrance (Area 34, Room 16) */
+    if (gRoomControls.area == 34 && gRoomControls.room == 16) {
+        /* BG selection: interiors usually render on layer 1 (top of bottom), but you can try 0/1 */
+        int layerIndex = 1; /* try 1 first; if not visible try 0 */
+        uint32_t seed = Random();
+        GenerateAndApplyMazeToLayer(layerIndex, seed);
+    }
+/*
     {
-        const int targetArea = 14; /* 014_Empty */
-        const int targetRoom = 0;  /* 00_0 */
+        const int targetArea = 14;
+        const int targetRoom = 0;
         void **targetProps;
         int i;
         int layerIndex;
@@ -210,12 +218,10 @@ void LoadRoom(void) {
                     gRoomVars.properties[i] = gCurrentRoomProperties[i];
                 }
 
-                /* Generate the maze in the forced room (layer 0) */
                 layerIndex = 0;
                 seed = Random();
                 GenerateAndApplyMazeToLayer(layerIndex, seed);
 
-                /* Teleport player... (rest unchanged) */
                 gPlayerEntity.base.x.HALF.HI = gRoomControls.origin_x + (1 << 3) + 4;
                 gPlayerEntity.base.y.HALF.HI = gRoomControls.origin_y + (1 << 3) + 4;
                 if (gRoomControls.camera_target != NULL) {
@@ -224,7 +230,7 @@ void LoadRoom(void) {
                 }
             }
         }
-    }
+    }*/
 
 
 
