@@ -715,15 +715,9 @@ const Transition gExitList_MinishVillage_SideHouse[] = {
       ROOM_MINISH_HOUSE_INTERIORS_SIDE_AREA, 1, TRANSITION_TYPE_NORMAL, 0x0, 0x0, 0x0, 0x0, 0x0 },
     TransitionListEnd,
 };
-const Transition gExitList_MinishVillage_TestRoom[] = {
-    { WARP_TYPE_AREA, 0x0, 0x78, 0x78, 0x78, 0x78, 0x0, AREA_MINISH_VILLAGE, ROOM_MINISH_VILLAGE_MAIN, 1, TRANSITION_TYPE_NORMAL, 0x0, 0x0, 0x0, 0x0, 0x0 },
-    TransitionListEnd,
-};
-
 const Transition* const gExitLists_MinishVillage[] = {
     [ROOM_MINISH_VILLAGE_MAIN] = gExitList_MinishVillage_Main,
     [ROOM_MINISH_VILLAGE_SIDE_HOUSE_AREA] = gExitList_MinishVillage_SideHouse,
-    [ROOM_MINISH_VILLAGE_TEST_ROOM] = gExitList_MinishVillage_TestRoom,
     [ROOM_MINISH_VILLAGE_2] = gExitList_NoExitList,
     [ROOM_MINISH_VILLAGE_3] = gExitList_NoExitList,
 };

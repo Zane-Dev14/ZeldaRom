@@ -43,7 +43,7 @@ Area_MinishWoods:: @ 080D4150
 Area_MinishVillage:: @ 080D4170
 	.4byte Room_MinishVillage_Main
 	.4byte Room_MinishVillage_SideHouse
-	.4byte Room_MinishVillage_TestRoom
+	.4byte 0x0
 	.4byte 0x0
 	.4byte 0x0
 	.4byte 0x0
@@ -5634,26 +5634,6 @@ Room_MinishVillage_SideHouse:: @ 080DC5C0
 	.4byte sub_unk2_MinishVillage_SideHouse
 	.4byte sub_unk3_MinishVillage_SideHouse
 	.4byte sub_StateChange_MinishVillage_SideHouse
-
-Entities_MinishVillage_TestRoom_0:: @ 080DC740
-	object_raw subtype=0x0, x=0x78, y=0x78, collision=1, paramA=0x63, paramB=0x400, paramC=0xc20000
-	entity_list_end
-
-Enemies_MinishVillage_TestRoom:: @ 080DC750
-	entity_list_end
-
-TileEntities_MinishVillage_TestRoom:: @ 080DC760
-	tile_entity_list_end
-
-Room_MinishVillage_TestRoom:: @ 080DC790
-	.4byte Entities_MinishVillage_TestRoom_0
-	.4byte 0x00000000
-	.4byte Enemies_MinishVillage_TestRoom
-	.4byte TileEntities_MinishVillage_TestRoom
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte sub_unk3_MinishVillage_TestRoom
-	.4byte sub_StateChange_MinishVillage_TestRoom
 
 Entities_CastleGardenMinishHoles_East_0:: @ 080DC5E0
 	entity_list_end

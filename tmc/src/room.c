@@ -11,6 +11,7 @@
 #include "object.h"
 #include "room.h"
 #include "tiles.h"
+#include "maze_gen.h"
 
 static void sub_0804B058(EntityData* dat);
 extern void sub_0801AC98(void);
@@ -188,6 +189,45 @@ void LoadRoom(void) {
 
     LoadRoomTileEntities(GetCurrentRoomProperty(3));
     sub_0801AC98();
+    /* DEBUG: Force current room to Area 014 (014_Empty), Room 00_0 and apply maze.
+     * This attempts to set the current room pointer for immediate debugging.
+     */
+    {
+        const int targetArea = 14; /* 014_Empty */
+        const int targetRoom = 0;  /* 00_0 */
+        void **targetProps;
+        int i;
+        int layerIndex;
+        u32 seed;
+
+        if (gAreaTable[targetArea] != NULL) {
+            targetProps = gAreaTable[targetArea][targetRoom];
+            if (targetProps != NULL) {
+
+                gCurrentRoomProperties = targetProps;
+
+                for (i = 0; i < 8; ++i) {
+                    gRoomVars.properties[i] = gCurrentRoomProperties[i];
+                }
+
+                /* Generate the maze in the forced room (layer 0) */
+                layerIndex = 0;
+                seed = Random();
+                GenerateAndApplyMazeToLayer(layerIndex, seed);
+
+                /* Teleport player... (rest unchanged) */
+                gPlayerEntity.base.x.HALF.HI = gRoomControls.origin_x + (1 << 3) + 4;
+                gPlayerEntity.base.y.HALF.HI = gRoomControls.origin_y + (1 << 3) + 4;
+                if (gRoomControls.camera_target != NULL) {
+                    gRoomControls.camera_target->x.HALF.HI = gPlayerEntity.base.x.HALF.HI;
+                    gRoomControls.camera_target->y.HALF.HI = gPlayerEntity.base.y.HALF.HI;
+                }
+            }
+        }
+    }
+
+
+
 }
 
 static void sub_0804B058(EntityData* dat) {

@@ -231,6 +231,7 @@ SECTIONS {
         asm/src/stack_check.o(.text);
 #endif
         asm/src/veneer.o(.text);
+        data/data_08000360.o(.rodata);
         asm/src/code_08000E44.o(.text);
         asm/lib/libgcc.o(.text);
         asm/src/code_08000F10.o(.text);
@@ -261,8 +262,10 @@ SECTIONS {
         src/npc.o(.text);
         src/collision.o(.text);
         /* C source compiled without interworking */
+        src/maze_gen.o(.text);
         src/kinstone.o(.text);
         src/playerItem/playerItemGustBig.o(.text);
+
         src/playerItem/playerItemBow.o(.text);
         src/playerItem/playerItemSwordBeam.o(.text);
         src/beanstalkSubtask.o(.text);

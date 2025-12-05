@@ -4328,18 +4328,13 @@ u32 FinalizeSave(void) {
         gSave.global_progress = 1;
         gSave.stats.health = 24;
         gSave.stats.maxHealth = 24;
-        gSave.saved_status.area_next = AREA_MINISH_VILLAGE;
-        gSave.saved_status.room_next = ROOM_MINISH_VILLAGE_TEST_ROOM;
+        gSave.saved_status.area_next = 0x22;
+        gSave.saved_status.room_next = 0x15; // links room
         gSave.saved_status.start_anim = 0;
         gSave.saved_status.spawn_type = PL_SPAWN_DEFAULT;
         gSave.saved_status.layer = 1;
-        gSave.saved_status.start_pos_x = 0x78;
-        gSave.saved_status.start_pos_y = 0x78;
-        
-        // Give starting items: Four Sword, Bow, and Arrows
-        SetInventoryValue(ITEM_FOURSWORD, 1);
-        SetInventoryValue(ITEM_BOW, 1);
-        SetInventoryValue(ITEM_ARROWS5, 1);
+        gSave.saved_status.start_pos_x = 0x90;
+        gSave.saved_status.start_pos_y = 0x38;
     }
     if (gSave.name[0] == 0) {
         MemCopy(gUnk_0811E470, &gSave.name, FILENAME_LENGTH - 1);

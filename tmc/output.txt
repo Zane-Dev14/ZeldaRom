@@ -1,0 +1,1632 @@
+=== Zelda TMC — Targeted Scan ===
+
+=== 1) Candidate room/map loader functions (first 200 matches) ===
+src/beanstalkSubtask.c:22:extern void LoadRoomGfx(void);
+src/beanstalkSubtask.c:23:extern void LoadRoomTileSet(void);
+src/beanstalkSubtask.c:135:void LoadMapData(MapDataDefinition* dataDefinition) {
+src/beanstalkSubtask.c:1191:    LoadRoomTileSet();
+src/beanstalkSubtask.c:1193:        LoadRoomGfx();
+src/cutscene.c:50:    LoadRoomEntityList(gUnk_080FCB94);
+src/cutscene.c:184:    LoadRoomEntityList((EntityData*)gUnk_080FCC54);
+src/cutscene.c:309:        LoadRoomEntityList(gUnk_080FCBC4);
+src/cutscene.c:323:    LoadRoomEntityList(gUnk_080FCC14);
+src/cutscene.c:391:    LoadRoomEntityList(gUnk_080FCD84);
+src/cutscene.c:454:    LoadRoomEntityList(gUnk_080FCDE0);
+src/cutscene.c:503:    LoadRoomEntityList(gUnk_080FCEBC);
+src/cutscene.c:583:    LoadRoomEntityList(ptr->entityData);
+src/cutscene.c:584:    LoadRoomEntityList(GetRoomProperty(ptr->area, ptr->room, 1));
+src/cutscene.c:585:    LoadRoomEntityList(GetRoomProperty(ptr->area, ptr->room, 2));
+src/cutscene.c:627:        LoadRoomEntityList(ptr->entityData);
+src/cutscene.c:628:        LoadRoomEntityList((EntityData*)GetRoomProperty(ptr->area, ptr->room, 1));
+src/cutscene.c:629:        LoadRoomEntityList((EntityData*)GetRoomProperty(ptr->area, ptr->room, 2));
+src/cutscene.c:716:    LoadRoomEntityList(ptr->entityData1);
+src/cutscene.c:731:        LoadRoomEntityList(*data);
+src/cutscene.c:753:        LoadRoomEntityList((ptr)->entityData1);
+src/enemy/gyorgFemale.c:237:    LoadMapData((MapDataDefinition*)gyorgMappings[super->animationState >> 6]);
+src/enterPortalSubtask.c:189:    LoadRoomEntityList(gUnk_080D4110[portalId]);
+src/game.c:78:extern void LoadRoomGfx(void);
+src/game.c:345:    LoadRoomBgm();
+src/game.c:347:    LoadRoom();
+src/game.c:365:    LoadRoomGfx();
+src/game.c:366:    LoadRoomBgm();
+src/game.c:367:    LoadRoom();
+src/game.c:382:    LoadRoomBgm();
+src/gameUtils.c:288:void LoadRoomBgm(void) {
+src/kinstone.c:296:            LoadRoomEntity(gUnk_080FEC28 + ptr->entity_idx);
+src/kinstone.c:305:            LoadRoomEntity(gUnk_080FEBE8 + ptr->entity_idx);
+src/kinstone.c:323:                LoadRoomEntity(gUnk_080FECC8 + ptr->entity_idx);
+src/kinstone.c:329:            roomEnt = LoadRoomEntity(&gUnk_080FED18[ptr->entity_idx]);
+src/kinstone.c:343:                LoadRoomEntity(&gUnk_080FED58[ptr->entity_idx]);
+src/kinstone.c:351:            ent = LoadRoomEntity(&gUnk_080FEE78[ptr->entity_idx]);
+src/kinstone.c:367:                LoadRoomEntityList(gUnk_080FEE18);
+src/kinstone.c:372:                LoadRoomEntity(gUnk_080FEE58);
+src/kinstone.c:374:                LoadRoomEntity(gUnk_080FEE48);
+src/kinstone.c:380:                LoadRoomEntityList(gUnk_080FEE38);
+src/manager/entitySpawnManager.c:35:        LoadRoomEntityList(GetCurrentRoomProperty(super->type));
+src/manager/fightManager.c:114:            ent = LoadRoomEntity(prop++);
+src/manager/floatingPlatformManager.c:33:        entity = LoadRoomEntity(entityData++);
+src/manager/miscManager.c:207:        LoadRoomEntityList(gUnk_080F4B88);
+src/manager/templeOfDropletsManager.c:109:        LoadRoomEntityList((EntityData*)&gUnk_080E4C08);
+src/manager/tileChangeObserveManager.c:51:            LoadRoomEntityList((EntityData*)GetCurrentRoomProperty(super->type));
+src/npc/bladeBrothers.c:558:        LoadRoomEntityList(&gUnk_080F3494);
+src/object/cloud.c:87:        LoadRoomEntityList((EntityData*)&gUnk_080DD750);
+src/object/mazaalBossObject.c:197:    LoadRoomEntityList(GetCurrentRoomProperty(super->type));
+src/object/mazaalBossObject.c:199:        LoadRoomEntityList(GetCurrentRoomProperty(super->type2));
+src/playerUtils.c:55:void LoadRoomGfx(void);
+src/playerUtils.c:72:void LoadRoomTileSet(void);
+src/playerUtils.c:3829:void LoadRoomTileSet(void) {
+src/playerUtils.c:3844:        LoadMapData((gArea.pCurrentRoomInfo)->tileSet);
+src/playerUtils.c:3847:    LoadMapData((gArea.pCurrentRoomInfo)->tiles);
+src/playerUtils.c:3877:void LoadRoomGfx(void) {
+src/playerUtils.c:3891:    LoadMapData((gArea.pCurrentRoomInfo)->map);
+src/playerUtils.c:4032:                LoadMapData(ptr1);
+src/playerUtils.c:4168:    LoadRoomTileSet();
+src/playerUtils.c:4169:    LoadRoomGfx();
+src/playerUtils.c:4228:    LoadRoomTileSet();
+src/playerUtils.c:4249:    LoadRoomGfx();
+src/projectile/removableDust.c:151:    LoadRoomEntity(entityData);
+src/room.c:37:static void LoadRoomVisitTile(TileEntity*);
+src/room.c:45:void LoadRoomEntityList(const EntityData* listPtr) {
+src/room.c:48:            LoadRoomEntity(listPtr++);
+src/room.c:53:Entity* LoadRoomEntity(const EntityData* dat) {
+src/room.c:182:void LoadRoom(void) {
+src/room.c:183:    LoadRoomEntityList(GetCurrentRoomProperty(1));
+src/room.c:184:    LoadRoomEntityList(GetCurrentRoomProperty(0));
+src/room.c:189:    LoadRoomTileEntities(GetCurrentRoomProperty(3));
+src/room.c:202:                    ent = LoadRoomEntity(dat);
+src/room.c:209:                LoadRoomEntity(dat);
+src/room.c:218:    LoadRoomEntityList(GetRoomProperty(area, room, 1));
+src/room.c:272:void LoadRoomTileEntities(TileEntity* list) {
+src/room.c:281:                LoadRoomVisitTile(t);
+src/room.c:320:static void LoadRoomVisitTile(TileEntity* tileEntity) {
+src/roomInit.c:243:        LoadRoomEntityList(&Entities_MinishPaths_MayorsCabin_gUnk_080D6138);
+src/roomInit.c:259:        LoadRoomEntityList(&Entities_HouseInteriors1_Mayor_080D6210);
+src/roomInit.c:287:        LoadRoomEntityList(&gUnk_080D6340);
+src/roomInit.c:314:        LoadRoomEntityList(&gUnk_080D6360);
+src/roomInit.c:317:        LoadRoomEntityList(&gUnk_080D6380);
+src/roomInit.c:320:        LoadRoomEntityList(&gUnk_080D63A0);
+src/roomInit.c:323:        LoadRoomEntityList(&gUnk_080D63C0);
+src/roomInit.c:326:        LoadRoomEntityList(&gUnk_080D63E0);
+src/roomInit.c:329:        LoadRoomEntityList(&gUnk_080D6400);
+src/roomInit.c:332:        LoadRoomEntityList(&gUnk_080D6420);
+src/roomInit.c:335:        LoadRoomEntityList(&gUnk_080D6440);
+src/roomInit.c:349:        LoadRoomEntityList(&gUnk_080D6578);
+src/roomInit.c:351:            LoadRoomEntityList(&gUnk_080D6638);
+src/roomInit.c:355:        LoadRoomEntityList(&gUnk_080D6558);
+src/roomInit.c:357:    LoadRoomEntityList(&gUnk_080D6618);
+src/roomInit.c:370:        LoadRoomEntityList(&gUnk_080D6714);
+src/roomInit.c:373:        LoadRoomEntityList(&gUnk_additional_9_HouseInteriors1_Library1F);
+src/roomInit.c:375:        LoadRoomEntityList(&gUnk_additional_8_HouseInteriors1_Library1F);
+src/roomInit.c:387:        LoadRoomEntityList(&gUnk_080D6924);
+src/roomInit.c:490:                LoadRoomEntityList(&UpperInn_NoDin);
+src/roomInit.c:492:                LoadRoomEntityList(&UpperInn_Nayru);
+src/roomInit.c:494:            LoadRoomEntityList(&UpperInn_Farore);
+src/roomInit.c:497:            LoadRoomEntityList(&UpperInn_Farore);
+src/roomInit.c:499:            LoadRoomEntityList(&UpperInn_NoNayru);
+src/roomInit.c:501:            LoadRoomEntityList(&UpperInn_Din);
+src/roomInit.c:504:            LoadRoomEntityList(&UpperInn_Nayru);
+src/roomInit.c:506:            LoadRoomEntityList(&UpperInn_Din);
+src/roomInit.c:508:            LoadRoomEntityList(&UpperInn_NoFarore);
+src/roomInit.c:510:        LoadRoomEntityList(&UpperInn_Oracles);
+src/roomInit.c:535:        LoadRoomEntityList(&gUnk_080D7038);
+src/roomInit.c:555:        LoadRoomEntityList(&gUnk_080D7140);
+src/roomInit.c:558:        LoadRoomEntityList(&gUnk_080D7170);
+src/roomInit.c:560:    if ((gSave.global_progress < 8) || (LoadRoomEntityList(&gUnk_080D71A0), gSave.global_progress < 8))
+src/roomInit.c:561:        LoadRoomEntityList(&gUnk_080D71D0);
+src/roomInit.c:563:        LoadRoomEntityList(&gUnk_080D71F0);
+src/roomInit.c:580:        LoadRoomEntityList(&gUnk_080D7328);
+src/roomInit.c:618:            LoadRoomEntityList(&gUnk_080D73B0);
+src/roomInit.c:621:            LoadRoomEntityList(&gUnk_080D73E0);
+src/roomInit.c:648:        LoadRoomEntityList(&gUnk_080D7618);
+src/roomInit.c:651:        LoadRoomEntityList(&gUnk_080D74C8);
+src/roomInit.c:654:        LoadRoomEntityList(&gUnk_080D7588);
+src/roomInit.c:656:        LoadRoomEntityList(&gUnk_080D75D8);
+src/roomInit.c:668:        LoadRoomEntityList(&gUnk_additional_8_HyruleCastle_3);
+src/roomInit.c:815:        LoadRoomEntityList(&gUnk_080D7D34);
+src/roomInit.c:862:        LoadRoomEntityList(&gUnk_080D827C);
+src/roomInit.c:953:        LoadRoomEntityList(&gUnk_080D8B24);
+src/roomInit.c:955:        LoadRoomEntityList(&gUnk_080D8AC4);
+src/roomInit.c:957:        LoadRoomEntityList(&gUnk_080D8A74);
+src/roomInit.c:959:        LoadRoomEntityList(&gUnk_080D8A34);
+src/roomInit.c:961:        LoadRoomEntityList(&gUnk_080D8A04);
+src/roomInit.c:963:        LoadRoomEntityList(&gUnk_080D89E4);
+src/roomInit.c:1039:            LoadRoomEntityList(&gUnk_080D90C8);
+src/roomInit.c:1040:            LoadRoomEntityList(&gUnk_080D9108);
+src/roomInit.c:1043:        LoadRoomEntityList(&gUnk_080D9108);
+src/roomInit.c:1046:        LoadRoomEntityList(&gUnk_080D9098);
+src/roomInit.c:1116:            LoadRoomTileEntities(gUnk_080D9328);
+src/roomInit.c:1194:        LoadRoomEntityList(&gUnk_080D9800);
+src/roomInit.c:1222:        LoadRoomEntityList(&gUnk_080D9CC8);
+src/roomInit.c:1225:        LoadRoomEntityList(&gUnk_080D9CE8);
+src/roomInit.c:1228:        LoadRoomEntityList(&gUnk_080D9C38);
+src/roomInit.c:1233:        LoadRoomEntityList(&gUnk_080D9CE8);
+src/roomInit.c:1417:        LoadRoomEntityList(&gUnk_080DAB44);
+src/roomInit.c:1419:        LoadRoomEntityList(&gUnk_080DAB64);
+src/roomInit.c:1440:        LoadRoomEntityList(&gUnk_080DAB84);
+src/roomInit.c:1443:        LoadRoomEntityList(&gUnk_080DAC54);
+src/roomInit.c:1446:        LoadRoomEntityList(&gUnk_080DAD24);
+src/roomInit.c:1449:        LoadRoomEntityList(&gUnk_080DABC4);
+src/roomInit.c:1452:        LoadRoomEntityList(&gUnk_080DAC94);
+src/roomInit.c:1455:        LoadRoomEntityList(&gUnk_080DAD64);
+src/roomInit.c:1458:        LoadRoomEntityList(&gUnk_080DAC04);
+src/roomInit.c:1461:        LoadRoomEntityList(&gUnk_080DACD4);
+src/roomInit.c:1464:        LoadRoomEntityList(&gUnk_080DADA4);
+src/roomInit.c:1477:        LoadRoomEntityList(&gUnk_080DAEE8);
+src/roomInit.c:1490:        LoadRoomEntityList(&gUnk_080DAF80);
+src/roomInit.c:1503:        LoadRoomEntityList(&gUnk_080DB018);
+src/roomInit.c:1540:        LoadRoomEntityList(&gUnk_080DB238);
+src/roomInit.c:1586:        LoadRoomEntityList(&gUnk_080DB4D0);
+src/roomInit.c:1588:        LoadRoomEntityList(&gUnk_080DB4A0);
+src/roomInit.c:1646:    LoadRoomEntityList(&gUnk_080DB8F0);
+src/roomInit.c:1648:        LoadRoomEntityList(&gUnk_additional_a_TownMinishHoles_LibraryBookshelf);
+src/roomInit.c:1661:        LoadRoomEntityList(&gUnk_080DBA08);
+src/roomInit.c:1681:        LoadRoomEntityList(&gUnk_080DBB50);
+src/roomInit.c:1685:        LoadRoomEntityList(&gUnk_080DBB70);
+src/roomInit.c:1686:        LoadRoomEntityList(&gUnk_080DBB10);
+src/roomInit.c:1688:        LoadRoomEntityList(&gUnk_080DBAD0);
+src/roomInit.c:1696:    LoadRoomEntityList(&gUnk_080DBB90);
+src/roomInit.c:1783:        LoadRoomEntityList(&gUnk_080DC390);
+src/roomInit.c:1785:            LoadRoomEntityList(&gUnk_080DC3F0);
+src/roomInit.c:1788:        LoadRoomEntityList(&gUnk_080DC430);
+src/roomInit.c:1790:            LoadRoomEntityList(&gUnk_080DC530);
+src/roomInit.c:1794:        LoadRoomEntityList(&gUnk_080DC470);
+src/roomInit.c:1797:        LoadRoomEntityList(&gUnk_080DC4C0);
+src/roomInit.c:1900:        LoadRoomEntityList(&gUnk_080DCB10);
+src/roomInit.c:1991:        LoadRoomEntityList(&gUnk_additional_8_MelarisMine_Main);
+src/roomInit.c:1994:        LoadRoomEntityList(&gUnk_additional_9_MelarisMine_Main);
+src/roomInit.c:1996:        LoadRoomEntityList(&gUnk_080DD294);
+src/roomInit.c:2009:        LoadRoomEntityList(&gUnk_080DD364);
+src/roomInit.c:2015:        LoadRoomEntityList(&gUnk_080DD364);
+src/roomInit.c:2041:        LoadRoomEntityList(&gUnk_080DD7E0);
+src/roomInit.c:2046:        LoadRoomEntityList(&gUnk_080DD840);
+src/roomInit.c:2075:        LoadRoomEntityList(&gUnk_080DDE88);
+src/roomInit.c:2101:        LoadRoomEntityList(&gUnk_080DE008);
+src/roomInit.c:2115:        LoadRoomEntityList(&gUnk_080DE1E0);
+src/roomInit.c:2118:        LoadRoomEntityList(&gUnk_080DE200);
+src/roomInit.c:2131:            LoadRoomEntityList(&gUnk_080DE4C8);
+src/roomInit.c:2152:        LoadRoomEntityList(&gUnk_080DE814);
+src/roomInit.c:2155:            LoadRoomEntityList(&gUnk_additional_8_DeepwoodShrine_StairsToB1);
+src/roomInit.c:2326:        LoadRoomEntityList(&gUnk_additional_a_DeepwoodShrineBoss_Main);
+src/roomInit.c:2358:        LoadRoomEntityList(&gUnk_080DFB78);
+src/roomInit.c:2522:        LoadRoomEntityList(&gUnk_additional_a_CaveOfFlamesBoss_Main);
+src/roomInit.c:2731:        LoadRoomEntityList(&gUnk_080E3850);
+src/roomInit.c:2851:        LoadRoomEntityList(&gUnk_additional_a_TempleOfDroplets_BigOcto);
+src/roomInit.c:2874:        LoadRoomEntityList(&gUnk_080E4BD8);
+src/roomInit.c:2888:        LoadRoomEntityList(&gUnk_080E4CD8);
+src/roomInit.c:2890:        LoadRoomEntityList(&gUnk_080E4CF8);
+src/roomInit.c:2962:        LoadRoomEntityList(&gUnk_080E5660);
+src/roomInit.c:2964:        LoadRoomEntityList(&gUnk_080E5680);
+src/roomInit.c:3013:        LoadRoomEntityList(&gUnk_080E5E3C);
+src/roomInit.c:3015:        LoadRoomEntityList(&gUnk_080E5E5C);
+src/roomInit.c:3083:        LoadRoomEntityList(&gUnk_080E693C);
+src/roomInit.c:3148:        LoadRoomEntityList(&gUnk_080E718C);
+src/roomInit.c:3151:        LoadRoomEntityList(&gUnk_080E71AC);
+
+=== 2) Candidate tile-buffer / tilemap variable names (first 200 matches) ===
+
+=== 3) uint16/u8 tilemap arrays and likely buffer declarations (first 200 matches) ===
+src/beanstalkSubtask.c:34:    u16 tileType;
+src/beanstalkSubtask.c:933:    u16 tileType;
+src/beanstalkSubtask.c:1013:    u16 tileY;
+src/beanstalkSubtask.c:1014:    u16 tileX;
+src/common.c:608:    u16 mapX;
+src/common.c:609:    u16 mapY;
+src/enemy/eyegore.c:28:    /*0x80*/ u16 tileIndex1;
+src/enemy/eyegore.c:29:    /*0x82*/ u16 tileIndex2;
+src/enemy/eyegore.c:30:    /*0x84*/ u16 tileIndex3;
+src/enemy/eyegore.c:31:    /*0x86*/ u16 tileIndex4;
+src/enemy/eyegore.c:331:    u16 tileIndex = GetTileIndex(tilePos + TILE_POS(0, 0), super->collisionLayer);
+src/enemy/flyingPot.c:19:    /* 0x74 */ u16 tileIndex;
+src/enemy/flyingSkull.c:17:    u16 tileIndex;
+src/enemy/gyorgFemale.c:260:            u16 tileType;
+src/enemy/puffstool.c:25:    /*0x86*/ u16 tilePos;
+src/enemy/puffstool.c:431:    u16 tileType = GetTileTypeAtRoomCoords(x - 0x00, y - 0x00, super->collisionLayer);
+src/enemy/spinyBeetle.c:16:    u16 tilePos;
+src/enemy/spinyBeetle.c:17:    u16 tileIndex;
+src/enemy/torchTrap.c:17:    u16 tilePos;
+src/enemy/torchTrap.c:20:    u16 projectileTimer;
+src/enemy/torchTrap.c:30:const u16 gTorchTrapProjectileSpeeds[];
+src/enemy/torchTrap.c:158:const u16 gTorchTrapProjectileSpeeds[] = {
+src/manager/diggingCaveEntranceManager.c:35:    u16 tileIndex = SPECIAL_TILE_128;
+src/npc/castorWildsStatue.c:19:    /*0x74*/ u16 tilePos;
+src/npc/zelda.c:175:    u16 tilePos;
+src/object/beanstalk.c:15:    /*0x70*/ u16 tilePos;
+src/object/bench.c:16:    u16 tilePos;
+src/object/bigPushableLever.c:14:    /*0x70*/ u16 tilePosUpper;
+src/object/bigPushableLever.c:15:    /*0x72*/ u16 tilePosLower;
+src/object/bigPushableLever.c:16:    /*0x74*/ u16 tileIndexUpper;
+src/object/bigPushableLever.c:17:    /*0x76*/ u16 tileIndexLower;
+src/object/board.c:21:    u16 tilePos;
+src/object/bollard.c:18:    u16 tilePos;
+src/object/bollard.c:19:    u16 tileIndex;
+src/object/button.c:16:    /*0x74*/ u16 tilePos;
+src/object/button.c:132:    u16 tileType;
+src/object/cabinFurniture.c:16:    u16 tilePos;
+src/object/cameraTarget.c:16://     u16 tilePos;
+src/object/chestSpawner.c:17:    /*0x70*/ u16 tilePos;
+src/object/doubleBookshelf.c:14:    /*0x80*/ u16 tilePos;
+src/object/furniture.c:101:    /* 0x78 */ u16 tilePos;
+src/object/furniture.c:433:    u16 cur = GetTileIndex(tilePos, layer);
+src/object/gentariCurtain.c:18:    u16 tilePos;
+src/object/gentariCurtain.c:19:    u16 tilePos2;
+src/object/gentariCurtain.c:20:    u16 tileIndex;
+src/object/gentariCurtain.c:21:    u16 tileIndex2;
+src/object/giantRock2.c:15:    u16 tilePos;
+src/object/giantRock2.c:31:    u16 tilePos;
+src/object/giantTwig.c:14:    /*0x76*/ u16 tilePos;
+src/object/macroBook.c:20:    u16 tilePos;
+src/object/macroBook.c:138:    static const u16 tileIndices[] = {
+src/object/macroDecorations.c:92:    u16 tilePos = COORD_TO_TILE(super);
+src/object/minecartDoor.c:16:    /*0x74*/ u16 tileIndex;
+src/object/minecartDoor.c:17:    /*0x76*/ u16 tilePos;
+src/object/objectBlockingStairs.c:19:    u16 tilePos;
+src/object/objectOnPillar.c:15:    /*0x70*/ u16 tileIndex;
+src/object/objectOnPillar.c:17:    /*0x74*/ u16 tilePos;
+src/object/objectOnPillar.c:190:    u16 tileType;
+src/object/playerClone.c:22:    u16 tilePos;
+src/object/pushableLever.c:14:    /*0x70*/ u16 tilePos;
+src/object/pushableLever.c:15:    /*0x72*/ u16 tileIndex;
+src/object/pushableRock.c:14:    /*0x70*/ u16 tileIndex;
+src/object/pushableRock.c:17:    /*0x74*/ u16 tilePos;
+src/object/pushableStatue.c:61:    u16 tileType;
+src/object/pushableStatue.c:102:    u16 tileType;
+src/object/pushableStatue.c:196:    u16 tileType;
+src/object/smallIceBlock.c:19:    /*0x70*/ u16 tilePos;
+src/object/smallIceBlock.c:185:    u16 tileType;
+src/playerItem/playerItemCellOverwriteSet.c:17:    /*0x6c*/ u16 tileType;
+src/playerItem/playerItemGust.c:42:    u16 tileID;
+src/playerUtils.c:66:extern const u8 gMapTileTypeToCollisionData[]; // collisionData for tileType?
+src/playerUtils.c:3301:    u16 tileIndex;
+src/playerUtils.c:3359:    u16 tileType;
+src/playerUtils.c:3524:    u16 tileType;
+src/projectile/v1FireProjectile.c:15:    /*0x76*/ u16 tilePos;
+src/projectile/v2Projectile.c:16:    /*0x74*/ u16 tilePos;
+src/projectile/v2Projectile.c:17:    /*0x76*/ u16 tileType;
+src/projectile/v3ElectricProjectile.c:23:static const u16 projectileSpeeds[];
+src/projectile/v3ElectricProjectile.c:25:static const u8 projectileDirections[];
+src/projectile/v3ElectricProjectile.c:197:static const u16 projectileSpeeds[] = { 352, 480, 480 };
+src/projectile/v3ElectricProjectile.c:201:static const u8 projectileDirections[] = {
+src/scroll.c:891:        u16 tileIndex = mapData[tilePos];
+
+=== 4) RNG / seed functions and globals (first 200 matches) ===
+src/backgroundAnimations.c:2413:        return gUnk_080B4550[*(u8*)param_1][(Random() & 7)];
+src/collision.c:292:    u32 rand = Random();
+src/collision.c:293:    Entity* e = CreateFx(a2, p[rand & 3], 0);
+src/common.c:1233:    s32 randomMood;
+src/common.c:1257:        if (offeredFusion == KINSTONE_RANDOM) { // random shared fusion
+src/common.c:1258:            offeredFusion = GetRandomSharedFusion(fuserData);
+src/common.c:1274:    randomMood = Random();
+src/common.c:1276:    if (fuserStability <= randomMood % 100) {
+src/common.c:1943:// Get a random kinstone
+src/common.c:1944:u32 GetRandomSharedFusion(u8* fuserData) {
+src/common.c:1945:    s32 r = (s32)Random() % 18;
+src/enemy/acroBandits.c:130:                super->knockbackDirection = DirectionNormalize((super->knockbackDirection + (7 & Random())) - 4);
+src/enemy/acroBandits.c:182:    this->unk_79 = Random();
+src/enemy/acroBandits.c:186:    u32 rand;
+src/enemy/acroBandits.c:194:            rand = Random();
+src/enemy/acroBandits.c:195:            x = this->unk_74.HWORD + ((s32)rand % 5) * 0x10 - 0x20;
+src/enemy/acroBandits.c:196:            y = this->unk_76.HWORD + ((s32)(rand >> 4) % 5) * 0x10 - 0x20;
+src/enemy/acroBandits.c:218:            super->timer = timers[Random() & 7];
+src/enemy/acroBandits.c:252:        super->timer = timers[Random() & 7];
+src/enemy/acroBandits.c:263:            u32 tmp = Random();
+src/enemy/acroBandits.c:385:    this->unk_79 = Random();
+src/enemy/acroBandits.c:459:                    if (sub_08049FA0(super) == 0 && (Random() & 1)) {
+src/enemy/acroBandits.c:462:                        this->unk_7a = Random() & 30;
+src/enemy/acroBandits.c:539:        super->frameDuration = (Random() & 0x30) + 30;
+src/enemy/armos.c:373:            if ((((Random() & 7) != 0) || (super->animationState == 0xff)) && ((this->unk_82 & 3) != 3)) {
+src/enemy/armos.c:378:                super->direction = (4 + uVar3 + ((Random() & 2) - 1) * 8) & 0x18;
+src/enemy/ballChainSoldier.c:75:    super->animationState = Random() & 3;
+src/enemy/ballChainSoldier.c:217:    this->unk_78 = gUnk_080D0728[Random() & 3];
+src/enemy/ballChainSoldier.c:223:    u32 rand = Random();
+src/enemy/ballChainSoldier.c:226:    if (sub_08049FA0(super) == 0 && (rand & 3)) {
+src/enemy/ballChainSoldier.c:231:        dir = rand;
+src/enemy/ballChainSoldier.c:236:    this->unk_78 = gUnk_080D0730[(rand >> 0x10) & 3];
+src/enemy/ballChainSoldier.c:242:    if (Random() & 1) {
+src/enemy/beetle.c:114:        super->direction = ((sub_08049F84(super, 1) ^ 0x10) + gUnk_080CB5DC[Random() & 7]) &
+src/enemy/beetle.c:129:        super->timer = (Random() & 0x38) + 8;
+src/enemy/beetle.c:165:            super->timer = (Random() & 0x3f) + 30;
+src/enemy/beetle.c:176:            super->timer = (Random() & 0x1F) + 30;
+src/enemy/bobomb.c:158:    super->direction = (Random() & 0x18) | DIR_DIAGONAL;
+src/enemy/bobomb.c:274:    super->direction = Random() & 0x18;
+src/enemy/bombPeahat.c:121:    this->unk_80 = Random() & 1;
+src/enemy/bombarossa.c:30:        super->timer = Random() & 0xf;
+src/enemy/bowMoblin.c:105:        } else if (((this->unk_0x80 & 0x3) == 0) && (Random() & 0x10)) {
+src/enemy/bowMoblin.c:164:                tmp = Random() & 0x7;
+src/enemy/bowMoblin.c:178:                tmp = (Random() & 0x7);
+src/enemy/bowMoblin.c:200:                    if (Random() & 0xc0) {
+src/enemy/bowMoblin.c:240:        super->timer = gUnk_080CFFA4[Random() & 7];
+src/enemy/bowMoblin.c:243:            dir = Random();
+src/enemy/bowMoblin.c:249:                dir += gUnk_080CFFAC[Random() & 0xf];
+src/enemy/bowMoblin.c:251:                dir += gUnk_080CFFAC[Random() & 0x7];
+src/enemy/businessScrub.c:273:                    case 0: // random kinstone
+src/enemy/businessScrub.c:276:                            subtype = kinstoneTypes[Random() & 7];
+src/enemy/chuchu.c:189:        super->timer = (Random() & 3) + 12;
+src/enemy/chuchu.c:190:        super->subtimer = Random();
+src/enemy/chuchu.c:213:                super->timer = (Random() & 3) + 12;
+src/enemy/chuchu.c:313:    super->timer = (Random() & 0x38) + 180;
+src/enemy/chuchu.c:314:    super->subtimer = Random();
+src/enemy/chuchu.c:347:    super->timer = Random();
+src/enemy/chuchu.c:400:            if (Random() & 1) {
+src/enemy/chuchu.c:533:    super->timer = Random();
+src/enemy/chuchuBoss.c:696:                this->unk_7d = cVar2 = gUnk_080CC24F[Random() & 7] + 1;
+src/enemy/chuchuBoss.c:722:                if (this->unk_84->unk_04 == 2 && ((Random() & 3) != 0)) {
+src/enemy/chuchuBoss.c:965:        this->unk_7c = gUnk_080CC278[Random() & 3];
+src/enemy/chuchuBoss.c:1815:    if ((Random() & param_2) == 0) {
+src/enemy/chuchuBoss.c:1819:            fxEnt->x.HALF.HI += ((s32)Random()) % (super->hitbox->width << 1);
+src/enemy/chuchuBoss.c:1821:            fxEnt->y.HALF.HI += ((s32)Random()) % (super->hitbox->height << 1);
+src/enemy/cloudPiranha.c:87:    super->direction = (Random() & 0x1c);
+src/enemy/cloudPiranha.c:93:    this->unk_80 = Random() & 1;
+src/enemy/cloudPiranha.c:146:                super->animationState = (Random() & 0x10) ? ((tmp + 2) & 7) : ((tmp + 6) & 7);
+src/enemy/cuccoAggr.c:127:            super->direction = Random() & 0x1f;
+src/enemy/cuccoAggr.c:135:        super->spriteSettings.flipX ^= (Random() & 1);
+src/enemy/cuccoAggr.c:212:    u32 r3 = Random();
+src/enemy/cuccoAggr.c:243:            if (Random() & 1) {
+src/enemy/cuccoAggr.c:244:                r5 = Random() & 1;
+src/enemy/cuccoAggr.c:256:    u32 rand = Random();
+src/enemy/cuccoAggr.c:257:    if (sub_08049FA0(super) && (rand & 1)) {
+src/enemy/cuccoAggr.c:258:        super->direction = (rand >> 0x10) & 0x1c;
+src/enemy/cuccoAggr.c:280:    super->timer = Random();
+src/enemy/cuccoAggr.c:302:                u32 rand = (Random() & 0x17);
+src/enemy/cuccoAggr.c:303:                const PosOffset* ptr = &gCuccoAggrSpawnPoints[rand];
+src/enemy/cuccoChickAggr.c:106:    this->timer = (Random() & 0xf) + 8;
+src/enemy/cuccoChickAggr.c:111:    u32 rand = Random();
+src/enemy/cuccoChickAggr.c:114:    this->timer = (rand & 3) + 1;
+src/enemy/cuccoChickAggr.c:118:    if (!sub_08049FA0(this) && (rand >> 8) & 3) {
+src/enemy/cuccoChickAggr.c:122:            (rand >> 0x10) & (0x3 | DIR_DIAGONAL | DirectionNorth | DirectionEast | DirectionSouth | DirectionWest);
+src/enemy/darkNut.c:428:            tmp = gUnk_080CAB3A[Random() & 7];
+src/enemy/darkNut.c:432:            tmp = gUnk_080CAB42[Random() & 7];
+src/enemy/darkNut.c:436:            tmp = gUnk_080CAB4A[Random() & 7];
+src/enemy/darkNut.c:441:        tmp = gUnk_080CAB52[Random() & 3];
+src/enemy/darkNut.c:568:    u32 rand;
+src/enemy/darkNut.c:570:    rand = Random();
+src/enemy/darkNut.c:571:    if (!sub_08049FA0(super) && (rand & 1)) {
+src/enemy/darkNut.c:574:        tmp2 = DirectionRound(rand >> 0x10);
+src/enemy/enemy50.c:187:    u32 rand;
+src/enemy/enemy50.c:190:    rand = Random();
+src/enemy/enemy50.c:191:    super->direction = rand & 0x1e;
+src/enemy/enemy50.c:195:    this->unk_7b = rand >> 4;
+src/enemy/enemy50.c:223:        this->unk_7c = this->unk_80 * ((Random() & 0x30) + 0x3c) + 0x78;
+src/enemy/enemy50.c:239:    u32 rand;
+src/enemy/enemy50.c:247:            rand = Random();
+src/enemy/enemy50.c:248:            super->timer = rand & 0xe0;
+src/enemy/enemy50.c:250:            this->unk_7e = ((rand >> 8) & 0x78) + 0x3c;
+src/enemy/enemy50.c:282:        this->unk_7c = (Random() & 0xf8) + 0xb4;
+src/enemy/enemy50.c:344:    this->unk_78 = gUnk_080D0E18[Random() & 3] + tmp;
+src/enemy/enemy50.c:390:    u32 rand;
+src/enemy/enemy50.c:397:    rand = Random();
+src/enemy/enemy50.c:398:    tmpB = rand & 6;
+src/enemy/enemy50.c:399:    tmpA = rand >> 8 & 3;
+src/enemy/enemy64.c:267:        Entity* enemy = CreateEnemy(GYORG_MALE_EYE, Random() & 3);
+src/enemy/enemy64.c:317:        this->unk_74 = gUnk_080D29B8[Random() & 7];
+src/enemy/enemy64.c:504:    if ((--super->timer == 0) && ((Random() & 0xf) != 0)) {
+src/enemy/enemy64.c:512:    u32 rand;
+src/enemy/enemy64.c:517:            rand = Random();
+src/enemy/enemy64.c:518:            effect->x.HALF.HI += ((rand & 0x30) - 0x18);
+src/enemy/enemy64.c:519:            effect->y.HALF.HI += (((rand >> 8) & 0x30) - 0x18);
+src/enemy/fallingBoulder.c:50:    this->unk_7a = Random() & 0x70;
+src/enemy/fallingBoulder.c:116:                        this->unk_7a = (Random() & 0xff) | 0x100;
+src/enemy/fallingBoulder.c:132:                this->unk_7a = (Random() & 0x7f) | 0x80;
+src/enemy/fallingBoulder.c:152:    u32 rand;
+src/enemy/fallingBoulder.c:166:    rand = Random() & 7;
+src/enemy/fallingBoulder.c:167:    if (rand & 4) {
+src/enemy/fallingBoulder.c:168:        if (rand & 3) {
+src/enemy/fallingBoulder.c:174:        if (rand & 3) {
+src/enemy/fallingBoulder.c:181:    rand = Random() & 7;
+src/enemy/fallingBoulder.c:182:    if (rand & 4) {
+src/enemy/fallingBoulder.c:187:        if (rand & 3) {
+src/enemy/fallingBoulder.c:197:        if (rand & 3) {
+src/enemy/fallingBoulder.c:204:    rand = Random() & 7;
+src/enemy/fallingBoulder.c:206:    if (rand & 4) {
+src/enemy/fallingBoulder.c:207:        if (rand & 3) {
+src/enemy/fallingBoulder.c:213:        if (rand & 3) {
+src/enemy/fireballGuy.c:130:    if (tmp != DIR_NONE && (Random() & 3) == 0) {
+src/enemy/fireballGuy.c:131:        super->timer = Random() & 3;
+src/enemy/fireballGuy.c:138:        super->timer = Random() & 3;
+src/enemy/fireballGuy.c:139:        if (sub_08049FA0(super) == 0 && (Random() & 3)) {
+src/enemy/fireballGuy.c:141:            tmp2 = Random() & 8;
+src/enemy/fireballGuy.c:145:            super->direction = DirectionRound(Random());
+src/enemy/ghini.c:144:    u32 rand;
+src/enemy/ghini.c:147:    rand = Random();
+src/enemy/ghini.c:148:    super->direction = rand & 0x1e;
+src/enemy/ghini.c:152:    this->unk_7b = (rand >> 4);
+src/enemy/ghini.c:165:        super->timer = (Random() & 0x60) + 10;
+src/enemy/ghini.c:178:            super->direction = Random() & 0x1f;
+src/enemy/ghini.c:290:    u32 rand = Random();
+src/enemy/ghini.c:291:    super->timer = (rand & 8) + 8;
+src/enemy/ghini.c:293:        super->direction = (super->direction + gUnk_080D0978[rand & 7]) & 0x1e;
+src/enemy/ghini.c:297:    super->speed = gUnk_080D0974[rand >> 4 & 3];
+src/enemy/ghini.c:345:    this->unk_78 = gUnk_080D0980[Random() & 3] + tmp;
+src/enemy/gibdo.c:96:    super->animationState = Random() & 0x3;
+src/enemy/gibdo.c:210:    u32 rand1;
+src/enemy/gibdo.c:211:    u32 rand2;
+src/enemy/gibdo.c:215:    rand1 = Random();
+src/enemy/gibdo.c:216:    this->field_0x74 = (rand1 & 0x38) + 120;
+src/enemy/gibdo.c:218:    rand2 = Random();
+src/enemy/gibdo.c:219:    if (!sub_08049FA0(super) && ((rand2 & 3) != 0)) {
+src/enemy/gibdo.c:222:        super->direction = DirectionRound(rand2);
+src/enemy/gibdo.c:304:    u32 rand;
+src/enemy/gibdo.c:308:    rand = Random();
+src/enemy/gibdo.c:309:    super->animationState = ((super->animationState + (rand & 2)) - 1) & 3;
+src/enemy/gleerok.c:281:        u32 rand = Random() & 5;
+src/enemy/gleerok.c:283:        rand *= 4;
+src/enemy/gleerok.c:285:        fx = CreateFx(*(Entity**)(ptr + rand), FX_GIANT_EXPLOSION3, 0);
+src/enemy/gleerok.c:848:            if ((Random() & 1) == 0) {
+src/enemy/gleerok.c:863:            if ((Random() & 1) == 0) {
+src/enemy/gleerok.c:1542:    this->unk_74 = gUnk_080CD854[GetRandomByWeight(gUnk_080CD850)];
+src/enemy/gleerok.c:1551:        iVar4 = GetRandomByWeight(gUnk_080CD86C[this->unk_79]);
+src/enemy/gleerok.c:1558:                bVar3 = Random() & 1;
+src/enemy/gyorgChild.c:96:        r = (signed)Random() % 11;
+src/enemy/gyorgChild.c:150:        Random();
+src/enemy/gyorgFemale.c:317:        tmp = gUnk_080D1AF4[Random() & 3];
+src/enemy/gyorgFemale.c:319:        tmp = Random() & 7;
+src/enemy/gyorgFemale.c:334:    this->eyesVulnerable = gUnk_080D1AF8[Random() & 3];
+src/enemy/gyorgFemaleEye.c:173:                    UpdateAnimationVariableFrames(super, Random() & 0x1C);
+src/enemy/gyorgMale.c:397:        super->direction = (gUnk_080D1B70[Random() & 1] + tmp) & 0xC0;
+src/enemy/gyorgMale.c:413:        super->subtimer = (Random() & 0x38) + 120;
+src/enemy/gyorgMale.c:495:        this->unk_74 = gUnk_080D1BBC[Random() & 1];
+src/enemy/gyorgMale.c:531:        if (Random() & 1) {
+src/enemy/gyorgMale.c:696:        Entity* tmp = CreateEnemy(GYORG_MALE_EYE, Random() & 3);
+src/enemy/gyorgMale.c:751:        Entity* tmp = CreateEnemy(GYORG_MALE_EYE, Random() & 3);
+src/enemy/gyorgMale.c:814:        this->unk_74 = gUnk_080D1BF0[Random() & 1];
+src/enemy/gyorgMale.c:859:        tmp = CreateEnemy(GYORG_MALE_EYE, Random() & 3);
+src/enemy/gyorgMale.c:951:                u32 rand = Random();
+src/enemy/gyorgMale.c:952:                tmp->x.HALF.HI += (rand & 0x1E) - 15;
+src/enemy/gyorgMale.c:953:                rand >>= 8;
+src/enemy/gyorgMale.c:954:                tmp->y.HALF.HI += (rand & 0x1E) - 15;
+src/enemy/gyorgMale.c:1171:    u32 rand = Random();
+src/enemy/gyorgMale.c:1172:    GyorgBossObject_SpawnChildren(rand & 7, TRUE, (rand >> 8) & 3);
+src/enemy/gyorgMale.c:1178:    return gUnk_080D1C44[(unk1 * 3) + ((signed)Random() % 3)];
+src/enemy/helmasaur.c:143:    this->unk_78 = Random();
+src/enemy/helmasaur.c:146:    super->direction = DirectionRound(Random());
+src/enemy/helmasaur.c:179:        super->timer = (Random() & 0xf) + 15;
+src/enemy/helmasaur.c:302:    u32 uVar1 = Random();
+src/enemy/keaton.c:184:    u32 rand = Random();
+src/enemy/keaton.c:186:    super->timer = gUnk_080CE7E0[rand & 0xF];
+src/enemy/keaton.c:187:    if (!((sub_08049FA0(super) == 0) && ((rand >> 8 & 1) == 0))) {
+src/enemy/keaton.c:188:        super->direction = DirectionRound(rand >> 0x10);
+src/enemy/keaton.c:216:    this->unk_74 = gUnk_080CE7F0[Random() & 0xF];
+src/enemy/keese.c:104:    super->direction = Random() & 0x1F;
+src/enemy/keese.c:153:    this->flyTimer = gKeeseFlyDurations[Random() & 0xF];
+src/enemy/keese.c:165:        super->timer = gKeeseRestDurations[Random() & 0xF];
+src/enemy/keese.c:174:            super->direction = Random() & 0x1f;
+
+=== 5) Collision / metatile / blocking matches (first 200 matches) ===
+src/beanstalkSubtask.c:4:#include "collision.h"
+src/beanstalkSubtask.c:72:bool32 sub_0801A2B0(MapLayer* mapLayer, u32 position, u32 collisionType);
+src/beanstalkSubtask.c:75:bool32 sub_0801A458(MapLayer* mapLayer, u32 position, u32 collisionType);
+src/beanstalkSubtask.c:206:                                          gPlayerEntity.base.collisionLayer) == COLLISION_DATA_255) {
+src/beanstalkSubtask.c:220:    mapLayer = GetLayerByIndex(gPlayerEntity.base.collisionLayer);
+src/beanstalkSubtask.c:223:    tileType = GetTileTypeAtTilePos(position, gPlayerEntity.base.collisionLayer);
+src/beanstalkSubtask.c:264:            if (GetCollisionDataAtTilePos(position, gPlayerEntity.base.collisionLayer) != COLLISION_DATA_15) {
+src/beanstalkSubtask.c:321:            sub_080A7CFC(position, gPlayerEntity.base.collisionLayer);
+src/beanstalkSubtask.c:335:            OpenSmallChest(position, gPlayerEntity.base.collisionLayer);
+src/beanstalkSubtask.c:346:            sub_0804B388(position, gPlayerEntity.base.collisionLayer);
+src/beanstalkSubtask.c:381:            if ((gPlayerEntity.base.collisionLayer == 3) && (gMapTop.mapData[position] == SPECIAL_TILE_11)) {
+src/beanstalkSubtask.c:469:            pushedBlock->collisionLayer = gPlayerEntity.base.collisionLayer;
+src/beanstalkSubtask.c:514:            SetTile(SPECIAL_TILE_84, position, gPlayerEntity.base.collisionLayer);
+src/beanstalkSubtask.c:520:            SetTile(SPECIAL_TILE_84, position, gPlayerEntity.base.collisionLayer);
+src/beanstalkSubtask.c:534:                    SetTile(SPECIAL_TILE_89, position, gPlayerEntity.base.collisionLayer);
+src/beanstalkSubtask.c:551:                    SetTile(SPECIAL_TILE_89, position, gPlayerEntity.base.collisionLayer);
+src/beanstalkSubtask.c:568:            SetTile(SPECIAL_TILE_116, position, gPlayerEntity.base.collisionLayer);
+src/beanstalkSubtask.c:587:            SetTile(SPECIAL_TILE_116, position, gPlayerEntity.base.collisionLayer);
+src/beanstalkSubtask.c:588:            SetActTileAtTilePos(ACT_TILE_13, position, gPlayerEntity.base.collisionLayer);
+src/beanstalkSubtask.c:595:bool32 sub_0801A2B0(MapLayer* mapLayer, u32 position, u32 collisionType) {
+src/beanstalkSubtask.c:605:        temp4 = GetActTileForTileType(GetTileTypeAtTilePos(position, gPlayerEntity.base.collisionLayer));
+src/beanstalkSubtask.c:617:                if ((mapLayer->collisionData[(position)] != 0x28)) {
+src/beanstalkSubtask.c:620:                    if ((!IsTileCollision(mapLayer->collisionData, x, y, collisionType))) {
+src/beanstalkSubtask.c:646:    tileType = GetTileTypeAtTilePos(pos, gPlayerEntity.base.collisionLayer);
+src/beanstalkSubtask.c:654:    if (topLayer->collisionData[pos - 0x80] == 0x46) {
+src/beanstalkSubtask.c:657:    switch ((u16)GetActTileForTileType(GetTileTypeAtTilePos(pos, gPlayerEntity.base.collisionLayer))) {
+src/beanstalkSubtask.c:668:    switch (temp = mapLayer->collisionData[pos]) {
+src/beanstalkSubtask.c:687:bool32 sub_0801A458(MapLayer* mapLayer, u32 position, u32 collisionType) {
+src/beanstalkSubtask.c:693:        tileType = GetTileTypeAtTilePos(pos, gPlayerEntity.base.collisionLayer);
+src/beanstalkSubtask.c:702:                if (((mapLayer->collisionData[pos] != 0x28) &&
+src/beanstalkSubtask.c:703:                     (!IsTileCollision(mapLayer->collisionData, (pos & 0x3f) * 0x10 + gRoomControls.origin_x,
+src/beanstalkSubtask.c:704:                                       (pos >> 6) * 0x10 + gRoomControls.origin_y, collisionType))) &&
+src/beanstalkSubtask.c:705:                    (0xe < (u32)mapLayer->collisionData[pos] - 1)) {
+src/beanstalkSubtask.c:727:        if ((gUnk_080B44A0[tmp] & gPlayerEntity.base.collisions) == 0) {
+src/beanstalkSubtask.c:748:    u8* collisionData;
+src/beanstalkSubtask.c:753:    layer = GetLayerByIndex(this->collisionLayer);
+src/beanstalkSubtask.c:780:            index1 = GetTileTypeAtTilePos(position, this->collisionLayer);
+src/beanstalkSubtask.c:784:                collisionData = layer->collisionData - 0x40 + position;
+src/beanstalkSubtask.c:786:                    if (collisionData[index1] != 0) {
+src/beanstalkSubtask.c:814:            index1 = GetTileTypeAtTilePos(position, this->collisionLayer);
+src/beanstalkSubtask.c:818:                collisionData = layer->collisionData + (position + index2);
+src/beanstalkSubtask.c:820:                    if (collisionData[index1 * 0x40] != 0) {
+src/beanstalkSubtask.c:848:            index1 = GetTileTypeAtTilePos(position, this->collisionLayer);
+src/beanstalkSubtask.c:852:                collisionData = layer->collisionData + (position + (index2 * 0x40));
+src/beanstalkSubtask.c:854:                    if (collisionData[index1] != 0) {
+src/beanstalkSubtask.c:882:            index1 = GetTileTypeAtTilePos(position, this->collisionLayer);
+src/beanstalkSubtask.c:886:                collisionData = layer->collisionData - 1 + position;
+src/beanstalkSubtask.c:888:                    if (collisionData[index1 * 0x40] != 0) {
+src/beanstalkSubtask.c:909:    mapData = GetLayerByIndex(this->collisionLayer)->mapData;
+src/beanstalkSubtask.c:935:    GetLayerByIndex(gPlayerEntity.base.collisionLayer); // TODO result unused?
+src/beanstalkSubtask.c:938:                                    gPlayerEntity.base.collisionLayer);
+src/beanstalkSubtask.c:987:    mapLayer = GetLayerByIndex(this->collisionLayer);
+src/beanstalkSubtask.c:988:    if (((mapLayer->collisionData[param_2 + gUnk_080B4488[param_3 >> 3]] == 0) ||
+src/beanstalkSubtask.c:989:         ((u8)(mapLayer->collisionData[param_2 + gUnk_080B4488[param_3 >> 3]] - 0x20) < 0x20))) {
+src/beanstalkSubtask.c:996:            object->collisionLayer = this->collisionLayer;
+src/beanstalkSubtask.c:1159:            entity->collisionLayer = 0;
+src/beanstalkSubtask.c:1284:// used for minish houses, seems to overwrite all tiles with certain collision values on layer 1 for them?
+src/beanstalkSubtask.c:1287:    u8* collisionData;
+src/beanstalkSubtask.c:1293:    collisionData = gMapBottom.collisionData;
+src/beanstalkSubtask.c:1298:            for (ptr = gUnk_080B44D0; ptr->collision != 0; ptr++) {
+src/beanstalkSubtask.c:1299:                if (ptr->collision == *collisionData) {
+src/beanstalkSubtask.c:1304:            collisionData++;
+src/beanstalkSubtask.c:1306:        collisionData = collisionData + (0x40 - width);
+src/code_08049DF4.c:68:    if ((entA->collisionLayer & entB->collisionLayer) != 0) {
+src/code_08049DF4.c:149:    if ((entB->collisionLayer & entA->collisionLayer) != 0) {
+src/code_08049DF4.c:170:            mapLayer = GetLayerByIndex(entA->collisionLayer);
+src/code_08049DF4.c:222:        if (sub_0804A4BC(&mapLayer->collisionData[tile1], &mapLayer->collisionData[tile2], 0x40, uVar3)) {
+src/code_08049DF4.c:228:            if (sub_0804A4BC(&mapLayer->collisionData[tile1], &mapLayer->collisionData[tile2], 0x40, uVar3)) {
+src/code_08049DF4.c:238:        if (sub_0804A4BC(&mapLayer->collisionData[tile1], &mapLayer->collisionData[tile2], -0x40, uVar3)) {
+src/code_08049DF4.c:244:            if (sub_0804A4BC(&mapLayer->collisionData[tile1], &mapLayer->collisionData[tile2], -0x40, uVar3)) {
+src/code_08049DF4.c:264:        if (sub_0804A4BC(&mapLayer->collisionData[tile1], &mapLayer->collisionData[tile2], 1, uVar3)) {
+src/code_08049DF4.c:270:            if (sub_0804A4BC(&mapLayer->collisionData[tile1], &mapLayer->collisionData[tile2], 1, uVar3)) {
+src/code_08049DF4.c:280:        if (sub_0804A4BC(&mapLayer->collisionData[tile1], &mapLayer->collisionData[tile2], -1, uVar3)) {
+src/code_08049DF4.c:285:            if (sub_0804A4BC(&mapLayer->collisionData[tile1], &mapLayer->collisionData[tile2], -1, uVar3)) {
+src/collision.c:2:#include "collision.h"
+src/collision.c:71:    // if any priority is set, dont do collision
+src/collision.c:76:    // Check to see if we should disable collision this frame
+src/collision.c:81:        gPlayerEntity.base.flags = flags; // reset collision to before
+src/collision.c:188:    if ((this->collisionLayer & that->collisionLayer) != 0) {
+src/collision.c:197:                if ((this->collisionFlags & 0x10) != 0)
+src/collision.c:201:                if ((that->collisionFlags & 0x10) != 0)
+src/collision.c:274:        e->collisionLayer = org->collisionLayer;
+src/enemy/acroBandits.c:197:            if (GetCollisionDataAtWorldCoords(x, y, super->collisionLayer) == 0) {
+src/enemy/armos.c:7:#include "collision.h"
+src/enemy/armos.c:181:                super->collisionMask = 0xb;
+src/enemy/armos.c:286:    super->collisionMask = 1;
+src/enemy/armos.c:380:            if (IsTileCollision(super->collisionLayer == 2 ? gMapTop.collisionData : gMapBottom.collisionData,
+src/enemy/armos.c:407:    this->unk_78 = GetTileIndex(tilePos, super->collisionLayer);
+src/enemy/armos.c:408:    SetTile(SPECIAL_TILE_34, tilePos, (u32)super->collisionLayer);
+src/enemy/armos.c:412:    SetTile(this->unk_78, COORD_TO_TILE(super), super->collisionLayer);
+src/enemy/armos.c:430:            if (GetTileTypeAtTilePos(tilePos, super->collisionLayer) == SPECIAL_TILE_73) {
+src/enemy/armos.c:439:                    SetTile(SPECIAL_TILE_34, tilePos, super->collisionLayer);
+src/enemy/armos.c:443:                    SetTile(SPECIAL_TILE_73, COORD_TO_TILE(super), super->collisionLayer);
+src/enemy/bobomb.c:8:#include "collision.h"
+src/enemy/bobomb.c:172:        if (super->collisions != COL_NONE) {
+src/enemy/bobomb.c:173:            sub_0800417E(super, super->collisions);
+src/enemy/bobomb.c:185:        if (super->collisions != COL_NONE) {
+src/enemy/bobomb.c:186:            sub_0800417E(super, super->collisions);
+src/enemy/bobomb.c:302:        entity->collisionLayer = super->collisionLayer;
+src/enemy/bombPeahat.c:118:    super->collisionFlags |= 0x10;
+src/enemy/bombPeahat.c:130:    super->collisionLayer = 3;
+src/enemy/bombPeahat.c:417:    super->collisionFlags = 3;
+src/enemy/bombPeahat.c:603:                        super->collisionLayer = 1;
+src/enemy/bowMoblin.c:112:        sub_0800417E(super, super->collisions);
+src/enemy/bowMoblin.c:370:    return (super->collisions & gUnk_080CFFBC[(super->animationState ^ 1) / 2]) != 0;
+src/enemy/businessScrub.c:107:        this->unk_74 = GetTileIndex(this->unk_76, super->collisionLayer);
+src/enemy/businessScrub.c:446:    SetTile(SPECIAL_TILE_34, this->unk_76, super->collisionLayer);
+src/enemy/businessScrub.c:460:        SetTile(this->unk_74, this->unk_76, super->collisionLayer);
+src/enemy/chuchuBoss.c:373:                    this->unk_68->base.collisionLayer = super->collisionLayer;
+src/enemy/chuchuBoss.c:383:                    super->parent->collisionLayer = super->collisionLayer;
+src/enemy/chuchuBoss.c:394:                    super->child->collisionLayer = super->collisionLayer;
+src/enemy/chuchuBoss.c:982:    child->collisionMask &= ~1;
+src/enemy/chuchuBoss.c:988:        child->collisionMask |= 1;
+src/enemy/cloudPiranha.c:7:#include "collision.h"
+src/enemy/cloudPiranha.c:242:    s32 collisionData;
+src/enemy/cloudPiranha.c:246:        collisionData = GetCollisionDataAtTilePos(COORD_TO_TILE(super), super->collisionLayer);
+src/enemy/cloudPiranha.c:247:        if ((collisionData == COLLISION_DATA_15) || (collisionData == COLLISION_DATA_42)) {
+src/enemy/cloudPiranha.c:252:        collisionData = GetCollisionDataRelativeTo(super, ptr[0], ptr[1]);
+src/enemy/cloudPiranha.c:253:        if ((collisionData == COLLISION_DATA_15) || (collisionData == COLLISION_DATA_42)) {
+src/enemy/cloudPiranha.c:256:            if (super->collisions != COL_NONE) {
+src/enemy/cloudPiranha.c:257:                sub_0800417E(super, super->collisions);
+src/enemy/crow.c:111:    super->collisionFlags |= 0x10;
+src/enemy/crow.c:112:    super->collisionLayer = 3;
+src/enemy/crow.c:169:    super->collisionLayer = 3;
+src/enemy/crow.c:198:    super->collisionLayer = 3;
+src/enemy/cuccoAggr.c:306:                entity->collisionLayer = super->collisionLayer;
+src/enemy/doorMimic.c:52:    SetTile(this->unk_7c, this->unk_7e, super->collisionLayer);
+src/enemy/doorMimic.c:128:    this->unk_7c = GetTileIndex(tilePos, super->collisionLayer);
+src/enemy/doorMimic.c:129:    SetTile(gUnk_080CB79C[super->type2], tilePos, super->collisionLayer);
+src/enemy/enemy50.c:419:    super->collisionLayer = 0;
+src/enemy/enemy64.c:115:        super->collisionLayer = 2;
+src/enemy/enemy64.c:246:                projectile->collisionLayer = 2;
+src/enemy/enemy64.c:521:            effect->collisionLayer = 2;
+src/enemy/eyegore.c:331:    u16 tileIndex = GetTileIndex(tilePos + TILE_POS(0, 0), super->collisionLayer);
+src/enemy/eyegore.c:333:    tileIndex = GetTileIndex(tilePos + TILE_POS(1, 0), super->collisionLayer);
+src/enemy/eyegore.c:335:    tileIndex = GetTileIndex(tilePos + TILE_POS(0, 1), super->collisionLayer);
+src/enemy/eyegore.c:337:    tileIndex = GetTileIndex(tilePos + TILE_POS(1, 1), super->collisionLayer);
+src/enemy/eyegore.c:339:    SetTile(SPECIAL_TILE_34, tilePos, super->collisionLayer);
+src/enemy/eyegore.c:340:    SetTile(SPECIAL_TILE_34, tilePos + 1, super->collisionLayer);
+src/enemy/eyegore.c:341:    SetTile(SPECIAL_TILE_34, tilePos + TILE_POS(0, 1), super->collisionLayer);
+src/enemy/eyegore.c:342:    SetTile(SPECIAL_TILE_34, tilePos + TILE_POS(1, 1), super->collisionLayer);
+src/enemy/eyegore.c:347:    SetTile(this->tileIndex1, tilePos + TILE_POS(0, 0), super->collisionLayer);
+src/enemy/eyegore.c:348:    SetTile(this->tileIndex2, tilePos + TILE_POS(1, 0), super->collisionLayer);
+src/enemy/eyegore.c:349:    SetTile(this->tileIndex3, tilePos + TILE_POS(0, 1), super->collisionLayer);
+src/enemy/eyegore.c:350:    SetTile(this->tileIndex4, tilePos + TILE_POS(1, 1), super->collisionLayer);
+src/enemy/eyegore.c:404:                                                     super->y.HALF.HI + gUnk_080CE2C0[tmp2 + 1], super->collisionLayer);
+src/enemy/eyegore.c:406:                                                     super->y.HALF.HI + gUnk_080CE2C0[tmp2 + 3], super->collisionLayer);
+src/enemy/fallingBoulder.c:62:    super->collisionLayer = 3;
+src/enemy/fallingBoulder.c:140:    super->collisionLayer = 3;
+src/enemy/fallingBoulder.c:154:    switch (GetTileIndex(this->unk_7e, super->collisionLayer)) {
+src/enemy/fireballGuy.c:68:    super->collisionFlags |= 0x10;
+src/enemy/flyingPot.c:7:#include "collision.h"
+src/enemy/flyingPot.c:103:        SetTile(this->tileIndex, TILE(super->x.HALF.HI, super->y.HALF.HI), super->collisionLayer);
+src/enemy/flyingPot.c:149:        SetTile(this->tileIndex, TILE(super->x.HALF.HI, super->y.HALF.HI), super->collisionLayer);
+src/enemy/flyingPot.c:180:    this->tileIndex = GetTileIndex(tilePos, super->collisionLayer);
+src/enemy/flyingPot.c:181:    SetTile(SPECIAL_TILE_0, tilePos, super->collisionLayer);
+src/enemy/flyingPot.c:189:        SetTile(this->tileIndex, TILE(super->x.HALF.HI, super->y.HALF.HI), super->collisionLayer);
+src/enemy/flyingPot.c:211:        super->collisionMask = 0xF;
+src/enemy/flyingPot.c:214:        SetTile(this->tileIndex, TILE(super->x.HALF.HI, super->y.HALF.HI), super->collisionLayer);
+src/enemy/flyingPot.c:237:    if (super->collisions != COL_NONE) {
+src/enemy/flyingPot.c:260:    if (GetTileIndex(tilePos, super->collisionLayer) == SPECIAL_TILE_103) {
+src/enemy/flyingPot.c:261:        SetTile(this->tileIndex, tilePos, super->collisionLayer);
+src/enemy/flyingSkull.c:7:#include "collision.h"
+src/enemy/flyingSkull.c:54:        SetTile(this->tileIndex, COORD_TO_TILE(super), super->collisionLayer);
+src/enemy/flyingSkull.c:93:        SetTile(this->tileIndex, COORD_TO_TILE(super), super->collisionLayer);
+src/enemy/flyingSkull.c:124:    this->tileIndex = GetTileIndex(tilePos, super->collisionLayer);
+src/enemy/flyingSkull.c:125:    SetTile(SPECIAL_TILE_96, tilePos, super->collisionLayer);
+src/enemy/flyingSkull.c:134:            SetTile(this->tileIndex, COORD_TO_TILE(super), super->collisionLayer);
+src/enemy/flyingSkull.c:151:                        SetTile(this->tileIndex, COORD_TO_TILE(super), super->collisionLayer);
+src/enemy/flyingSkull.c:167:    super->collisions = COL_NONE;
+src/enemy/flyingSkull.c:171:    SetTile(this->tileIndex, COORD_TO_TILE(super), super->collisionLayer);
+src/enemy/flyingSkull.c:183:    if (super->z.HALF.HI == 0 || (super->collisions != COL_NONE)) {
+src/enemy/flyingSkull.c:202:        super->collisionMask = 0xf;
+src/enemy/flyingSkull.c:204:        SetTile(this->tileIndex, COORD_TO_TILE(super), super->collisionLayer);
+src/enemy/flyingSkull.c:230:    if (super->collisions != COL_NONE) {
+src/enemy/flyingSkull.c:252:    if (GetTileIndex(tilePos, super->collisionLayer) == SPECIAL_TILE_103) {
+src/enemy/flyingSkull.c:253:        SetTile(this->tileIndex, tilePos, super->collisionLayer);
+src/enemy/gibdo.c:329:    super->collisionMask &= 0xfe;
+src/enemy/gibdo.c:344:    super->collisionMask |= 1;
+src/enemy/gleerok.c:352:                    super->child->collisionLayer = super->collisionLayer;
+src/enemy/gleerok.c:367:                super->child->collisionLayer = super->collisionLayer;
+src/enemy/gleerok.c:386:                super->collisionMask |= 0x80;
+src/enemy/gleerok.c:402:            super->collisionMask |= 0x80;
+src/enemy/gyorgChild.c:29:        this->collisionLayer = 2;
+src/enemy/gyorgChild.c:154:        super->collisionLayer = 2;
+src/enemy/gyorgFemale.c:9:#include "collision.h"
+src/enemy/gyorgFemale.c:88:    super->collisionLayer = 2;
+src/enemy/gyorgFemale.c:96:    gPlayerEntity.base.collisionLayer = 2;
+src/enemy/gyorgFemale.c:255:    u8* collisionData = &gMapTop.collisionData[sub_08046518_offset];
+src/enemy/gyorgFemale.c:264:            collisionData[j] = gMapTileTypeToCollisionData[tileType];
+src/enemy/gyorgFemale.c:269:        collisionData += 0x40;
+src/enemy/gyorgFemale.c:389:                tmp->collisionLayer = 1;
+src/enemy/gyorgFemaleEye.c:109:    super->collisionLayer = 2;
+src/enemy/gyorgFemaleMouth.c:48:        this->collisionLayer = 2;
+src/enemy/gyorgMale.c:132:    super->collisionFlags |= 0x10;
+src/enemy/gyorgMale.c:133:    super->collisionLayer = 2;
+src/enemy/gyorgMale.c:416:            tmp->collisionLayer = 2;
+src/enemy/gyorgMale.c:441:            tmp->collisionLayer = 2;
+src/enemy/gyorgMale.c:956:                tmp->collisionLayer = 1;
+src/enemy/helmasaur.c:7:#include "collision.h"
+
+=== 6) Room dimensions / tilemap size constants (first 200 matches) ===
+include/map.h:1:#ifndef MAP_H
+include/map.h:2:#define MAP_H
+include/map.h:124:#endif // MAP_H
+include/tileMap.h:1:#ifndef TILEMAP_H
+include/tileMap.h:2:#define TILEMAP_H
+include/tileMap.h:13:#endif // TILEMAP_H
+
+=== 7) assets/map.json (first 200 lines) ===
+[
+  {
+    "offsets": {
+      "DEMO_JP": -988,
+      "DEMO_USA": 2608,
+      "JP": -980,
+      "EU": -2808
+    }
+  },
+  {
+    "calculateOffsets": "map_offsets.inc",
+    "start": 3295972
+  },
+  {
+    "path": "assets/gAreaRoomMap_None.bin.lz",
+    "start": 3295972,
+    "size": 976,
+    "type": "tileMap"
+  },
+  {
+    "path": "maps/areas/000_MinishWoods/tileSets/0/gAreaTileSet_MinishWoods_0_0.4bpp.lz",
+    "start": 3296948,
+    "size": 11348,
+    "type": "subTileSet"
+  },
+  {
+    "path": "maps/areas/000_MinishWoods/tileSets/0/gAreaTileSet_MinishWoods_0_1.4bpp.lz",
+    "start": 3308296,
+    "size": 9712,
+    "type": "subTileSet"
+  },
+  {
+    "path": "maps/areas/000_MinishWoods/tileSets/0/gAreaTileSet_MinishWoods_0_2.4bpp.lz",
+    "start": 3318008,
+    "size": 8432,
+    "type": "subTileSet"
+  },
+  {
+    "path": "maps/areas/000_MinishWoods/tileSet/gAreaTileSet_MinishWoods_bottom.bin.lz",
+    "start": 3326440,
+    "size": 7036,
+    "type": "tileSet"
+  },
+  {
+    "path": "maps/areas/000_MinishWoods/tileSet/gAreaTileSet_MinishWoods_top.bin.lz",
+    "start": 3333476,
+    "size": 3468,
+    "type": "tileSet"
+  },
+  {
+    "path": "maps/areas/000_MinishWoods/tileSet/gAreaTileSetTypes_MinishWoods_bottom.bin.lz",
+    "start": 3336944,
+    "size": 1072,
+    "type": "tileSet_types"
+  },
+  {
+    "path": "maps/areas/000_MinishWoods/tileSet/gAreaTileSetTypes_MinishWoods_top.bin.lz",
+    "start": 3338016,
+    "size": 708,
+    "type": "tileSet_types"
+  },
+  {
+    "path": "maps/areas/000_MinishWoods/rooms/00_Main/gAreaRoomMap_MinishWoods_Main_bottom.bin.lz",
+    "start": 3338724,
+    "size": 4268,
+    "type": "tileMap"
+  },
+  {
+    "path": "maps/areas/000_MinishWoods/rooms/00_Main/gAreaRoomMap_MinishWoods_Main_top.bin.lz",
+    "start": 3342992,
+    "size": 1544,
+    "type": "tileMap"
+  },
+  {
+    "path": "maps/areas/000_MinishWoods/rooms/00_Main/gCaveBorder_LakeWoods_outside.bin.lz",
+    "start": 3344536,
+    "size": 1012,
+    "type": "tileMap"
+  },
+  {
+    "path": "maps/areas/000_MinishWoods/rooms/00_Main/gCaveBorder_LakeWoods_unused.bin.lz",
+    "start": 3345548,
+    "size": 1164,
+    "type": "tileMap"
+  },
+  {
+    "path": "maps/areas/011_LakeHylia/tileSets/0/gAreaTileSet_LakeHylia_0_0.4bpp.lz",
+    "start": 3346712,
+    "size": 8204,
+    "type": "subTileSet"
+  },
+  {
+    "path": "maps/areas/011_LakeHylia/tileSets/0/gAreaTileSet_LakeHylia_0_1.4bpp.lz",
+    "start": 3354916,
+    "size": 9776,
+    "type": "subTileSet"
+  },
+  {
+    "path": "maps/areas/011_LakeHylia/tileSets/0/gAreaTileSet_LakeHylia_0_2.4bpp.lz",
+    "start": 3364692,
+    "size": 7620,
+    "type": "subTileSet"
+  },
+  {
+    "path": "maps/areas/011_LakeHylia/tileSet/gAreaTileSet_LakeHylia_bottom.bin.lz",
+    "start": 3372312,
+    "size": 6104,
+    "type": "tileSet"
+  },
+  {
+    "path": "maps/areas/011_LakeHylia/tileSet/gAreaTileSet_LakeHylia_top.bin.lz",
+    "start": 3378416,
+    "size": 3584,
+    "type": "tileSet"
+  },
+  {
+    "path": "maps/areas/011_LakeHylia/tileSet/gAreaTileSetTypes_LakeHylia_bottom.bin.lz",
+    "start": 3382000,
+    "size": 1144,
+    "type": "tileSet_types"
+  },
+  {
+    "path": "maps/areas/011_LakeHylia/tileSet/gAreaTileSetTypes_LakeHylia_top.bin.lz",
+    "start": 3383144,
+    "size": 728,
+    "type": "tileSet_types"
+  },
+  {
+    "path": "maps/areas/011_LakeHylia/rooms/00_Main/gAreaRoomMap_LakeHylia_Main_bottom.bin.lz",
+    "start": 3383872,
+    "size": 3188,
+    "type": "tileMap"
+  },
+  {
+    "path": "maps/areas/011_LakeHylia/rooms/00_Main/gAreaRoomMap_LakeHylia_Main_top.bin.lz",
+    "start": 3387060,
+    "size": 1084,
+    "type": "tileMap"
+  },
+  {
+    "path": "maps/areas/011_LakeHylia/rooms/00_Main/gCaveBorder_LakeHyliaNorth_outside.bin.lz",
+    "start": 3388144,
+    "size": 760,
+    "type": "tileMap"
+  },
+  {
+    "path": "maps/areas/011_LakeHylia/rooms/01_Beanstalk/gAreaRoomMap_LakeHylia_Beanstalk_bottom.bin.lz",
+    "start": 3388904,
+    "size": 368,
+    "type": "tileMap"
+  },
+  {
+    "path": "maps/areas/011_LakeHylia/rooms/01_Beanstalk/gAreaRoomMap_LakeHylia_Beanstalk_top.bin.lz",
+    "start": 3389272,
+    "size": 324,
+    "type": "tileMap"
+  },
+  {
+    "path": "maps/areas/004_CastorWilds/tileSets/0/gAreaTileSet_CastorWilds_0_0.4bpp.lz",
+    "start": 3389596,
+    "size": 11284,
+    "type": "subTileSet"
+  },
+  {
+    "path": "maps/areas/004_CastorWilds/tileSets/0/gAreaTileSet_CastorWilds_0_1.4bpp.lz",
+    "start": 3400880,
+    "size": 10124,
+    "type": "subTileSet"
+  },
+  {
+    "path": "maps/areas/004_CastorWilds/tileSets/0/gAreaTileSet_CastorWilds_0_2.4bpp.lz",
+    "start": 3411004,
+    "size": 5256,
+    "type": "subTileSet"
+  },
+  {
+    "path": "maps/areas/004_CastorWilds/tileSet/gAreaTileSet_CastorWilds_bottom.bin.lz",
+    "start": 3416260,
+    "size": 7472,
+    "type": "tileSet"
+  },
+  {
+    "path": "maps/areas/004_CastorWilds/tileSet/gAreaTileSet_CastorWilds_top.bin.lz",
+    "start": 3423732,
+    "size": 3636,
+    "type": "tileSet"
+  },
+  {
+    "path": "maps/areas/004_CastorWilds/tileSet/gAreaTileSetTypes_CastorWilds_bottom.bin.lz",
+    "start": 3427368,
+    "size": 1256,
+    "type": "tileSet_types"
+  },
+  {
+    "path": "maps/areas/004_CastorWilds/tileSet/gAreaTileSetTypes_CastorWilds_top.bin.lz",
+    "start": 3428624,
+    "size": 744,
+    "type": "tileSet_types"
+  },
+  {
+
+=== 8) File headers: room.c / roomInit.c / screenTileMap.c ===
+--- src/room.c ---
+// TODO: original name is probably floor.c
+
+#include "area.h"
+#include "common.h"
+#include "enemy.h"
+#include "flags.h"
+#include "functions.h"
+#include "game.h"
+#include "manager/bombableWallManager.h"
+#include "map.h"
+#include "object.h"
+#include "room.h"
+#include "tiles.h"
+
+static void sub_0804B058(EntityData* dat);
+extern void sub_0801AC98(void);
+extern u32 EnemyEnableRespawn(u32);
+
+extern void** gCurrentRoomProperties;
+extern void*** gAreaTable[];
+extern u8 gEntityListLUT[];
+
+extern void sub_080186EC(void);
+extern void sub_0804B16C(void);
+extern void ClearSmallChests(void);
+extern Entity* GetEmptyEntityByKind(u32 kind);
+
+void RegisterRoomEntity(Entity*, const EntityData*);
+void sub_0804AF0C(Entity*, const EntityData*);
+void sub_0804AFB0(void** properties);
+
+void sub_08054524(void);
+void sub_0806F704(Entity*, u32);
+
+void sub_0805BB00(u32, u32);
+
+static void LoadRoomVisitTile(TileEntity*);
+static void LoadSmallChestTile(TileEntity*);
+static void LoadBombableWallTile(TileEntity*);
+static void LoadDarknessTile(TileEntity*);
+static void LoadDestructibleTile(TileEntity*);
+static void LoadGrassDropTile(TileEntity*);
+static void LoadLocationTile(TileEntity*);
+
+void LoadRoomEntityList(const EntityData* listPtr) {
+    if (listPtr != NULL) {
+        while (listPtr->kind != 0xFF) {
+            LoadRoomEntity(listPtr++);
+        }
+    }
+}
+
+Entity* LoadRoomEntity(const EntityData* dat) {
+    int kind;
+    Entity* entity;
+
+// r4/r5 regalloc
+#ifndef NON_MATCHING
+    asm("" ::: "r5");
+#endif
+
+    kind = dat->kind & 0xF;
+    if ((dat->flags & 0xF0) == 0x50 && DeepFindEntityByID(kind, dat->id))
+        return NULL;
+    entity = GetEmptyEntityByKind(kind);
+    if (entity != NULL) {
+        entity->kind = kind;
+        entity->id = dat->id;
+        entity->type = dat->type;
+        RegisterRoomEntity(entity, dat);
+        if ((dat->flags & 0xF0) != 16) {
+            u8 kind2;
+            entity->type2 = *(u8*)&dat->type2;
+            entity->timer = (dat->type2 & 0xFF00) >> 8;
+            if (kind == 9)
+                return entity;
+            sub_0804AF0C(entity, dat);
+            if (!entity->next)
+                return entity;
+            kind2 = dat->kind & 0xF0;
+            if ((kind2 & 0x10) == 0) {
+                if ((kind2 & 0x20) != 0) {
+                    entity->collisionLayer = 2;
+                    return entity;
+                }
+            }
+
+            if ((kind2 & 0x10) || (gRoomControls.scroll_flags & 2)) {
+                entity->collisionLayer = 1;
+                return entity;
+            }
+
+            ResolveCollisionLayer(entity);
+            return entity;
+        }
+    }
+    return entity;
+}
+
+void RegisterRoomEntity(Entity* ent, const EntityData* dat) {
+    u32 list;
+    u32 kind;
+    void* offset;
+
+    list = dat->flags & 0xF;
+    kind = dat->kind & 0xF;
+    if (ent->prev == NULL) {
+        if (list == 0xF) {
+            AppendEntityToList(ent, gEntityListLUT[kind]);
+        } else if (list == 8) {
+            AppendEntityToList(ent, 8);
+        } else {
+            AppendEntityToList(ent, list);
+        }
+    }
+    offset = &((GenericEntity*)ent)->field_0x78;
+    if (kind == MANAGER)
+        offset = &ent->y;
+    MemCopy(dat, offset, sizeof(EntityData));
+}
+
+void sub_0804AF0C(Entity* ent, const EntityData* dat) {
+    switch (dat->flags & 0xf0) {
+        case 0x0:
+            ent->x.HALF.HI = dat->xPos + gRoomControls.origin_x;
+            ent->y.HALF.HI = dat->yPos + gRoomControls.origin_y;
+            break;
+        case 0x20:
+            ((Enemy*)ent)->enemyFlags |= EM_FLAG_CAPTAIN;
+            ent->x.HALF.HI = dat->xPos + gRoomControls.origin_x;
+            ent->y.HALF.HI = dat->yPos + gRoomControls.origin_y;
+            break;
+        case 0x40:
+            ent->x.HALF.HI = dat->xPos + gRoomControls.origin_x;
+            ent->y.HALF.HI = dat->yPos + gRoomControls.origin_y;
+            if (!StartCutscene(ent, (u16*)dat->spritePtr))
+                DeleteEntity(ent);
+            break;
+    }
+}
+
+void sub_0804AF90(void) {
+    sub_0804AFB0(gArea.pCurrentRoomInfo->properties);
+    ClearSmallChests();
+}
+
+void sub_0804AFB0(void** properties) {
+    u32 i;
+
+    gCurrentRoomProperties = properties;
+    for (i = 0; i < 8; ++i) {
+        gRoomVars.properties[i] = gCurrentRoomProperties[i];
+    }
+}
+
+u32 CallRoomProp6(void) {
+    u32 result;
+    u32 (*func)(void);
+
+    result = 1;
+    func = (u32(*)())GetCurrentRoomProperty(6);
+    if (func != NULL)
+        result = func();
+    return result;
+}
+
+void CallRoomProp5And7(void) {
+    void (*func)(void);
+
+    sub_080186EC();
+    func = (void (*)())GetCurrentRoomProperty(5);
+    if (func) {
+        func();
+    }
+    func = (void (*)())GetCurrentRoomProperty(7);
+    if (func) {
+        func();
+    }
+    sub_0804B16C();
+}
+
+void LoadRoom(void) {
+    LoadRoomEntityList(GetCurrentRoomProperty(1));
+    LoadRoomEntityList(GetCurrentRoomProperty(0));
+
+    if (CheckGlobalFlag(TABIDACHI))
+        sub_0804B058(GetCurrentRoomProperty(2));
+
+    LoadRoomTileEntities(GetCurrentRoomProperty(3));
+    sub_0801AC98();
+}
+
+static void sub_0804B058(EntityData* dat) {
+    Entity* ent;
+    u32 uVar2;
+
+    if ((dat != NULL) && dat->kind != 0xff) {
+        uVar2 = 0;
+        do {
+            if ((uVar2 < 0x20) && ((dat->kind & 0xF) == 3)) {
+                if (EnemyEnableRespawn(uVar2) != 0) {
+                    ent = LoadRoomEntity(dat);
+                    if ((ent != NULL) && (ent->kind == ENEMY)) {
+                        ((Enemy*)ent)->idx = uVar2 | 0x80; // TODO Set the room tracker flag that can be set by the
+                                                           // enemy so it does not appear next time the room is visited?
+                    }
+                }
+            } else {
+                LoadRoomEntity(dat);
+            }
+            uVar2++;
+            dat++;
+        } while (dat->kind != 0xff);
+    }
+}
+
+void sub_0804B0B0(u32 area, u32 room) {
+    LoadRoomEntityList(GetRoomProperty(area, room, 1));
+}
+
+void SetCurrentRoomPropertyList(u32 area, u32 room) {
+    gCurrentRoomProperties = NULL;
+    if (gAreaTable[area] != NULL) {
+        gCurrentRoomProperties = gAreaTable[area][room];
+    }
+}
+
+void sub_0804B0E8(u32 area, u32 room) {
+    void (*func)(void);
+
+    // init function at index 4 of room data
+    func = (void (*)())GetRoomProperty(area, room, 4);
+    if (func != NULL) {
+        func();
+    }
+}
+
+void* GetRoomProperty(u32 area, u32 room, u32 property) {
+    void** temp;
+    temp = NULL;
+
+--- src/roomInit.c ---
+#include "area.h"
+#include "common.h"
+#include "effects.h"
+#include "flags.h"
+#include "functions.h"
+#include "game.h"
+#include "item.h"
+#include "kinstone.h"
+#include "main.h"
+#include "npc.h"
+#include "object.h"
+#include "save.h"
+#include "screen.h"
+#include "screenTransitions.h"
+#include "sound.h"
+#include "tiles.h"
+#include "windcrest.h"
+
+extern u32 sub_08060354(void);
+extern void sub_08057E64(void);
+extern void sub_0809F814(u32);
+extern void sub_080300E8(void);
+extern void sub_08058D34(void);
+extern void sub_0807BB98(u32, u32, u32, u32);
+extern void sub_080AF2E4(void);
+extern void sub_08059994(void);
+
+static void sub_0804E150(void);
+static void sub_0804D0B4(void);
+static void sub_0804D9B0(void);
+static void sub_0804ED18(void);
+static void sub_0804F578(void);
+extern void sub_080AF250(u32);
+extern void sub_0804AFB0(void**);
+extern void sub_0804AF90(void);
+void sub_080AF250();
+void sub_0804C290();
+void sub_0804C258();
+
+static void sub_0804C128(void);
+
+extern void** gCurrentRoomProperties;
+
+u32 sub_unk3_ArmosInteriors_RuinsEntranceNorth(u32 arg0) {
+    return 1;
+}
+
+void sub_StateChange_ArmosInteriors_RuinsEntranceNorth(void) {
+    sub_08030118(0);
+}
+
+u32 sub_unk3_ArmosInteriors_RuinsEntranceSouth(void) {
+    return 1;
+}
+
+void sub_StateChange_ArmosInteriors_RuinsEntranceSouth(void) {
+    sub_08030118(1);
+}
+
+u32 sub_unk3_ArmosInteriors_RuinsLeft(void) {
+    return 1;
+}
+
+void sub_StateChange_ArmosInteriors_RuinsLeft(void) {
+    sub_08030118(2);
+}
+
+u32 sub_unk3_ArmosInteriors_RuinsMiddleLeft(void) {
+    return 1;
+}
+
+void sub_StateChange_ArmosInteriors_RuinsMiddleLeft(void) {
+    sub_08030118(3);
+}
+
+u32 sub_unk3_ArmosInteriors_RuinsMiddleRight(void) {
+    return 1;
+}
+
+void sub_StateChange_ArmosInteriors_RuinsMiddleRight(void) {
+    sub_08030118(4);
+}
+
+u32 sub_unk3_ArmosInteriors_RuinsRight(void) {
+    return 1;
+}
+
+void sub_StateChange_ArmosInteriors_RuinsRight(void) {
+    sub_08030118(5);
+}
+
+u32 sub_unk3_ArmosInteriors_6(void) {
+    return 1;
+}
+
+void sub_StateChange_ArmosInteriors_6(void) {
+    sub_08030118(6);
+}
+
+u32 sub_unk3_ArmosInteriors_RuinsGrassPath(void) {
+    return 1;
+}
+
+void sub_StateChange_ArmosInteriors_RuinsGrassPath(void) {
+    sub_08030118(7);
+}
+
+u32 sub_unk3_ArmosInteriors_8(void) {
+    return 1;
+}
+
+void sub_StateChange_ArmosInteriors_8(void) {
+    sub_08030118(8);
+}
+
+u32 sub_unk3_ArmosInteriors_FortressOfWindsLeft(void) {
+    return 1;
+}
+
+void sub_StateChange_ArmosInteriors_FortressOfWindsLeft(void) {
+    sub_08030118(9);
+    gArea.dungeon_idx = 3;
+    gArea.areaMetadata = AR_HAS_NO_ENEMIES | AR_HAS_MAP | AR_IS_DUNGEON | AR_HAS_KEYS;
+}
+
+u32 sub_unk3_ArmosInteriors_FortressOfWindsRight(void) {
+    return 1;
+}
+
+void sub_StateChange_ArmosInteriors_FortressOfWindsRight(void) {
+    sub_08030118(10);
+    gArea.dungeon_idx = 3;
+    gArea.areaMetadata = AR_HAS_NO_ENEMIES | AR_HAS_MAP | AR_IS_DUNGEON | AR_HAS_KEYS;
+}
+
+u32 sub_unk3_CrenelMinishPaths_CrenelBean(void) {
+    return 1;
+}
+
+void sub_StateChange_CrenelMinishPaths_CrenelBean(void) {
+    sub_080575C8(35);
+    sub_08057688();
+}
+
+u32 sub_unk3_CrenelMinishPaths_CrenelWater(void) {
+    return 1;
+}
+
+void sub_StateChange_CrenelMinishPaths_CrenelWater(void) {
+    sub_080575C8(35);
+}
+
+void sub_unk1_CrenelMinishPaths_CrenelWater(void) {
+    sub_080575C8(35);
+}
+
+u32 sub_unk3_CrenelMinishPaths_Rainfall(void) {
+    return 1;
+}
+
+void sub_StateChange_CrenelMinishPaths_Rainfall(void) {
+    sub_080580B0(34);
+}
+
+void sub_unk1_CrenelMinishPaths_Rainfall(void) {
+    sub_080580B0(34);
+}
+
+u32 sub_unk3_CrenelMinishPaths_MelarisMine(void) {
+    return 1;
+}
+
+void sub_StateChange_CrenelMinishPaths_MelarisMine(void) {
+    sub_080580B0(0x22);
+    // white sword
+    if (GetInventoryValue(ITEM_GREEN_SWORD))
+        SetGlobalFlag(WHITE_SWORD_END);
+}
+
+void sub_unk1_CrenelMinishPaths_MelarisMine(void) {
+    sub_080580B0(34);
+}
+
+u32 sub_unk3_MinishPaths_ToMinishVillage(void) {
+    return 1;
+}
+
+void sub_StateChange_MinishPaths_ToMinishVillage(void) {
+    sub_080575C8(30);
+}
+
+void sub_unk1_MinishPaths_ToMinishVillage(void) {
+    sub_080575C8(30);
+}
+
+u32 sub_unk3_MinishPaths_CastorWilds(void) {
+    return 1;
+}
+
+void sub_StateChange_MinishPaths_CastorWilds(void) {
+    sub_080575C8(33);
+}
+
+void sub_unk1_MinishPaths_CastorWilds(void) {
+    sub_080575C8(33);
+}
+
+u32 sub_unk3_MinishPaths_HyruleTown(void) {
+    return 1;
+}
+
+void sub_StateChange_MinishPaths_HyruleTown(void) {
+    sub_080575C8(31);
+}
+
+void sub_unk1_MinishPaths_HyruleTown(void) {
+    sub_080575C8(31);
+}
+
+u32 sub_unk3_MinishPaths_LonLonRanch(void) {
+    return 1;
+}
+
+void sub_StateChange_MinishPaths_LonLonRanch(void) {
+    sub_080575C8(32);
+}
+
+void sub_unk1_MinishPaths_LonLonRanch(void) {
+    sub_080575C8(32);
+}
+
+u32 sub_unk3_MinishPaths_MayorsCabin(void) {
+    return 1;
+}
+
+extern EntityData Entities_MinishPaths_MayorsCabin_gUnk_080D6138;
+
+void sub_StateChange_MinishPaths_MayorsCabin(void) {
+
+    sub_080575C8(0x20);
+
+--- src/screenTileMap.c ---
+#include "global.h"
+#include "room.h"
+
+// Called when gUpdateVisibleTiles == 2
+void sub_0807D280(u16* mapspecial, u16* bgbuffer) {
+    u32 unk_18;
+    s32 tmp1, tmp2, tmp3, tmp4, tmp5, tmp6;
+    s32 xdiff, ydiff;
+    s32 i, j, index_hack;
+
+    xdiff = (gRoomControls.scroll_x - gRoomControls.origin_x);
+    ydiff = (gRoomControls.scroll_y - gRoomControls.origin_y);
+    switch (gRoomControls.scroll_direction) {
+        case 0:
+            if ((gRoomControls.unk_18 & 3) != 1) {
+                return;
+            }
+            for (i = 0x1c; i > 0; i--) {
+                DmaSet(3, bgbuffer + 0x20 * (i - 1), bgbuffer + 0x20 * (i + 1), 0x80000020);
+            }
+
+            tmp1 = (gRoomControls.height >> 4) - 1;
+            tmp2 = (gRoomControls.unk_18 >> 2);
+            tmp3 = (tmp1 - tmp2) << 8;
+            tmp3 += (xdiff >> 4) * 2;
+            mapspecial = mapspecial + tmp3;
+            DmaSet(3, mapspecial, bgbuffer, 0x80000020);
+            DmaSet(3, mapspecial + 0x80, bgbuffer + 0x20, 0x80000020);
+            return;
+        case 1:
+            if ((gRoomControls.unk_18 & 3) != 0) {
+                return;
+            } else if (gRoomControls.unk_18 != 0) {
+                for (i = 0; i < 0x16; i++) {
+                    DmaSet(3, bgbuffer + 0x20 * i + 2, bgbuffer + 0x20 * i, 0x8000001e);
+                }
+            }
+
+            mapspecial = mapspecial + ((ydiff >> 4) * 0x100 + ((gRoomControls.unk_18 >> 2) << 1));
+            bgbuffer = bgbuffer + 0x1e;
+
+            for (i = 0; i < 0x16; bgbuffer += 0x20, mapspecial += 0x80, i++) {
+                bgbuffer[0] = mapspecial[0];
+                bgbuffer[1] = mapspecial[1];
+            }
+
+            return;
+        case 2:
+            unk_18 = gRoomControls.unk_18;
+
+            if ((unk_18 & 3) != 0) {
+                return;
+            } else if (unk_18 << 0x10 != 0) {
+                DmaSet(3, bgbuffer + 0x40, bgbuffer, 0x800003c0);
+            }
+
+            mapspecial = mapspecial + (((unk_18 * 0x10000 >> 0x12) << 8) + ((xdiff >> 4) << 1));
+            DmaSet(3, mapspecial, bgbuffer + 0x280, 0x80000020);
+            DmaSet(3, mapspecial + 0x80, bgbuffer + 0x2a0, 0x80000020);
+            return;
+        default:
+            if ((gRoomControls.unk_18 & 3) == 1) {
+                for (i = 0; i < 0x16; i++) {
+                    for (j = 0x1d; j >= 0; j--) {
+                        index_hack = i + 1;
+                        bgbuffer[(index_hack - 1) * 0x20 + j + 2] = bgbuffer[(index_hack - 1) * 0x20 + j];
+                    }
+                }
+
+                tmp4 = (ydiff >> 4) * 0x100;
+                tmp5 = ((gRoomControls.width >> 4) - 1);
+                tmp6 = (u32)(gRoomControls.unk_18 >> 2);
+                mapspecial = mapspecial + (tmp4 + ((tmp5 - tmp6) << 1));
+
+                for (i = 0; i < 0x16; bgbuffer += 0x20, mapspecial += 0x80, i++) {
+                    bgbuffer[0] = mapspecial[0];
+                    bgbuffer[1] = mapspecial[1];
+                }
+            }
+            return;
+    }
+}
+
+// Called when gUpdateVisibleTiles == 3
+void sub_0807D46C(u16* mapSpecial, u16* bgBuffer) {
+    s32 index, r0, r1, r2, r5, r8, r12;
+    u16 *r4, *r6;
+
+    switch (gRoomControls.scroll_direction) {
+        case 0:
+        case 2:
+            r5 = gRoomControls.scroll_x - gRoomControls.origin_x;
+            if (r5 > 7) {
+                r5 -= 8;
+            }
+
+            r8 = (gRoomControls.camera_target)->x.HALF.HI - gRoomControls.origin_x - 4;
+            if (r8 > 7) {
+                r8 = r8 - 8;
+            }
+
+            r12 = gRoomControls.scroll_y - gRoomControls.origin_y;
+            if (r12 > 7) {
+                r12 -= 8;
+            }
+
+            r0 = r8 - (gRoomControls.unk_18 * 8);
+            if (r0 >= r5) {
+                r4 = mapSpecial + ((r12 >> 3) * 0x80) + (r0 >> 3);
+                r6 = bgBuffer + ((r0 >> 3) & 0x1f);
+                r2 = ((r12 >> 3) & 0x1f) << 5;
+
+                if (gRoomControls.height < 0xb0) {
+                    index = gRoomControls.height >> 0x3;
+                } else {
+                    index = 0x16;
+                }
+
+                while (index > 0) {
+                    // TODO r4 index with index
+                    r6[r2] = *r4;
+                    r4 += 0x80;
+                    r2 = (r2 + 0x20) & 0x3ff;
+                    index--;
+                }
+            }
+
+            r0 = (gRoomControls.unk_18 + 1) * 8 + r8;
+            if (r5 + 0xf8 >= gRoomControls.width) {
+                r1 = r5 + 0xf8;
+            } else {
+                r1 = r5 + 0x100;
+            }
+            if (r0 < r1) {
+                r4 = mapSpecial + ((r12 >> 3) * 0x80) + (r0 >> 3);
+                r6 = bgBuffer + ((r0 >> 3) & 0x1f);
+                r2 = (r12 >> 3 & 0x1f) << 5;
+
+                if (gRoomControls.height < 0xb0) {
+                    index = gRoomControls.height >> 3;
+                } else {
+                    index = 0x16;
+                }
+
+                while (index > 0) {
+                    r6[r2] = *r4;
+                    r4 += 0x80;
+                    r2 = (r2 + 0x20) & 0x3ff;
+                    index--;
+                }
+            }
+            break;
+        case 1:
+        case 3:
+            r5 = gRoomControls.scroll_y - gRoomControls.origin_y;
+            if (r5 > 7) {
+                r5 -= 8;
+            }
+
+            r8 = gRoomControls.scroll_x - gRoomControls.origin_x;
+            if (r8 > 7) {
+                r8 -= 8;
+            }
+
+            r12 = (gRoomControls.camera_target)->y.HALF.HI - gRoomControls.origin_y - 4;
+            if (r12 > 7) {
+                r12 = r12 - 8;
+            }
+
+            r0 = r12 + gRoomControls.unk_18 * -8;
+            if (r0 >= r5) {
+                r4 = mapSpecial + ((r0 >> 3) * 0x80) + (r8 >> 3);
+                r6 = bgBuffer + (((r0 >> 3) & 0x1f) << 5);
+                r2 = ((r8 >> 3) & 0x1f);
+
+                if (gRoomControls.width < 0x100) {
+                    index = gRoomControls.width >> 3;
+                } else {
+                    index = 0x20;
+                }
+
+                while (index > 0) {
+                    r6[r2] = *r4;
+                    r4 += 1;
+                    r2 = (r2 + 1) & 0x1f;
+                    index--;
+                }
+            }
+
+            r0 = (gRoomControls.unk_18 + 1) * 8 + r12;
+            if (r5 + 0xa8 >= gRoomControls.height) {
+                r2 = r5 + 0xa8;
+            } else {
+                r2 = r5 + 0xb0;
+            }
+            if (r0 < r2) {
+                r4 = mapSpecial + ((r0 >> 3) * 0x80) + (r8 >> 3);
+                r6 = bgBuffer + (((r0 >> 3) & 0x1f) << 5);
+                r2 = ((r8 >> 3) & 0x1f);
+                if (gRoomControls.width < 0x100) {
+                    index = gRoomControls.width >> 3;
+                } else {
+                    index = 0x20;
+                }
+                while (index > 0) {
+                    r6[r2] = *r4;
+                    r4 += 0x1;
+                    r2 = (r2 + 0x1) & 0x1f;
+                    index--;
+                }
+            }
+            break;
+    }
+}
+
+// Called when gUpdateVisibleTiles == 4
+void sub_0807D6D8(u16* mapSpecial, u16* bgBuffer) {
+    s32 Unk1a;
+    s32 SquaredUnk18;
+    s32 SquaredUnk1a;
+    s32 RelativeCameraTargetX;
+    s32 RelativeCameraTargetY;
+    s32 CameraOffsetFromTargetX;
+    s32 CameraOffsetFromTargetY;
+    s32 RelativeScrollX;
+    s32 RelativeScrollY;
+    s32 r0, r4, r9, r7, r12;
+    u16 *r2, *r3;
+
+    if ((gRoomControls.unk_18 == 0) || (gRoomControls.unk_1a == 0))
+        return;
+
+    RelativeScrollX = (gRoomControls.scroll_x - gRoomControls.origin_x) & 0xfffffff0;
+    RelativeCameraTargetX = ((gRoomControls.camera_target)->x.HALF.HI - gRoomControls.origin_x) & 0xfffffff8;
+    CameraOffsetFromTargetX = RelativeCameraTargetX - RelativeScrollX;
+
+    RelativeScrollY = (gRoomControls.scroll_y - gRoomControls.origin_y) & 0xfffffff0;
+    RelativeCameraTargetY = (gRoomControls.camera_target->y.HALF.HI - gRoomControls.origin_y) & 0xfffffff8;
+    CameraOffsetFromTargetY = RelativeCameraTargetY - RelativeScrollY;
+
+
+=== DONE ===
