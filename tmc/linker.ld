@@ -108,8 +108,21 @@ SECTIONS {
         . = 0x00036BC0; gMPlayTracks = .;
         . = 0x00038560; gEndOfEwram = .;
 #endif
+        *(.bss)
+        *(COMMON)
         . = 0x00040000;
     } >ewram
+/*.bss (NOLOAD) : ALIGN(4)
+{
+    *(.bss)
+    *(COMMON)
+} >ewram*/
+
+.iwram_bss (NOLOAD) :
+{
+    *(.iwram_bss)
+} >iwram
+
 
     iwram (NOLOAD) : ALIGN(4) {
         . = 0x00000000; gOAMControls = .;
@@ -262,8 +275,8 @@ SECTIONS {
         src/npc.o(.text);
         src/collision.o(.text);
         /* C source compiled without interworking */
-        src/maze_gen_data.o(.text .data .rodata .bss);
-        src/maze_gen.o(.text .rodata .data .bss);
+/*         src/maze_gen_data.o(.text .data .rodata); */
+        src/maze_gen.o(.text .rodata);
         src/kinstone.o(.text);
         src/playerItem/playerItemGustBig.o(.text);
 

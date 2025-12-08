@@ -4,10 +4,8 @@
 #include <stdint.h> /* uint8_t, uint16_t, uint32_t */
 
 /* Maze size in cells */
-#define MAZE_CELLS_X 10
-#define MAZE_CELLS_Y 10
-
-/* Types used by the maze generator (use standard fixed-width types to avoid typedef collisions) */
+#define MAZE_CELLS_X 5
+#define MAZE_CELLS_Y 5
 
 typedef struct {
     uint8_t visited;
@@ -16,11 +14,11 @@ typedef struct {
 
 typedef struct { int x, y; } CellPos;
 
-/* Globals (defined in maze_gen.c). These are extern here for other TUs. */
+/*
 extern uint32_t g_local_rng_state;
 extern MazeCell maze[MAZE_CELLS_Y][MAZE_CELLS_X];
 extern CellPos stackArr[MAZE_CELLS_X * MAZE_CELLS_Y];
-extern int stackTop;
+extern int stackTop;*/
 
 /* Public API:
  * layerIndex: pass to GetLayerByIndex (0 = typical bottom layer).
@@ -28,4 +26,8 @@ extern int stackTop;
  */
 void GenerateAndApplyMazeToLayer(int layerIndex, uint32_t seed);
 
-#endif // MAZE_GEN_H
+/* Ensure the TU with maze data is referenced so the linker doesn't GC it.
+   Implemented in maze_gen.c (empty function is fine). */
+void MazeGen_KeepData(void);
+
+#endif /* MAZE_GEN_H */

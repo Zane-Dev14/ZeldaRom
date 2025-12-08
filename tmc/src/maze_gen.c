@@ -12,9 +12,23 @@
 #include "functions.h" // SetTile(), Random()
 #include "room.h"      // gRoomControls, camera_target
 #include "asm.h"
-void MazeGen_KeepData(void);
+/* Remove these from the top of the file: */
+// uint32_t g_local_rng_state;
+// MazeCell maze[MAZE_CELLS_Y][MAZE_CELLS_X];
+// CellPos stackArr[MAZE_CELLS_X * MAZE_CELLS_Y];
+// int stackTop;
+
+/* Add static versions: */
+static uint32_t g_local_rng_state;
+static MazeCell maze[MAZE_CELLS_Y][MAZE_CELLS_X];
+static CellPos stackArr[MAZE_CELLS_X * MAZE_CELLS_Y];
+static int stackTop;
+
+// void MazeGen_KeepData(void);
 #include <string.h>    // memset, memcpy
 #include <stddef.h>    // NULL
+extern u8 gUpdateVisibleTiles;
+
 // ---------------- PRNG (xorshift-style) ----------------
 static uint32_t local_rng_next(void) {
     uint32_t x = g_local_rng_state;
@@ -151,35 +165,21 @@ static int room_tile_height(void) {
 
 // Safe write: calls engine SetTile (keeps engine runtime buffers happy) AND updates layer->mapData & collisionData
 // posX/posY are tile coords within 0..63; we guard against writing outside logical room tile extents.
-static void safe_write_tile_and_collision(
-    MapLayer *layer, int layerIndex,
-    int posX, int posY,
-    u16 tileIndex, u8 collisionValue,
-    int roomW, int roomH)
-{
+static void safe_write_tile_and_collision(MapLayer *layer, int layerIndex, int posX, int posY, u16 tileIndex, u8 collisionValue, int roomW, int roomH) {
     int pos;
-    u16 old;
 
     if (!layer) return;
     if (posX < 0 || posY < 0) return;
     if (posX >= 64 || posY >= 64) return;
-
     if (posX >= roomW || posY >= roomH) return;
 
     pos = posY * 64 + posX;
 
-    SetTile(tileIndex, pos, layerIndex);
-
+    /* Only update mapData - let the engine handle collision */
     if (layer->mapData) {
-        old = layer->mapData[pos];
-        layer->mapData[pos] = (old & 0xF000) | (tileIndex & 0x0FFF);
-    }
-
-    if (layer->collisionData) {
-        layer->collisionData[pos] = collisionValue;
+        layer->mapData[pos] = (layer->mapData[pos] & 0xF000) | (tileIndex & 0x0FFF);
     }
 }
-
 
 // ---------------- Tile detection utilities ----------------
 // We attempt to find representative floor (walkable) and wall (blocking) tiles and their collision bytes.
@@ -411,65 +411,69 @@ static void render_maze_to_layer(MapLayer *layer, int layerIndex, u16 wallTile, 
 void GenerateAndApplyMazeToLayer(int layerIndex, uint32_t seed) {
     MapLayer *layer;
     int roomW, roomH;
-    u16 detected_floor, detected_wall;
-    u8 floorCollision, wallCollision;
+    u16 center_tile;
+    u16 wall_tile;  /* DECLARE AT TOP FOR C89 */
+    int cy, cx, tx, ty;
+    int tileAreaW, tileAreaH, startX, startY;
+    int px, py;  /* DECLARE LOOP VARIABLES AT TOP */
 
     layer = GetLayerByIndex(layerIndex);
-    if (!layer) return;
-    MazeGen_KeepData();
-    if (!layer->mapData) return;
+    if (!layer || !layer->mapData) return;
 
     roomW = room_tile_width();
     roomH = room_tile_height();
 
-    /* ---- pick explicit visible tiles from room center ----
-     *       this avoids auto-detection mistakes (tileset/palette mismatch) */
+    /* Use a single tile from room center */
     {
-        int cx = (roomW > 4) ? (roomW / 2) : 1;
-        int cy = (roomH > 4) ? (roomH / 2) : 1;
-        int pos = cy * 64 + cx;
-        detected_floor = layer->mapData[pos] & 0x0FFF;
-        /* make wall a neighboring tile so it likely uses the same tileset */
-        detected_wall = layer->mapData[(cy * 64) + ( (cx+1 < roomW) ? (cx+1) : cx )] & 0x0FFF;
-
-        if (detected_floor == 0) detected_floor = layer->mapData[0] & 0x0FFF;
-        if (detected_wall == 0) detected_wall = (detected_floor == 0) ? 1 : (detected_floor ^ 1);
-        if (detected_wall == detected_floor) detected_wall = (detected_floor ^ 1);
+        int centerX = roomW / 2;
+        int centerY = roomH / 2;
+        center_tile = layer->mapData[centerY * 64 + centerX] & 0x0FFF;
+        if (center_tile == 0) center_tile = 0x3001; /* fallback */
     }
 
-    /* Derive collisions conservatively */
-    floorCollision = 0;
-    wallCollision = 1;
-    if (layer->collisionData) {
-        floorCollision = find_collision_for_tile(layer, detected_floor, roomW, roomH, 0);
-        wallCollision  = find_collision_for_tile(layer, detected_wall, roomW, roomH, 1);
-        if (wallCollision == floorCollision) wallCollision = (floorCollision == 1) ? 2 : 1;
-    }
+    wall_tile = center_tile + 0x10; /* Calculate wall tile AFTER center_tile is set */
 
-    if (seed == 0) seed = Random();
     if (seed == 0) seed = 0xA5A5A5A5u;
 
-    /* small visible test markers: write the center and (0,0) to the chosen layer.
-     *       This will tell us if writes are visible and whether the tile is drawn with the room's tileset. */
-    {
-        int midX = (roomW > 4) ? (roomW / 2) : 1;
-        int midY = (roomH > 4) ? (roomH / 2) : 1;
-        int posMid = midY * 64 + midX;
-        int pos00  = 0;
-        /* write a conspicuous tile (copy of detected_floor) to (0,0) and center */
-        SetTile(detected_floor, pos00, layerIndex);
-        if (layer->mapData) layer->mapData[pos00] = (layer->mapData[pos00] & 0xF000) | (detected_floor & 0x0FFF);
-        if (layer->collisionData) layer->collisionData[pos00] = floorCollision;
+    generate_cells(seed);
 
-        SetTile(detected_floor, posMid, layerIndex);
-        if (layer->mapData) layer->mapData[posMid] = (layer->mapData[posMid] & 0xF000) | (detected_floor & 0x0FFF);
-        if (layer->collisionData) layer->collisionData[posMid] = floorCollision;
+    tileAreaW = MAZE_CELLS_X * 2 + 1;
+    tileAreaH = MAZE_CELLS_Y * 2 + 1;
+    if (tileAreaW > roomW) tileAreaW = roomW;
+    if (tileAreaH > roomH) tileAreaH = roomH;
+
+    startX = (roomW > tileAreaW) ? ((roomW - tileAreaW) >> 1) : 0;
+    startY = (roomH > tileAreaH) ? ((roomH - tileAreaH) >> 1) : 0;
+
+    /* Clear area first */
+    for (ty = 0; ty < tileAreaH; ++ty) {
+        for (tx = 0; tx < tileAreaW; ++tx) {
+            px = startX + tx;
+            py = startY + ty;
+            if (px < roomW && py < roomH) {
+                layer->mapData[py * 64 + px] = center_tile;
+            }
+        }
     }
 
-    /* Now generate & render the maze as before */
-    generate_cells(seed);
-    render_maze_to_layer(layer, layerIndex, detected_wall, detected_floor, wallCollision, floorCollision);
+    /* Draw walls */
+    for (cy = 0; cy < MAZE_CELLS_Y; ++cy) {
+        for (cx = 0; cx < MAZE_CELLS_X; ++cx) {
+            tx = startX + (cx * 2 + 1);
+            ty = startY + (cy * 2 + 1);
 
-    /* Done. Keep these test marks for now. If you see them, the writes are working. */
+            if (tx >= 0 && tx < roomW && ty >= 0 && ty < roomH) {
+                if (maze[cy][cx].walls & 1 && ty > 0)
+                    layer->mapData[(ty-1) * 64 + tx] = wall_tile;
+                if (maze[cy][cx].walls & 2 && tx < roomW-1)
+                    layer->mapData[ty * 64 + (tx+1)] = wall_tile;
+                if (maze[cy][cx].walls & 4 && ty < roomH-1)
+                    layer->mapData[(ty+1) * 64 + tx] = wall_tile;
+                if (maze[cy][cx].walls & 8 && tx > 0)
+                    layer->mapData[ty * 64 + (tx-1)] = wall_tile;
+            }
+        }
+    }
+
+    gUpdateVisibleTiles = 1;
 }
-
