@@ -193,11 +193,11 @@ void LoadRoom(void) {
      * This attempts to set the current room pointer for immediate debugging.
      */
     /* Maze only for Link's House entrance (Area 34, Room 16) */
-    if (gRoomControls.area == 34 && gRoomControls.room == 16) {
-    int layerIndex = 1;  /* CHANGE TO 1 - interior bottom layer */
-    uint32_t seed = Random();
-    GenerateAndApplyMazeToLayer(layerIndex, seed);
-}
+//     if (gRoomControls.area == 34 && gRoomControls.room == 16) {
+//     int layerIndex = 1;  /* CHANGE TO 1 - interior bottom layer */
+//     uint32_t seed = Random();
+//     GenerateAndApplyMazeToLayer(layerIndex, seed);
+// }
 /*
     {
         const int targetArea = 14;

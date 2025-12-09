@@ -106,10 +106,12 @@ SECTIONS {
         . = 0x00036AD8; gUnk_02036AD8 = .;
         . = 0x00036BB8; gUnk_02036BB8 = .;
         . = 0x00036BC0; gMPlayTracks = .;
-        . = 0x00038560; gEndOfEwram = .;
-#endif
         *(.bss)
         *(COMMON)
+        *(.data)
+        . = 0x00038560; gEndOfEwram = .;
+#endif
+
         . = 0x00040000;
     } >ewram
 /*.bss (NOLOAD) : ALIGN(4)
@@ -275,7 +277,6 @@ SECTIONS {
         src/npc.o(.text);
         src/collision.o(.text);
         /* C source compiled without interworking */
-/*         src/maze_gen_data.o(.text .data .rodata); */
         src/maze_gen.o(.text .rodata);
         src/kinstone.o(.text);
         src/playerItem/playerItemGustBig.o(.text);

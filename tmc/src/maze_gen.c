@@ -19,26 +19,36 @@
 // int stackTop;
 
 /* Add static versions: */
-static uint32_t g_local_rng_state;
-static MazeCell maze[MAZE_CELLS_Y][MAZE_CELLS_X];
-static CellPos stackArr[MAZE_CELLS_X * MAZE_CELLS_Y];
-static int stackTop;
+// static uint32_t g_local_rng_state;
+// static MazeCell maze[MAZE_CELLS_Y][MAZE_CELLS_X];
+// static CellPos stackArr[MAZE_CELLS_X * MAZE_CELLS_Y];
+// static int stackTop;
+
+typedef struct {
+    uint32_t rng_state;
+    MazeCell maze[MAZE_CELLS_Y][MAZE_CELLS_X];
+    CellPos stack[MAZE_CELLS_X * MAZE_CELLS_Y];
+    int stackTop;
+} MazeGenState;
+
+// static MazeGenState* g_mazeState = NULL;
 
 // void MazeGen_KeepData(void);
 #include <string.h>    // memset, memcpy
 #include <stddef.h>    // NULL
+// #include <stdlib.h> /* malloc, free */
+
 extern u8 gUpdateVisibleTiles;
 
 // ---------------- PRNG (xorshift-style) ----------------
 static uint32_t local_rng_next(void) {
-    uint32_t x = g_local_rng_state;
+    uint32_t x = g_mazeState->rng_state;
     x ^= x << 13;
     x ^= x >> 17;
     x ^= x << 5;
-    g_local_rng_state = x ? x : 0xDEADBEEFu;
-    return g_local_rng_state;
+    g_mazeState->rng_state = x ? x : 0xDEADBEEFu;
+    return g_mazeState->rng_state;
 }
-
 /* Return a small-range value in [0, n-1] without using division.
  * n must be > 0 and reasonably small (we only use it for MAZE_CELLS_X / neighbor count).
  * Uses subtraction loop to avoid emitting __umodsi3.
@@ -71,21 +81,28 @@ static const u8 DIR_BIT[4] = {1, 2, 4, 8};
 static const u8 OPP_BIT[4] = {4, 8, 1, 2};
 
 static void init_cells(void) {
-    int y;
-    int x;
+    int y, x;
     for (y = 0; y < MAZE_CELLS_Y; ++y) {
         for (x = 0; x < MAZE_CELLS_X; ++x) {
-            maze[y][x].visited = 0;
-            maze[y][x].walls = 1|2|4|8;
+            g_mazeState->maze[y][x].visited = 0;
+            g_mazeState->maze[y][x].walls = 15; /* 1|2|4|8 */
         }
     }
-    stackTop = 0;
+    g_mazeState->stackTop = 0;
 }
 
-static void push_cell(int x,int y){ stackArr[stackTop].x = x; stackArr[stackTop].y = y; ++stackTop; }
-static CellPos pop_cell(void){ --stackTop; return stackArr[stackTop]; }
+static void push_cell(int x, int y) {
+    g_mazeState->stack[g_mazeState->stackTop].x = x;
+    g_mazeState->stack[g_mazeState->stackTop].y = y;
+    g_mazeState->stackTop++;
+}
 
-static int count_unvisited_neighbors(int x,int y,int *buf) {
+static CellPos pop_cell(void) {
+    g_mazeState->stackTop--;
+    return g_mazeState->stack[g_mazeState->stackTop];
+}
+
+static int count_unvisited_neighbors(int x, int y, int *buf) {
     int n = 0;
     int d;
     int nx, ny;
@@ -93,17 +110,19 @@ static int count_unvisited_neighbors(int x,int y,int *buf) {
         nx = x + DIR_DX[d];
         ny = y + DIR_DY[d];
         if (nx >= 0 && nx < MAZE_CELLS_X && ny >= 0 && ny < MAZE_CELLS_Y) {
-            if (!maze[ny][nx].visited) {
+            if (!g_mazeState->maze[ny][nx].visited) {
                 buf[n++] = d;
             }
         }
     }
     return n;
 }
-static void carve_between(int x,int y,int d) {
-    int nx = x + DIR_DX[d], ny = y + DIR_DY[d];
-    maze[y][x].walls &= ~DIR_BIT[d];
-    maze[ny][nx].walls &= ~OPP_BIT[d];
+
+static void carve_between(int x, int y, int d) {
+    int nx = x + DIR_DX[d];
+    int ny = y + DIR_DY[d];
+    g_mazeState->maze[y][x].walls &= ~DIR_BIT[d];
+    g_mazeState->maze[ny][nx].walls &= ~OPP_BIT[d];
 }
 
 static void generate_cells(uint32_t seed) {
@@ -115,17 +134,18 @@ static void generate_cells(uint32_t seed) {
     int nx, ny;
     CellPos cur;
 
-    g_local_rng_state = seed ? seed : 0xA5A5A5A5u;
+    /* init RNG in the heap state */
+    g_mazeState->rng_state = seed ? seed : 0xA5A5A5A5u;
     init_cells();
 
     sx = (int)local_rng_range(MAZE_CELLS_X);
     sy = (int)local_rng_range(MAZE_CELLS_Y);
 
-    maze[sy][sx].visited = 1;
+    g_mazeState->maze[sy][sx].visited = 1;
     push_cell(sx, sy);
 
-    while (stackTop > 0) {
-        cur = stackArr[stackTop - 1];
+    while (g_mazeState->stackTop > 0) {
+        cur = g_mazeState->stack[g_mazeState->stackTop - 1];
         n = count_unvisited_neighbors(cur.x, cur.y, dirs);
 
         if (n == 0) {
@@ -139,11 +159,12 @@ static void generate_cells(uint32_t seed) {
 
         nx = cur.x + DIR_DX[d];
         ny = cur.y + DIR_DY[d];
-        maze[ny][nx].visited = 1;
+        g_mazeState->maze[ny][nx].visited = 1;
 
         push_cell(nx, ny);
     }
 }
+
 
 // ---------------- Helpers: room bounds & safe map writes ----------------
 
@@ -383,14 +404,19 @@ static void render_maze_to_layer(MapLayer *layer, int layerIndex, u16 wallTile, 
             /* center floor */
             safe_write_tile_and_collision(layer, layerIndex, tx, ty, floorTile, floorCollision, roomW, roomH);
 
-            if (maze[cy][cx].walls & 1)
+            if (g_mazeState->maze[cy][cx].walls & 1) {
                 safe_write_tile_and_collision(layer, layerIndex, tx, ty - 1, wallTile, wallCollision, roomW, roomH); /* N */
-                if (maze[cy][cx].walls & 2)
-                    safe_write_tile_and_collision(layer, layerIndex, tx + 1, ty, wallTile, wallCollision, roomW, roomH); /* E */
-                    if (maze[cy][cx].walls & 4)
-                        safe_write_tile_and_collision(layer, layerIndex, tx, ty + 1, wallTile, wallCollision, roomW, roomH); /* S */
-                        if (maze[cy][cx].walls & 8)
-                            safe_write_tile_and_collision(layer, layerIndex, tx - 1, ty, wallTile, wallCollision, roomW, roomH); /* W */
+            }
+            if (g_mazeState->maze[cy][cx].walls & 2) {
+                safe_write_tile_and_collision(layer, layerIndex, tx + 1, ty, wallTile, wallCollision, roomW, roomH); /* E */
+            }
+            if (g_mazeState->maze[cy][cx].walls & 4) {
+                safe_write_tile_and_collision(layer, layerIndex, tx, ty + 1, wallTile, wallCollision, roomW, roomH); /* S */
+            }
+            if (g_mazeState->maze[cy][cx].walls & 8) {
+                safe_write_tile_and_collision(layer, layerIndex, tx - 1, ty, wallTile, wallCollision, roomW, roomH); /* W */
+            }
+
         }
     }
 
@@ -409,16 +435,27 @@ static void render_maze_to_layer(MapLayer *layer, int layerIndex, u16 wallTile, 
 // ---------------- Public API ----------------
 /* DEBUG version — temporary: forces use of center-room tiles and places visible markers */
 void GenerateAndApplyMazeToLayer(int layerIndex, uint32_t seed) {
+    MazeGenState state;  /* Stack local - no EWRAM collision */
+    MazeGenState *g_mazeState = &state;
     MapLayer *layer;
     int roomW, roomH;
     u16 center_tile;
-    u16 wall_tile;  /* DECLARE AT TOP FOR C89 */
+    u16 wall_tile;
     int cy, cx, tx, ty;
     int tileAreaW, tileAreaH, startX, startY;
-    int px, py;  /* DECLARE LOOP VARIABLES AT TOP */
+    int px, py;
+    MazeGenState state;  /* CHANGED: local variable instead of malloc */
+
+    /* CHANGED: Use address of local variable */
+    g_mazeState = &state;
+    state.stackTop = 0;
+    state.rng_state = seed ? seed : 0xA5A5A5A5u;
 
     layer = GetLayerByIndex(layerIndex);
-    if (!layer || !layer->mapData) return;
+    if (!layer || !layer->mapData) {
+        g_mazeState = NULL;  /* CHANGED: just clear pointer, no free */
+        return;
+    }
 
     roomW = room_tile_width();
     roomH = room_tile_height();
@@ -428,10 +465,10 @@ void GenerateAndApplyMazeToLayer(int layerIndex, uint32_t seed) {
         int centerX = roomW / 2;
         int centerY = roomH / 2;
         center_tile = layer->mapData[centerY * 64 + centerX] & 0x0FFF;
-        if (center_tile == 0) center_tile = 0x3001; /* fallback */
+        if (center_tile == 0) center_tile = 0x3001;
     }
 
-    wall_tile = center_tile + 0x10; /* Calculate wall tile AFTER center_tile is set */
+    wall_tile = center_tile + 0x10;
 
     if (seed == 0) seed = 0xA5A5A5A5u;
 
@@ -463,17 +500,18 @@ void GenerateAndApplyMazeToLayer(int layerIndex, uint32_t seed) {
             ty = startY + (cy * 2 + 1);
 
             if (tx >= 0 && tx < roomW && ty >= 0 && ty < roomH) {
-                if (maze[cy][cx].walls & 1 && ty > 0)
+                if (g_mazeState->maze[cy][cx].walls & 1 && ty > 0)
                     layer->mapData[(ty-1) * 64 + tx] = wall_tile;
-                if (maze[cy][cx].walls & 2 && tx < roomW-1)
+                if (g_mazeState->maze[cy][cx].walls & 2 && tx < roomW-1)
                     layer->mapData[ty * 64 + (tx+1)] = wall_tile;
-                if (maze[cy][cx].walls & 4 && ty < roomH-1)
+                if (g_mazeState->maze[cy][cx].walls & 4 && ty < roomH-1)
                     layer->mapData[(ty+1) * 64 + tx] = wall_tile;
-                if (maze[cy][cx].walls & 8 && tx > 0)
+                if (g_mazeState->maze[cy][cx].walls & 8 && tx > 0)
                     layer->mapData[ty * 64 + (tx-1)] = wall_tile;
             }
         }
     }
 
+    g_mazeState = NULL;  /* CHANGED: just clear pointer, no free */
     gUpdateVisibleTiles = 1;
 }
