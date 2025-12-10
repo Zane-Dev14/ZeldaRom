@@ -107,16 +107,22 @@ SECTIONS {
         . = 0x00036BB8; gUnk_02036BB8 = .;
         . = 0x00036BC0; gMPlayTracks = .;
 
-        /* === MAZE STATE RESERVATION (608 bytes + safety margin) === */
-        . = 0x00037000;                    /* Start at safe offset after gMPlayTracks */
-        _mazeState_start = .;
-        . = . + 0x00000800;                /* Reserve 2048 bytes (0x800) */
-        _mazeState_end = .;
-        /* === END MAZE STATE === */
-
+       /* normal RAM storage first */
         *(.bss)
         *(COMMON)
         *(.data)
+
+        /* === MAZE STATE RESERVATION (0x800 = 2048 bytes) ===
+           Reserve a private EW-RAM block after the normal .bss/.data
+          so startup zero/copy cannot stomp it.
+        */
+        . = 0x00038300;
+        . = ALIGN(4);
+        _mazeState_start = .;
+        . = . + 0x00000800; /* 0x800 bytes */
+        _mazeState_end = .;
+        /* === END MAZE STATE === */
+
         . = 0x00038560; gEndOfEwram = .;
 #endif
 
@@ -285,7 +291,7 @@ SECTIONS {
         src/npc.o(.text);
         src/collision.o(.text);
         /* C source compiled without interworking */
-        src/maze_gen.o(.text .rodata);
+        src/maze_gen.o(.text);
         src/kinstone.o(.text);
         src/playerItem/playerItemGustBig.o(.text);
 
