@@ -106,6 +106,14 @@ SECTIONS {
         . = 0x00036AD8; gUnk_02036AD8 = .;
         . = 0x00036BB8; gUnk_02036BB8 = .;
         . = 0x00036BC0; gMPlayTracks = .;
+
+        /* === MAZE STATE RESERVATION (608 bytes + safety margin) === */
+        . = 0x00037000;                    /* Start at safe offset after gMPlayTracks */
+        _mazeState_start = .;
+        . = . + 0x00000800;                /* Reserve 2048 bytes (0x800) */
+        _mazeState_end = .;
+        /* === END MAZE STATE === */
+
         *(.bss)
         *(COMMON)
         *(.data)

@@ -41,26 +41,28 @@ typedef struct {
 extern u8 gUpdateVisibleTiles;
 
 // ---------------- PRNG (xorshift-style) ----------------
-static uint32_t local_rng_next(void) {
-    uint32_t x = g_mazeState->rng_state;
+static uint32_t local_rng_next(MazeGenState *s) {
+    uint32_t x = s->rng_state;
     x ^= x << 13;
     x ^= x >> 17;
     x ^= x << 5;
-    g_mazeState->rng_state = x ? x : 0xDEADBEEFu;
-    return g_mazeState->rng_state;
+    s->rng_state = x ? x : 0xDEADBEEFu;
+    return s->rng_state;
 }
+
+
 /* Return a small-range value in [0, n-1] without using division.
  * n must be > 0 and reasonably small (we only use it for MAZE_CELLS_X / neighbor count).
  * Uses subtraction loop to avoid emitting __umodsi3.
  */
-static uint32_t local_rng_range(uint32_t n) {
+static uint32_t local_rng_range(MazeGenState *s, uint32_t n) {
     uint32_t r;
     if (n == 0) return 0;
-    r = local_rng_next();
-    /* reduce r into range [0, n-1] using subtraction; n is small (<= 32), so this is cheap */
+    r = local_rng_next(s);
     while (r >= n) r -= n;
     return r;
 }
+
 
 // ---------------- Maze model ----------------
 // ---------------- Maze model ----------------
@@ -79,89 +81,71 @@ static const int DIR_DX[4] = {0, 1, 0, -1};
 static const int DIR_DY[4] = {-1, 0, 1, 0};
 static const u8 DIR_BIT[4] = {1, 2, 4, 8};
 static const u8 OPP_BIT[4] = {4, 8, 1, 2};
-
-static void init_cells(void) {
+static void init_cells(MazeGenState *s) {
     int y, x;
     for (y = 0; y < MAZE_CELLS_Y; ++y) {
         for (x = 0; x < MAZE_CELLS_X; ++x) {
-            g_mazeState->maze[y][x].visited = 0;
-            g_mazeState->maze[y][x].walls = 15; /* 1|2|4|8 */
+            s->maze[y][x].visited = 0;
+            s->maze[y][x].walls = 15;
         }
     }
-    g_mazeState->stackTop = 0;
+    s->stackTop = 0;
 }
 
-static void push_cell(int x, int y) {
-    g_mazeState->stack[g_mazeState->stackTop].x = x;
-    g_mazeState->stack[g_mazeState->stackTop].y = y;
-    g_mazeState->stackTop++;
+static void push_cell(MazeGenState *s, int x, int y) {
+    s->stack[s->stackTop].x = x;
+    s->stack[s->stackTop].y = y;
+    s->stackTop++;
 }
 
-static CellPos pop_cell(void) {
-    g_mazeState->stackTop--;
-    return g_mazeState->stack[g_mazeState->stackTop];
+static CellPos pop_cell(MazeGenState *s) {
+    s->stackTop--;
+    return s->stack[s->stackTop];
 }
 
-static int count_unvisited_neighbors(int x, int y, int *buf) {
-    int n = 0;
-    int d;
-    int nx, ny;
+static int count_unvisited_neighbors(MazeGenState *s, int x, int y, int *buf) {
+    int n = 0, d, nx, ny;
     for (d = 0; d < 4; ++d) {
         nx = x + DIR_DX[d];
         ny = y + DIR_DY[d];
         if (nx >= 0 && nx < MAZE_CELLS_X && ny >= 0 && ny < MAZE_CELLS_Y) {
-            if (!g_mazeState->maze[ny][nx].visited) {
-                buf[n++] = d;
-            }
+            if (!s->maze[ny][nx].visited) buf[n++] = d;
         }
     }
     return n;
 }
 
-static void carve_between(int x, int y, int d) {
+static void carve_between(MazeGenState *s, int x, int y, int d) {
     int nx = x + DIR_DX[d];
     int ny = y + DIR_DY[d];
-    g_mazeState->maze[y][x].walls &= ~DIR_BIT[d];
-    g_mazeState->maze[ny][nx].walls &= ~OPP_BIT[d];
+    s->maze[y][x].walls &= ~DIR_BIT[d];
+    s->maze[ny][nx].walls &= ~OPP_BIT[d];
 }
 
-static void generate_cells(uint32_t seed) {
-    int sx, sy;
-    int dirs[4];
-    int n;
-    int ri;
-    int d;
-    int nx, ny;
+static void generate_cells(MazeGenState *s, uint32_t seed) {
+    int sx, sy, dirs[4], n, ri, d, nx, ny;
     CellPos cur;
 
-    /* init RNG in the heap state */
-    g_mazeState->rng_state = seed ? seed : 0xA5A5A5A5u;
-    init_cells();
+    s->rng_state = seed ? seed : 0xA5A5A5A5u;
+    init_cells(s);
 
-    sx = (int)local_rng_range(MAZE_CELLS_X);
-    sy = (int)local_rng_range(MAZE_CELLS_Y);
+    sx = (int)local_rng_range(s, MAZE_CELLS_X);
+    sy = (int)local_rng_range(s, MAZE_CELLS_Y);
 
-    g_mazeState->maze[sy][sx].visited = 1;
-    push_cell(sx, sy);
+    s->maze[sy][sx].visited = 1;
+    push_cell(s, sx, sy);
 
-    while (g_mazeState->stackTop > 0) {
-        cur = g_mazeState->stack[g_mazeState->stackTop - 1];
-        n = count_unvisited_neighbors(cur.x, cur.y, dirs);
-
-        if (n == 0) {
-            pop_cell();
-            continue;
-        }
-
-        ri = (int)local_rng_range((uint32_t)n);
+    while (s->stackTop > 0) {
+        cur = s->stack[s->stackTop - 1];
+        n = count_unvisited_neighbors(s, cur.x, cur.y, dirs);
+        if (n == 0) { pop_cell(s); continue; }
+        ri = (int)local_rng_range(s, (uint32_t)n);
         d = dirs[ri];
-        carve_between(cur.x, cur.y, d);
-
+        carve_between(s, cur.x, cur.y, d);
         nx = cur.x + DIR_DX[d];
         ny = cur.y + DIR_DY[d];
-        g_mazeState->maze[ny][nx].visited = 1;
-
-        push_cell(nx, ny);
+        s->maze[ny][nx].visited = 1;
+        push_cell(s, nx, ny);
     }
 }
 
@@ -363,7 +347,7 @@ static u8 find_collision_for_tile(MapLayer *layer, u16 tileIndex, int roomW, int
 // ---------------- Maze render mapping & write ----------------
 // Mapping: each cell -> 2x2 floor tiles; walls occupy the gaps -> total area = 2*cells+1
 /* Replace the existing render_maze_to_layer with this C89-safe version */
-static void render_maze_to_layer(MapLayer *layer, int layerIndex, u16 wallTile, u16 floorTile, u8 wallCollision, u8 floorCollision) {
+static void render_maze_to_layer(MazeGenState *s, MapLayer *layer, int layerIndex, u16 wallTile, u16 floorTile, u8 wallCollision, u8 floorCollision) {
     int roomW, roomH;
     int tileAreaW, tileAreaH;
     int startX, startY;
@@ -401,22 +385,20 @@ static void render_maze_to_layer(MapLayer *layer, int layerIndex, u16 wallTile, 
             tx = startX + (cx * 2 + 1);
             ty = startY + (cy * 2 + 1);
 
-            /* center floor */
             safe_write_tile_and_collision(layer, layerIndex, tx, ty, floorTile, floorCollision, roomW, roomH);
 
-            if (g_mazeState->maze[cy][cx].walls & 1) {
-                safe_write_tile_and_collision(layer, layerIndex, tx, ty - 1, wallTile, wallCollision, roomW, roomH); /* N */
+            if (s->maze[cy][cx].walls & 1) {  /* Changed g_mazeState to s */
+                safe_write_tile_and_collision(layer, layerIndex, tx, ty - 1, wallTile, wallCollision, roomW, roomH);
             }
-            if (g_mazeState->maze[cy][cx].walls & 2) {
-                safe_write_tile_and_collision(layer, layerIndex, tx + 1, ty, wallTile, wallCollision, roomW, roomH); /* E */
+            if (s->maze[cy][cx].walls & 2) {
+                safe_write_tile_and_collision(layer, layerIndex, tx + 1, ty, wallTile, wallCollision, roomW, roomH);
             }
-            if (g_mazeState->maze[cy][cx].walls & 4) {
-                safe_write_tile_and_collision(layer, layerIndex, tx, ty + 1, wallTile, wallCollision, roomW, roomH); /* S */
+            if (s->maze[cy][cx].walls & 4) {
+                safe_write_tile_and_collision(layer, layerIndex, tx, ty + 1, wallTile, wallCollision, roomW, roomH);
             }
-            if (g_mazeState->maze[cy][cx].walls & 8) {
-                safe_write_tile_and_collision(layer, layerIndex, tx - 1, ty, wallTile, wallCollision, roomW, roomH); /* W */
+            if (s->maze[cy][cx].walls & 8) {
+                safe_write_tile_and_collision(layer, layerIndex, tx - 1, ty, wallTile, wallCollision, roomW, roomH);
             }
-
         }
     }
 
@@ -435,32 +417,27 @@ static void render_maze_to_layer(MapLayer *layer, int layerIndex, u16 wallTile, 
 // ---------------- Public API ----------------
 /* DEBUG version — temporary: forces use of center-room tiles and places visible markers */
 void GenerateAndApplyMazeToLayer(int layerIndex, uint32_t seed) {
-    MazeGenState state;  /* Stack local - no EWRAM collision */
-    MazeGenState *g_mazeState = &state;
+    MazeGenState state;
+    MazeGenState *g_mazeState;
     MapLayer *layer;
     int roomW, roomH;
     u16 center_tile;
     u16 wall_tile;
-    int cy, cx, tx, ty;
-    int tileAreaW, tileAreaH, startX, startY;
-    int px, py;
-    MazeGenState state;  /* CHANGED: local variable instead of malloc */
 
-    /* CHANGED: Use address of local variable */
+    /* Initialize state */
     g_mazeState = &state;
     state.stackTop = 0;
     state.rng_state = seed ? seed : 0xA5A5A5A5u;
 
     layer = GetLayerByIndex(layerIndex);
     if (!layer || !layer->mapData) {
-        g_mazeState = NULL;  /* CHANGED: just clear pointer, no free */
         return;
     }
 
     roomW = room_tile_width();
     roomH = room_tile_height();
 
-    /* Use a single tile from room center */
+    /* Pick tiles from room center */
     {
         int centerX = roomW / 2;
         int centerY = roomH / 2;
@@ -472,46 +449,11 @@ void GenerateAndApplyMazeToLayer(int layerIndex, uint32_t seed) {
 
     if (seed == 0) seed = 0xA5A5A5A5u;
 
-    generate_cells(seed);
+    /* Generate maze */
+    generate_cells(g_mazeState, seed);
 
-    tileAreaW = MAZE_CELLS_X * 2 + 1;
-    tileAreaH = MAZE_CELLS_Y * 2 + 1;
-    if (tileAreaW > roomW) tileAreaW = roomW;
-    if (tileAreaH > roomH) tileAreaH = roomH;
+    /* Render maze to layer */
+    render_maze_to_layer(g_mazeState, layer, layerIndex, wall_tile, center_tile, 1, 0);
 
-    startX = (roomW > tileAreaW) ? ((roomW - tileAreaW) >> 1) : 0;
-    startY = (roomH > tileAreaH) ? ((roomH - tileAreaH) >> 1) : 0;
-
-    /* Clear area first */
-    for (ty = 0; ty < tileAreaH; ++ty) {
-        for (tx = 0; tx < tileAreaW; ++tx) {
-            px = startX + tx;
-            py = startY + ty;
-            if (px < roomW && py < roomH) {
-                layer->mapData[py * 64 + px] = center_tile;
-            }
-        }
-    }
-
-    /* Draw walls */
-    for (cy = 0; cy < MAZE_CELLS_Y; ++cy) {
-        for (cx = 0; cx < MAZE_CELLS_X; ++cx) {
-            tx = startX + (cx * 2 + 1);
-            ty = startY + (cy * 2 + 1);
-
-            if (tx >= 0 && tx < roomW && ty >= 0 && ty < roomH) {
-                if (g_mazeState->maze[cy][cx].walls & 1 && ty > 0)
-                    layer->mapData[(ty-1) * 64 + tx] = wall_tile;
-                if (g_mazeState->maze[cy][cx].walls & 2 && tx < roomW-1)
-                    layer->mapData[ty * 64 + (tx+1)] = wall_tile;
-                if (g_mazeState->maze[cy][cx].walls & 4 && ty < roomH-1)
-                    layer->mapData[(ty+1) * 64 + tx] = wall_tile;
-                if (g_mazeState->maze[cy][cx].walls & 8 && tx > 0)
-                    layer->mapData[ty * 64 + (tx-1)] = wall_tile;
-            }
-        }
-    }
-
-    g_mazeState = NULL;  /* CHANGED: just clear pointer, no free */
     gUpdateVisibleTiles = 1;
 }
