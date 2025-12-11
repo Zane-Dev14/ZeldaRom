@@ -107,23 +107,31 @@ SECTIONS {
         . = 0x00036BB8; gUnk_02036BB8 = .;
         . = 0x00036BC0; gMPlayTracks = .;
 
-       /* normal RAM storage first */
+                /* normal RAM storage first */
         *(.bss)
         *(COMMON)
         *(.data)
 
-        /* === MAZE STATE RESERVATION (0x800 = 2048 bytes) ===
-           Reserve a private EW-RAM block after the normal .bss/.data
-          so startup zero/copy cannot stomp it.
-        */
-        . = 0x00038300;
+        /* mark the natural end of engine EW-RAM here */
         . = ALIGN(4);
+        gEndOfEwram = .;
+
+        /* === MAZE STATE RESERVATION (0x800 = 2048 bytes) ===
+           Place the maze at a fixed safe offset well past engine data
+           to avoid any overlap with engine audio/other globals.
+        */
+        /* choose 0x00038560 as the fixed start (example used earlier) */
+        . = 0x00038560;
         _mazeState_start = .;
-        . = . + 0x00000800; /* 0x800 bytes */
+        . = . + 0x00000800; /* reserve 0x800 bytes (2048) */
         _mazeState_end = .;
         /* === END MAZE STATE === */
 
-        . = 0x00038560; gEndOfEwram = .;
+        /* continue rest of EW-RAM (if any) */
+        . = ALIGN(4);
+
+
+
 #endif
 
         . = 0x00040000;
