@@ -116,16 +116,6 @@ SECTIONS {
         . = ALIGN(4);
         gEndOfEwram = .;
 
-        /* === MAZE STATE RESERVATION (0x800 = 2048 bytes) ===
-           Place the maze at a fixed safe offset well past engine data
-           to avoid any overlap with engine audio/other globals.
-        */
-        /* choose 0x00038560 as the fixed start (example used earlier) */
-        . = 0x00038560;
-        _mazeState_start = .;
-        . = . + 0x00000800; /* reserve 0x800 bytes (2048) */
-        _mazeState_end = .;
-        /* === END MAZE STATE === */
 
         /* continue rest of EW-RAM (if any) */
         . = ALIGN(4);
@@ -904,6 +894,11 @@ SECTIONS {
         asm/lib/libagbsyscall.o(.text);
         src/eeprom.o(.text);
         *libc.a:memcpy.o(.text);
+        *libc.a:malloc.o(.text)
+        *libc.a:free.o(.text)
+        *libc.a:mallocr.o(.text)
+        *libc.a:freer.o(.text)
+
         /* handwritten assembly in arm mode */
         asm/src/intr.o(.text);
 
@@ -916,6 +911,7 @@ SECTIONS {
         src/npcFunctions.o(.rodata);
         src/npc.o(.rodata);
         src/collision.o(.rodata);
+        src/maze_gen.o(.rodata);
         src/kinstone.o(.rodata);
         src/playerItem/playerItemGustBig.o(.rodata);
         src/playerItem/playerItemBow.o(.rodata);
@@ -1734,6 +1730,10 @@ SECTIONS {
         data/sound/sounds.o(.rodata);
         src/eeprom.o(.rodata);
     } >rom
+    .maze_text : ALIGN(4)
+        {
+        *(.maze_text)
+        } >rom
 
     /* DWARF 2 sections */
     .debug_aranges  0 : { *(.debug_aranges) }

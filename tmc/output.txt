@@ -1,1692 +1,9 @@
-=== core symbols ===
-18826:02038560 B gEndOfEwram
-20350:02036bc0 B gMPlayTracks
-39714:02037800 B _mazeState_end
-39715:02037000 B _mazeState_start
-
-=== duplicate EW-RAM addresses (exact matches) ===
-
-=== EW-RAM B/D symbols (sorted) - truncated to 300 lines ===
-0x02000010        B gUnk_02000010
-0x02000020        B gUnk_02000020
-0x02000030        B gUnk_02000030
-0x02000040        B gUnk_02000040
-0x02000050        B gMessage
-0x02000070        B gUpdateVisibleTiles
-0x02000080        B gChooseFileState
-0x02000080        B gIntroState
-0x02000080        B gMenu
-0x02000090        B gUnk_02000090
-0x020000b0        B gUnk_020000B0
-0x020000c0        B gUnk_020000C0
-0x02000cc0        B gBgAnimations
-0x02000d00        B gTextGfxBuffer
-0x02001a00        B gPaletteList
-0x02001a3c        B gUnk_02001A3C
-0x02001a40        B gBG3Buffer
-0x02002a40        B gSave
-0x02002f00        B gMapDataTopSpecial
-0x02006f00        B gUnk_02006F00
-0x0200af00        B gHUD
-0x0200af34        B gUnk_0200AF34
-0x0200b240        B gTilesForSpecialTiles
-0x0200b640        B gUnk_0200B640
-0x0200b644        B gUsedPalettes
-0x0200b650        B gMapTop
-0x02017654        B gCurrentRoomProperties
-0x02017660        B gSmallChests
-0x020176a0        B gPaletteBuffer
-0x02017830        B gUnk_02017830
-0x02017aa0        B gUnk_02017AA0
-0x02017ba0        B gUnk_02017BA0
-0x02018ea0        B gUnk_02018EA0
-0x02018eb0        B gUnk_02018EB0
-0x02018ee0        B gUnk_02018EE0
-0x02019ee0        B gMapDataBottomSpecial
-0x0201aee0        B gDungeonMap
-0x02021ee0        B gSoundPlayingInfo
-0x02021f00        B gUnk_02021F00
-0x02021f20        B gUnk_02021F20
-0x02021f30        B gBG1Buffer
-0x02022730        B gVBlankDMA
-0x02022740        B gFuseInfo
-0x02022750        B gPlayerScriptExecutionContext
-0x02022780        B gTextRender
-0x020227dc        B gUnk_020227DC
-0x020227e8        B gUnk_020227E8
-0x020227f0        B gUnk_020227F0
-0x020227f8        B gUnk_020227F8
-0x02022800        B gUnk_02022800
-0x0202281d        B gTextRenderUpdateDraw
-0x02022830        B gUnk_02022830
-0x02024030        B gMessageChoices
-0x02024048        B gUnk_02024048
-0x02024050        B gRoomMemory
-0x02024090        B gPaletteBufferBackup
-0x02024490        B gGFXSlots
-0x020246b0        B gUnk_020246B0
-0x02025eb0        B gMapBottom
-0x02031ec0        B gNPCData
-0x02032ec0        B gUI
-0x02033280        B gActiveScriptInfo
-0x02033290        B gUnk_02033290
-0x02033a90        B gArea
-0x020342f8        B gUnk_020342F8
-0x02034330        B gUnk_02034330
-0x02034350        B gRoomVars
-0x02034480        B gUnk_02034480
-0x02034490        B gPauseMenuOptions
-0x02034492        B gUnk_02034492
-0x020344a0        B gUnk_020344A0
-0x020344b0        B gBG2Buffer
-0x02034cb0        B gBG0Buffer
-0x020354b0        B gCurrentRoomMemory
-0x020354b4        B gManagerCount
-0x020354c0        B gUnk_020354C0
-0x02035540        B gzHeap
-0x02035542        B gUnk_02035542
-0x02036540        B gUnk_02036540
-0x02036570        B gScriptExecutionContextArray
-0x020369f0        B gEntityListsBackup
-0x02036a38        B gCurrentWindow
-0x02036a40        B gNewWindow
-0x02036a50        B gEEPROMConfig
-0x02036a58        B gUnk_02036A58
-0x02036ad8        B gUnk_02036AD8
-0x02036bb8        B gUnk_02036BB8
-0x02036bc0        B gMPlayTracks
-0x02037000        B _mazeState_start
-0x02037800        B _mazeState_end
-0x02038560        B gEndOfEwram
-
-=== symbols around 0x02036BC0 - 0x02037800 (context) ===
-0x02036540        B gUnk_02036540
-0x02036570        B gScriptExecutionContextArray
-0x020369f0        B gEntityListsBackup
-0x02036a38        B gCurrentWindow
-0x02036a40        B gNewWindow
-0x02036a50        B gEEPROMConfig
-0x02036a58        B gUnk_02036A58
-0x02036ad8        B gUnk_02036AD8
-0x02036bb8        B gUnk_02036BB8
-0x02036bc0        B gMPlayTracks
-0x02037000        B _mazeState_start
-0x02037800        B _mazeState_end
-
-=== .map entries around gMPlayTracks / _mazeState_start ===
-2434:                0x02036bc0                        gMPlayTracks = .
-2437:                0x02037000                        _mazeState_start = .
-2438:                0x02037800                        . = (. + 0x800)
-2439: *fill*         0x02037000      0x800
-2440:                0x02037800                        _mazeState_end = .
-2442: .bss           0x02037800        0x0 asm/src/crt0.o
-2443: .bss           0x02037800        0x0 asm/src/veneer.o
-2444: .bss           0x02037800        0x0 data/data_08000360.o
-2469: .bss           0x02037800        0x0 src/npc.o
-2470: .bss           0x02037800        0x0 src/collision.o
-2471: .bss           0x02037800        0x0 src/maze_gen.o
-2472: .bss           0x02037800        0x0 src/kinstone.o
-2473: .bss           0x02037800        0x0 src/playerItem/playerItemGustBig.o
-2474: .bss           0x02037800        0x0 src/playerItem/playerItemBow.o
-2475: .bss           0x02037800        0x0 src/playerItem/playerItemSwordBeam.o]
-3361: .bss           0x02037800        0x0 data/sound/direct_sound_samples.o
-3362: .bss           0x02037800        0x0 data/sound/sounds.o
-3363: .bss           0x02037800        0x0 ../../tools/agbcc/lib/libc.a(memcpy.o)
-3365: COMMON         0x02037800        0x0 src/gba/m4a.o
-3367: .data          0x02037800        0x0 asm/src/crt0.o
-3368: .data          0x02037800        0x0 asm/src/veneer.o
-3369: .data          0x02037800        0x0 data/data_08000360.o
-3370: .data          0x02037800        0x0 asm/src/code_08000E44.o
-3371: .data          0x02037800        0x0 asm/lib/libgcc.o
-3372: .data          0x02037800        0x0 asm/src/code_08000F10.o
-3373: .data          0x02037800        0x0 data/data_08000F54.o
-3374: .data          0x02037800        0x0 asm/src/enemy.o
-3375: .data          0x02037800        0x0 src/droptables.o
-3376: .data          0x02037800        0x0 asm/src/code_08001A7C.o
-3377: .data          0x02037800        0x0 data/gfx/sprite_ptrs.o
-3378: .data          0x02037800        0x0 asm/src/code_08003FC4.o
-3379: .data          0x02037800        0x0 asm/src/code_080043E8.o
-3380: .data          0x02037800        0x0 src/data/data_080046A4.o
-3381: .data          0x02037800        0x0 data/gfx/link_animations.o
-3382: .data          0x02037800        0x0 src/data/mapActTileToSurfaceType.o
-3383: .data          0x02037800        0x0 asm/src/code_08007CAC.o
-3384: .data          0x02037800        0x0 data/data_08007DF4.o
-3385: .data          0x02037800        0x0 asm/src/player.o
-3386: .data          0x02037800        0x0 data/scripts.o
-3387: .data          0x02037800        0x0 asm/src/script.o
-3388: .data          0x02037800        0x0 asm/src/projectileUpdate.o
-3389: .data          0x02037800        0x0 src/interrupts.o
-3390: .data          0x02037800        0x0 src/playerItem.o
-3391: .data          0x02037800        0x0 src/object.o
-3392: .data          0x02037800        0x0 src/manager.o
-3393: .data          0x02037800        0x0 src/npcFunctions.o
-3394: .data          0x02037800        0x0 src/npc.o
-3395: .data          0x02037800        0x0 src/collision.o
-3396: .data          0x02037800        0x0 src/maze_gen.o
-3397: .data          0x02037800        0x0 src/kinstone.o
-3398: .data          0x02037800        0x0 src/playerItem/playerItemGustBig.o
-3399: .data          0x02037800        0x0 src/playerItem/playerItemBow.o
-3400: .data          0x02037800        0x0 src/playerItem/playerItemSwordBeam.o
-3401: .data          0x02037800        0x0 src/beanstalkSubtask.o
-4281: .data          0x02037800        0x0 data/strings.o
-4282: .data          0x02037800        0x0 data/gfx/extra_frame_offsets.o
-4283: .data          0x02037800        0x0 data/gfx/sprite_table.o
-4284: .data          0x02037800        0x0 data/sound/voicegroups.o
-4285: .data          0x02037800        0x0 data/sound/programmable_wave_samples.o
-4286: .data          0x02037800        0x0 data/sound/direct_sound_samples.o
-4287: .data          0x02037800        0x0 data/sound/sounds.o
-4288: .data          0x02037800        0x0 ../../tools/agbcc/lib/libc.a(memcpy.o)
-4290: *fill*         0x02037800      0xd60
-4291:                0x02038560                        gEndOfEwram = .
-
-=== .map lines that mention 0x02036BC0 or 0x02037000 (source object contributors) ===
-2434:                0x02036bc0                        gMPlayTracks = .
-2436: *fill*         0x02036bc0      0x440
-2437:                0x02037000                        _mazeState_start = .
-2438:                0x02037800                        . = (. + 0x800)
-2439: *fill*         0x02037000      0x800
-2440:                0x02037800                        _mazeState_end = .
-2442: .bss           0x02037800        0x0 asm/src/crt0.o
-2443: .bss           0x02037800        0x0 asm/src/veneer.o
-2444: .bss           0x02037800        0x0 data/data_08000360.o
-2445: .bss           0x02037800        0x0 asm/src/code_08000E44.o
-2446: .bss           0x02037800        0x0 asm/lib/libgcc.o
-2447: .bss           0x02037800        0x0 asm/src/code_08000F10.o
-2448: .bss           0x02037800        0x0 data/data_08000F54.o
-2449: .bss           0x02037800        0x0 asm/src/enemy.o
-2450: .bss           0x02037800        0x0 src/droptables.o
-2451: .bss           0x02037800        0x0 asm/src/code_08001A7C.o
-2452: .bss           0x02037800        0x0 data/gfx/sprite_ptrs.o
-2453: .bss           0x02037800        0x0 asm/src/code_08003FC4.o
-2454: .bss           0x02037800        0x0 asm/src/code_080043E8.o
-2455: .bss           0x02037800        0x0 src/data/data_080046A4.o
-2456: .bss           0x02037800        0x0 data/gfx/link_animations.o
-2457: .bss           0x02037800        0x0 src/data/mapActTileToSurfaceType.o
-2458: .bss           0x02037800        0x0 asm/src/code_08007CAC.o
-2459: .bss           0x02037800        0x0 data/data_08007DF4.o
-2460: .bss           0x02037800        0x0 asm/src/player.o
-2461: .bss           0x02037800        0x0 data/scripts.o
-2462: .bss           0x02037800        0x0 asm/src/script.o
-2463: .bss           0x02037800        0x0 asm/src/projectileUpdate.o
-2464: .bss           0x02037800        0x0 src/interrupts.o
-2465: .bss           0x02037800        0x0 src/playerItem.o
-2466: .bss           0x02037800        0x0 src/object.o
-2467: .bss           0x02037800        0x0 src/manager.o
-2468: .bss           0x02037800        0x0 src/npcFunctions.o
-2469: .bss           0x02037800        0x0 src/npc.o
-2470: .bss           0x02037800        0x0 src/collision.o
-2471: .bss           0x02037800        0x0 src/maze_gen.o
-2472: .bss           0x02037800        0x0 src/kinstone.o
-2628: .bss           0x02037800        0x0 src/worldEvent/worldEvent0.o
-2629: .bss           0x02037800        0x0 src/worldEvent/worldEvent22.o
-2630: .bss           0x02037800        0x0 src/main.o
-2631: .bss           0x02037800        0x0 src/message.o
-2632: .bss           0x02037800        0x0 src/manager/lightRayManager.o
-2633: .bss           0x02037800        0x0 src/manager/verticalMinishPathBackgroundManager.o
-2634: .bss           0x02037800        0x0 src/manager/minishPortalManager.o
-2635: .bss           0x02037800        0x0 src/manager/diggingCaveEntranceManager.o
-
-=== maze_gen.o symbol table (.data/.bss/COMMON) ===
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
-
-=== COMMON symbols in tmc.elf ===
-
-=== Alternate duplicate-address scan (print duplicates only) ===
-
-=== show .map section lines surrounding the first occurrence of 02036BC0 (if present) ===
-                0x00036a38                        . = 0x36a38
- *fill*         0x020369f0       0x48
-                0x02036a38                        gCurrentWindow = .
-                0x00036a40                        . = 0x36a40
- *fill*         0x02036a38        0x8
-                0x02036a40                        gNewWindow = .
-                0x00036a50                        . = 0x36a50
- *fill*         0x02036a40       0x10
-                0x02036a50                        gEEPROMConfig = .
-                0x00036a58                        . = 0x36a58
- *fill*         0x02036a50        0x8
-                0x02036a58                        gUnk_02036A58 = .
-                0x00036ad8                        . = 0x36ad8
- *fill*         0x02036a58       0x80
-                0x02036ad8                        gUnk_02036AD8 = .
-                0x00036bb8                        . = 0x36bb8
- *fill*         0x02036ad8       0xe0
-                0x02036bb8                        gUnk_02036BB8 = .
-                0x00036bc0                        . = 0x36bc0
- *fill*         0x02036bb8        0x8
-                0x02036bc0                        gMPlayTracks = .
-                0x00037000                        . = 0x37000
- *fill*         0x02036bc0      0x440
-                0x02037000                        _mazeState_start = .
-                0x02037800                        . = (. + 0x800)
- *fill*         0x02037000      0x800
-                0x02037800                        _mazeState_end = .
- *(.bss)
- .bss           0x02037800        0x0 asm/src/crt0.o
- .bss           0x02037800        0x0 asm/src/veneer.o
- .bss           0x02037800        0x0 data/data_08000360.o
- .bss           0x02037800        0x0 asm/src/code_08000E44.o
- .bss           0x02037800        0x0 asm/lib/libgcc.o
- .bss           0x02037800        0x0 asm/src/code_08000F10.o
- .bss           0x02037800        0x0 data/data_08000F54.o
- .bss           0x02037800        0x0 asm/src/enemy.o
- .bss           0x02037800        0x0 src/droptables.o
- .bss           0x02037800        0x0 asm/src/code_08001A7C.o
- .bss           0x02037800        0x0 data/gfx/sprite_ptrs.o
- .bss           0x02037800        0x0 asm/src/code_08003FC4.o
- .bss           0x02037800        0x0 asm/src/code_080043E8.o
- .bss           0x02037800        0x0 src/data/data_080046A4.o
- .bss           0x02037800        0x0 data/gfx/link_animations.o
- .bss           0x02037800        0x0 src/data/mapActTileToSurfaceType.o
- .bss           0x02037800        0x0 asm/src/code_08007CAC.o
- .bss           0x02037800        0x0 data/data_08007DF4.o
- .bss           0x02037800        0x0 asm/src/player.o
- .bss           0x02037800        0x0 data/scripts.o
- .bss           0x02037800        0x0 asm/src/script.o
- .bss           0x02037800        0x0 asm/src/projectileUpdate.o
- .bss           0x02037800        0x0 src/interrupts.o
- .bss           0x02037800        0x0 src/playerItem.o
- .bss           0x02037800        0x0 src/object.o
- .bss           0x02037800        0x0 src/manager.o
- .bss           0x02037800        0x0 src/npcFunctions.o
- .bss           0x02037800        0x0 src/npc.o
- .bss           0x02037800        0x0 src/collision.o
- .bss           0x02037800        0x0 src/maze_gen.o
- .bss           0x02037800        0x0 src/kinstone.o
- .bss           0x02037800        0x0 src/playerItem/playerItemGustBig.o
- .bss           0x02037800        0x0 src/playerItem/playerItemBow.o
-
-=== link command + linker script used (search build log) ===
-If build.log missing, show recent linker invocation from make output (last 200 lines):
-make[2]: 'tmc.gba' is up to date.
-
-=== ELF section sizes (suspicious .bss/.data sizes) ===
-tmc.elf  :
-section               size        addr
-ewram               262144    33554432
-iwram                32768    50331648
-rom               14582428   134217728
-.debug_aranges       19104           0
-.debug_pubnames     270843           0
-.debug_info       48203058           0
-.debug_abbrev       316699           0
-.debug_line        1072662           0
-Total             64759706
-
-
-
-
-Lot of stuff that i cut from
-=== .map entries around gMPlayTracks / _mazeState_start ===
-and
-
-=== .map lines that mention 0x02036BC0 or 0x02037000 (source object contributors) ===
-
-They were the src/ npc stuff etc
-
-=== core symbols ===
-18826:02038560 B gEndOfEwram
-20350:02036bc0 B gMPlayTracks
-39714:02037800 B _mazeState_end
-39715:02037000 B _mazeState_start
-
-=== duplicate EW-RAM addresses (exact matches) ===
-
-=== EW-RAM B/D symbols (sorted) - truncated to 300 lines ===
-0x02000010        B gUnk_02000010
-0x02000020        B gUnk_02000020
-0x02000030        B gUnk_02000030
-0x02000040        B gUnk_02000040
-0x02000050        B gMessage
-0x02000070        B gUpdateVisibleTiles
-0x02000080        B gChooseFileState
-0x02000080        B gIntroState
-0x02000080        B gMenu
-0x02000090        B gUnk_02000090
-0x020000b0        B gUnk_020000B0
-0x020000c0        B gUnk_020000C0
-0x02000cc0        B gBgAnimations
-0x02000d00        B gTextGfxBuffer
-0x02001a00        B gPaletteList
-0x02001a3c        B gUnk_02001A3C
-0x02001a40        B gBG3Buffer
-0x02002a40        B gSave
-0x02002f00        B gMapDataTopSpecial
-0x02006f00        B gUnk_02006F00
-0x0200af00        B gHUD
-0x0200af34        B gUnk_0200AF34
-0x0200b240        B gTilesForSpecialTiles
-0x0200b640        B gUnk_0200B640
-0x0200b644        B gUsedPalettes
-0x0200b650        B gMapTop
-0x02017654        B gCurrentRoomProperties
-0x02017660        B gSmallChests
-0x020176a0        B gPaletteBuffer
-0x02017830        B gUnk_02017830
-0x02017aa0        B gUnk_02017AA0
-0x02017ba0        B gUnk_02017BA0
-0x02018ea0        B gUnk_02018EA0
-0x02018eb0        B gUnk_02018EB0
-0x02018ee0        B gUnk_02018EE0
-0x02019ee0        B gMapDataBottomSpecial
-0x0201aee0        B gDungeonMap
-0x02021ee0        B gSoundPlayingInfo
-0x02021f00        B gUnk_02021F00
-0x02021f20        B gUnk_02021F20
-0x02021f30        B gBG1Buffer
-0x02022730        B gVBlankDMA
-0x02022740        B gFuseInfo
-0x02022750        B gPlayerScriptExecutionContext
-0x02022780        B gTextRender
-0x020227dc        B gUnk_020227DC
-0x020227e8        B gUnk_020227E8
-0x020227f0        B gUnk_020227F0
-0x020227f8        B gUnk_020227F8
-0x02022800        B gUnk_02022800
-0x0202281d        B gTextRenderUpdateDraw
-0x02022830        B gUnk_02022830
-0x02024030        B gMessageChoices
-0x02024048        B gUnk_02024048
-0x02024050        B gRoomMemory
-0x02024090        B gPaletteBufferBackup
-0x02024490        B gGFXSlots
-0x020246b0        B gUnk_020246B0
-0x02025eb0        B gMapBottom
-0x02031ec0        B gNPCData
-0x02032ec0        B gUI
-0x02033280        B gActiveScriptInfo
-0x02033290        B gUnk_02033290
-0x02033a90        B gArea
-0x020342f8        B gUnk_020342F8
-0x02034330        B gUnk_02034330
-0x02034350        B gRoomVars
-0x02034480        B gUnk_02034480
-0x02034490        B gPauseMenuOptions
-0x02034492        B gUnk_02034492
-0x020344a0        B gUnk_020344A0
-0x020344b0        B gBG2Buffer
-0x02034cb0        B gBG0Buffer
-0x020354b0        B gCurrentRoomMemory
-0x020354b4        B gManagerCount
-0x020354c0        B gUnk_020354C0
-0x02035540        B gzHeap
-0x02035542        B gUnk_02035542
-0x02036540        B gUnk_02036540
-0x02036570        B gScriptExecutionContextArray
-0x020369f0        B gEntityListsBackup
-0x02036a38        B gCurrentWindow
-0x02036a40        B gNewWindow
-0x02036a50        B gEEPROMConfig
-0x02036a58        B gUnk_02036A58
-0x02036ad8        B gUnk_02036AD8
-0x02036bb8        B gUnk_02036BB8
-0x02036bc0        B gMPlayTracks
-0x02037000        B _mazeState_start
-0x02037800        B _mazeState_end
-0x02038560        B gEndOfEwram
-
-=== symbols around 0x02036BC0 - 0x02037800 (context) ===
-0x02036540        B gUnk_02036540
-0x02036570        B gScriptExecutionContextArray
-0x020369f0        B gEntityListsBackup
-0x02036a38        B gCurrentWindow
-0x02036a40        B gNewWindow
-0x02036a50        B gEEPROMConfig
-0x02036a58        B gUnk_02036A58
-0x02036ad8        B gUnk_02036AD8
-0x02036bb8        B gUnk_02036BB8
-0x02036bc0        B gMPlayTracks
-0x02037000        B _mazeState_start
-0x02037800        B _mazeState_end
-
-=== .map entries around gMPlayTracks / _mazeState_start ===
-2434:                0x02036bc0                        gMPlayTracks = .
-2437:                0x02037000                        _mazeState_start = .
-2438:                0x02037800                        . = (. + 0x800)
-2439: *fill*         0x02037000      0x800 
-2440:                0x02037800                        _mazeState_end = .
-2442: .bss           0x02037800        0x0 asm/src/crt0.o
-2443: .bss           0x02037800        0x0 asm/src/veneer.o
-2444: .bss           0x02037800        0x0 data/data_08000360.o
-2445: .bss           0x02037800        0x0 asm/src/code_08000E44.o
-2446: .bss           0x02037800        0x0 asm/lib/libgcc.o
-2447: .bss           0x02037800        0x0 asm/src/code_08000F10.o
-2448: .bss           0x02037800        0x0 data/data_08000F54.o
-2449: .bss           0x02037800        0x0 asm/src/enemy.o
-2450: .bss           0x02037800        0x0 src/droptables.o
-2451: .bss           0x02037800        0x0 asm/src/code_08001A7C.o
-2452: .bss           0x02037800        0x0 data/gfx/sprite_ptrs.o
-2453: .bss           0x02037800        0x0 asm/src/code_08003FC4.o
-2454: .bss           0x02037800        0x0 asm/src/code_080043E8.o
-2455: .bss           0x02037800        0x0 src/data/data_080046A4.o
-2456: .bss           0x02037800        0x0 data/gfx/link_animations.o
-2457: .bss           0x02037800        0x0 src/data/mapActTileToSurfaceType.o
-2458: .bss           0x02037800        0x0 asm/src/code_08007CAC.o
-2459: .bss           0x02037800        0x0 data/data_08007DF4.o
-2460: .bss           0x02037800        0x0 asm/src/player.o
-2461: .bss           0x02037800        0x0 data/scripts.o
-2462: .bss           0x02037800        0x0 asm/src/script.o
-2463: .bss           0x02037800        0x0 asm/src/projectileUpdate.o
-2464: .bss           0x02037800        0x0 src/interrupts.o
-2465: .bss           0x02037800        0x0 src/playerItem.o
-2466: .bss           0x02037800        0x0 src/object.o
-2467: .bss           0x02037800        0x0 src/manager.o
-2468: .bss           0x02037800        0x0 src/npcFunctions.o
-2469: .bss           0x02037800        0x0 src/npc.o
-2470: .bss           0x02037800        0x0 src/collision.o
-2471: .bss           0x02037800        0x0 src/maze_gen.o
-2472: .bss           0x02037800        0x0 src/kinstone.o
-2473: .bss           0x02037800        0x0 src/playerItem/playerItemGustBig.o
-2474: .bss           0x02037800        0x0 src/playerItem/playerItemBow.o
-4286: .data          0x02037800        0x0 data/sound/direct_sound_samples.o
-4287: .data          0x02037800        0x0 data/sound/sounds.o
-4288: .data          0x02037800        0x0 ../../tools/agbcc/lib/libc.a(memcpy.o)
-4290: *fill*         0x02037800      0xd60 
-4291:                0x02038560                        gEndOfEwram = .
-
-=== .map lines that mention 0x02036BC0 or 0x02037000 (source object contributors) ===
-2434:                0x02036bc0                        gMPlayTracks = .
-2436: *fill*         0x02036bc0      0x440 
-2437:                0x02037000                        _mazeState_start = .
-2438:                0x02037800                        . = (. + 0x800)
-2439: *fill*         0x02037000      0x800 
-2440:                0x02037800                        _mazeState_end = .
-2442: .bss           0x02037800        0x0 asm/src/crt0.o
-2443: .bss           0x02037800        0x0 asm/src/veneer.o
-2444: .bss           0x02037800        0x0 data/data_08000360.o
-2445: .bss           0x02037800        0x0 asm/src/code_08000E44.o
-2446: .bss           0x02037800        0x0 asm/lib/libgcc.o
-2447: .bss           0x02037800        0x0 asm/src/code_08000F10.o
-2448: .bss           0x02037800        0x0 data/data_08000F54.o
-2449: .bss           0x02037800        0x0 asm/src/enemy.o
-2450: .bss           0x02037800        0x0 src/droptables.o
-2451: .bss           0x02037800        0x0 asm/src/code_08001A7C.o
-2452: .bss           0x02037800        0x0 data/gfx/sprite_ptrs.o
-2453: .bss           0x02037800        0x0 asm/src/code_08003FC4.o
-2454: .bss           0x02037800        0x0 asm/src/code_080043E8.o
-2455: .bss           0x02037800        0x0 src/data/data_080046A4.o
-2456: .bss           0x02037800        0x0 data/gfx/link_animations.o
-2457: .bss           0x02037800        0x0 src/data/mapActTileToSurfaceType.o
-2458: .bss           0x02037800        0x0 asm/src/code_08007CAC.o
-2459: .bss           0x02037800        0x0 data/data_08007DF4.o
-2460: .bss           0x02037800        0x0 asm/src/player.o
-2461: .bss           0x02037800        0x0 data/scripts.o
-2462: .bss           0x02037800        0x0 asm/src/script.o
-2463: .bss           0x02037800        0x0 asm/src/projectileUpdate.o
-2464: .bss           0x02037800        0x0 src/interrupts.o
-2465: .bss           0x02037800        0x0 src/playerItem.o
-2466: .bss           0x02037800        0x0 src/object.o
-2467: .bss           0x02037800        0x0 src/manager.o
-2468: .bss           0x02037800        0x0 src/npcFunctions.o
-2469: .bss           0x02037800        0x0 src/npc.o
-2470: .bss           0x02037800        0x0 src/collision.o
-2471: .bss           0x02037800        0x0 src/maze_gen.o
-2472: .bss           0x02037800        0x0 src/kinstone.o
-2473: .bss           0x02037800        0x0 src/playerItem/playerItemGustBig.o
-2474: .bss           0x02037800        0x0 src/playerItem/playerItemBow.o
-2475: .bss           0x02037800        0x0 src/playerItem/playerItemSwordBeam.o
-2476: .bss           0x02037800        0x0 src/beanstalkSubtask.o
-2477: .bss           0x02037800        0x0 src/backgroundAnimations.o
-2478: .bss           0x02037800        0x0 src/playerItem/playerItemBomb.o
-2479: .bss           0x02037800        0x0 src/playerItem/playerItemBoomerang.o
-2480: .bss           0x02037800        0x0 src/playerItem/playerItemDashSword.o
-2481: .bss           0x02037800        0x0 src/playerItem/playerItemBottle.o
-2482: .bss           0x02037800        0x0 src/playerItem/playerItemCellOverwriteSet.o
-2483: .bss           0x02037800        0x0 src/ui.o
-2484: .bss           0x02037800        0x0 src/color.o
-2485: .bss           0x02037800        0x0 src/common.o
-2486: .bss           0x02037800        0x0 src/enemy/octorok.o
-2487: .bss           0x02037800        0x0 src/enemy/chuchu.o
-2488: .bss           0x02037800        0x0 src/enemy/leever.o
-2489: .bss           0x02037800        0x0 src/enemy/peahat.o
-2490: .bss           0x02037800        0x0 src/enemy/rollobite.o
-2491: .bss           0x02037800        0x0 src/enemy/darkNut.o
-2492: .bss           0x02037800        0x0 src/enemy/hangingSeed.o
-2493: .bss           0x02037800        0x0 src/enemy/beetle.o
-2494: .bss           0x02037800        0x0 src/enemy/keese.o
-2495: .bss           0x02037800        0x0 src/enemy/doorMimic.o
-2496: .bss           0x02037800        0x0 src/enemy/rockChuchu.o
-2497: .bss           0x02037800        0x0 src/enemy/spinyChuchu.o
-2498: .bss           0x02037800        0x0 src/enemy/cuccoChickAggr.o
-2499: .bss           0x02037800        0x0 src/enemy/moldorm.o
-2500: .bss           0x02037800        0x0 src/enemy/enemyE.o
-2501: .bss           0x02037800        0x0 src/enemy/moldworm.o
-2630: .bss           0x02037800        0x0 src/main.o
-2631: .bss           0x02037800        0x0 src/message.o
-2632: .bss           0x02037800        0x0 src/manager/lightRayManager.o
-2633: .bss           0x02037800        0x0 src/manager/verticalMinishPathBackgroundManager.o
-2634: .bss           0x02037800        0x0 src/manager/minishPortalManager.o
-2635: .bss           0x02037800        0x0 src/manager/diggingCaveEntranceManager.o
-
-=== maze_gen.o symbol table (.data/.bss/COMMON) ===
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
-
-=== COMMON symbols in tmc.elf ===
-
-=== Alternate duplicate-address scan (print duplicates only) ===
-
-=== show .map section lines surrounding the first occurrence of 02036BC0 (if present) ===
-                0x00036a38                        . = 0x36a38
- *fill*         0x020369f0       0x48 
-                0x02036a38                        gCurrentWindow = .
-                0x00036a40                        . = 0x36a40
- *fill*         0x02036a38        0x8 
-                0x02036a40                        gNewWindow = .
-                0x00036a50                        . = 0x36a50
- *fill*         0x02036a40       0x10 
-                0x02036a50                        gEEPROMConfig = .
-                0x00036a58                        . = 0x36a58
- *fill*         0x02036a50        0x8 
-                0x02036a58                        gUnk_02036A58 = .
-                0x00036ad8                        . = 0x36ad8
- *fill*         0x02036a58       0x80 
-                0x02036ad8                        gUnk_02036AD8 = .
-                0x00036bb8                        . = 0x36bb8
- *fill*         0x02036ad8       0xe0 
-                0x02036bb8                        gUnk_02036BB8 = .
-                0x00036bc0                        . = 0x36bc0
- *fill*         0x02036bb8        0x8 
-                0x02036bc0                        gMPlayTracks = .
-                0x00037000                        . = 0x37000
- *fill*         0x02036bc0      0x440 
-                0x02037000                        _mazeState_start = .
-                0x02037800                        . = (. + 0x800)
- *fill*         0x02037000      0x800 
-                0x02037800                        _mazeState_end = .
- *(.bss)
- .bss           0x02037800        0x0 asm/src/crt0.o
- .bss           0x02037800        0x0 asm/src/veneer.o
- .bss           0x02037800        0x0 data/data_08000360.o
- .bss           0x02037800        0x0 asm/src/code_08000E44.o
- .bss           0x02037800        0x0 asm/lib/libgcc.o
- .bss           0x02037800        0x0 asm/src/code_08000F10.o
- .bss           0x02037800        0x0 data/data_08000F54.o
- .bss           0x02037800        0x0 asm/src/enemy.o
- .bss           0x02037800        0x0 src/droptables.o
- .bss           0x02037800        0x0 asm/src/code_08001A7C.o
- .bss           0x02037800        0x0 data/gfx/sprite_ptrs.o
- .bss           0x02037800        0x0 asm/src/code_08003FC4.o
- .bss           0x02037800        0x0 asm/src/code_080043E8.o
- .bss           0x02037800        0x0 src/data/data_080046A4.o
- .bss           0x02037800        0x0 data/gfx/link_animations.o
- .bss           0x02037800        0x0 src/data/mapActTileToSurfaceType.o
- .bss           0x02037800        0x0 asm/src/code_08007CAC.o
- .bss           0x02037800        0x0 data/data_08007DF4.o
- .bss           0x02037800        0x0 asm/src/player.o
- .bss           0x02037800        0x0 data/scripts.o
- .bss           0x02037800        0x0 asm/src/script.o
- .bss           0x02037800        0x0 asm/src/projectileUpdate.o
- .bss           0x02037800        0x0 src/interrupts.o
- .bss           0x02037800        0x0 src/playerItem.o
- .bss           0x02037800        0x0 src/object.o
- .bss           0x02037800        0x0 src/manager.o
- .bss           0x02037800        0x0 src/npcFunctions.o
- .bss           0x02037800        0x0 src/npc.o
- .bss           0x02037800        0x0 src/collision.o
- .bss           0x02037800        0x0 src/maze_gen.o
- .bss           0x02037800        0x0 src/kinstone.o
- .bss           0x02037800        0x0 src/playerItem/playerItemGustBig.o
- .bss           0x02037800        0x0 src/playerItem/playerItemBow.o
-
-=== link command + linker script used (search build log) ===
-If build.log missing, show recent linker invocation from make output (last 200 lines):
-make[2]: 'tmc.gba' is up to date.
-
-=== ELF section sizes (suspicious .bss/.data sizes) ===
-tmc.elf  :
-section               size        addr
-ewram               262144    33554432
-iwram                32768    50331648
-rom               14582428   134217728
-.debug_aranges       19104           0
-.debug_pubnames     270843           0
-.debug_info       48203058           0
-.debug_abbrev       316699           0
-.debug_line        1072662           0
-Total             64759706
-
-
-
 === 1) Map lines placing .bss at 0x02037800 (brief) ===
-2438:                0x02037800                        . = (. + 0x800)
-2440:                0x02037800                        _mazeState_end = .
-2442: .bss           0x02037800        0x0 asm/src/crt0.o
-2443: .bss           0x02037800        0x0 asm/src/veneer.o
-2444: .bss           0x02037800        0x0 data/data_08000360.o
-2445: .bss           0x02037800        0x0 asm/src/code_08000E44.o
-2446: .bss           0x02037800        0x0 asm/lib/libgcc.o
-2447: .bss           0x02037800        0x0 asm/src/code_08000F10.o
-2448: .bss           0x02037800        0x0 data/data_08000F54.o
-2449: .bss           0x02037800        0x0 asm/src/enemy.o
-2450: .bss           0x02037800        0x0 src/droptables.o
-2451: .bss           0x02037800        0x0 asm/src/code_08001A7C.o
-2452: .bss           0x02037800        0x0 data/gfx/sprite_ptrs.o
-2453: .bss           0x02037800        0x0 asm/src/code_08003FC4.o
-2454: .bss           0x02037800        0x0 asm/src/code_080043E8.o
-2455: .bss           0x02037800        0x0 src/data/data_080046A4.o
-2456: .bss           0x02037800        0x0 data/gfx/link_animations.o
-2457: .bss           0x02037800        0x0 src/data/mapActTileToSurfaceType.o
-2458: .bss           0x02037800        0x0 asm/src/code_08007CAC.o
-2459: .bss           0x02037800        0x0 data/data_08007DF4.o
-2460: .bss           0x02037800        0x0 asm/src/player.o
-2461: .bss           0x02037800        0x0 data/scripts.o
-2462: .bss           0x02037800        0x0 asm/src/script.o
-2463: .bss           0x02037800        0x0 asm/src/projectileUpdate.o
-2464: .bss           0x02037800        0x0 src/interrupts.o
-2465: .bss           0x02037800        0x0 src/playerItem.o
-2466: .bss           0x02037800        0x0 src/object.o
-2467: .bss           0x02037800        0x0 src/manager.o
-2468: .bss           0x02037800        0x0 src/npcFunctions.o
-2469: .bss           0x02037800        0x0 src/npc.o
-2470: .bss           0x02037800        0x0 src/collision.o
-2471: .bss           0x02037800        0x0 src/maze_gen.o
-2472: .bss           0x02037800        0x0 src/kinstone.o
-2473: .bss           0x02037800        0x0 src/playerItem/playerItemGustBig.o
-2474: .bss           0x02037800        0x0 src/playerItem/playerItemBow.o
-2475: .bss           0x02037800        0x0 src/playerItem/playerItemSwordBeam.o
-2476: .bss           0x02037800        0x0 src/beanstalkSubtask.o
-2477: .bss           0x02037800        0x0 src/backgroundAnimations.o
-2478: .bss           0x02037800        0x0 src/playerItem/playerItemBomb.o
-2479: .bss           0x02037800        0x0 src/playerItem/playerItemBoomerang.o
-2480: .bss           0x02037800        0x0 src/playerItem/playerItemDashSword.o
-2481: .bss           0x02037800        0x0 src/playerItem/playerItemBottle.o
-2482: .bss           0x02037800        0x0 src/playerItem/playerItemCellOverwriteSet.o
-2483: .bss           0x02037800        0x0 src/ui.o
-2484: .bss           0x02037800        0x0 src/color.o
-2485: .bss           0x02037800        0x0 src/common.o
-2486: .bss           0x02037800        0x0 src/enemy/octorok.o
-2487: .bss           0x02037800        0x0 src/enemy/chuchu.o
-2488: .bss           0x02037800        0x0 src/enemy/leever.o
-2489: .bss           0x02037800        0x0 src/enemy/peahat.o
-2490: .bss           0x02037800        0x0 src/enemy/rollobite.o
-2557: .bss           0x02037800        0x0 src/enemy/lakitu.o
-2558: .bss           0x02037800        0x0 src/enemy/lakituCloud.o
-2559: .bss           0x02037800        0x0 src/enemy/torchTrap.o
 
 === 2) Object files placed at 0x02037800 (unique list) ===
-asm/lib/libagbsyscall.o
-asm/lib/libgcc.o
-asm/lib/m4a_asm.o
-asm/src/code_08000E44.o
-asm/src/code_08000F10.o
-asm/src/code_08001A7C.o
-asm/src/code_08003FC4.o
-asm/src/code_080043E8.o
-asm/src/code_08007CAC.o
-asm/src/crt0.o
-asm/src/enemy.o
-asm/src/intr.o
-asm/src/player.o
-asm/src/projectileUpdate.o
-asm/src/script.o
-asm/src/veneer.o
-data/animations/enemy/acroBandits.o
-data/animations/enemy/armos.o
-data/animations/enemy/ballChainSoldier.o
-data/animations/object/japaneseSubtitle.o
-data/animations/object/jarPortal.o
-
-=== 3) For each of those object files: show symbol table + sizes (trimmed) ===
----- asm/lib/libagbsyscall.o ----
-build/USA/asm/lib/libagbsyscall.o  :
-section           size   addr
-.text               92      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total              124
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/lib/libgcc.o ----
-build/USA/asm/lib/libgcc.o  :
-section           size   addr
-.text               56      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total               88
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/lib/m4a_asm.o ----
-build/USA/asm/lib/m4a_asm.o  :
-section           size   addr
-.text             2956      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total             2988
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/code_08000E44.o ----
-build/USA/asm/src/code_08000E44.o  :
-section           size   addr
-.text              148      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total              180
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/code_08000F10.o ----
-build/USA/asm/src/code_08000F10.o  :
-section           size   addr
-.text               68      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total              100
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/code_08001A7C.o ----
-build/USA/asm/src/code_08001A7C.o  :
-section           size   addr
-.text             3896      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total             3928
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/code_08003FC4.o ----
-build/USA/asm/src/code_08003FC4.o  :
-section           size   addr
-.text             1060      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total             1092
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/code_080043E8.o ----
-build/USA/asm/src/code_080043E8.o  :
-section           size   addr
-.text              700      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total              732
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/code_08007CAC.o ----
-build/USA/asm/src/code_08007CAC.o  :
-section           size   addr
-.text               56      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total               88
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/crt0.o ----
-build/USA/asm/src/crt0.o  :
-section           size   addr
-.text              264      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total              296
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/enemy.o ----
-build/USA/asm/src/enemy.o  :
-section           size   addr
-.text              440      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total              472
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/intr.o ----
-build/USA/asm/src/intr.o  :
-section           size   addr
-.text             4340      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total             4372
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/player.o ----
-build/USA/asm/src/player.o  :
-section           size   addr
-.text             1504      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total             1536
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/projectileUpdate.o ----
-build/USA/asm/src/projectileUpdate.o  :
-section           size   addr
-.text               76      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total              108
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/script.o ----
-build/USA/asm/src/script.o  :
-section           size   addr
-.text              352      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total              384
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
-00000006 g       .text	00000000 GetNextScriptCommandHalfwordAfterCommandMetadata
-00000014 g       .text	00000000 GetNextScriptCommandWordAfterCommandMetadata
----- asm/src/veneer.o ----
-build/USA/asm/src/veneer.o  :
-section           size   addr
-.text              600      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total              632
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- data/animations/enemy/acroBandits.o ----
-build/USA/data/animations/enemy/acroBandits.o  :
-section           size   addr
-.text                0      0
-.data                0      0
-.bss                 0      0
-.rodata            418      0
-.ARM.attributes     32      0
-Total              450
-
-
-build/USA/data/animations/enemy/acroBandits.o:     file format elf32-littlearm
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
-00000000 l    d  .rodata	00000000 .rodata
-00000000 g       .rodata	00000000 gSpriteAnimations_AcroBandits_0
-00000018 g       .rodata	00000000 gSpriteAnimations_AcroBandits_1
-00000049 g       .rodata	00000000 gSpriteAnimations_AcroBandits_2
-00000059 g       .rodata	00000000 gSpriteAnimations_AcroBandits_3
-00000081 g       .rodata	00000000 gSpriteAnimations_AcroBandits_4
-0000008a g       .rodata	00000000 gSpriteAnimations_AcroBandits_5
-0000008f g       .rodata	00000000 gSpriteAnimations_AcroBandits_6
-00000098 g       .rodata	00000000 gSpriteAnimations_AcroBandits_7
-000000a1 g       .rodata	00000000 gSpriteAnimations_AcroBandits_8
-000000b2 g       .rodata	00000000 gSpriteAnimations_AcroBandits_9
-000000c3 g       .rodata	00000000 gSpriteAnimations_AcroBandits_10
-000000c8 g       .rodata	00000000 gSpriteAnimations_AcroBandits_11
-000000cd g       .rodata	00000000 gSpriteAnimations_AcroBandits_12
-000000d9 g       .rodata	00000000 gSpriteAnimations_AcroBandits_13
-00000119 g       .rodata	00000000 gSpriteAnimations_AcroBandits_14
-00000162 g       .rodata	00000000 gSpriteAnimations_AcroBandits
----- data/animations/enemy/armos.o ----
-build/USA/data/animations/enemy/armos.o  :
-section           size   addr
-.text                0      0
-.data                0      0
-.bss                 0      0
-.rodata            284      0
-.ARM.attributes     32      0
-Total              316
-
-
-build/USA/data/animations/enemy/armos.o:     file format elf32-littlearm
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
-00000000 l    d  .rodata	00000000 .rodata
-00000000 g       .rodata	00000000 gSpriteAnimations_Armos_0
-00000019 g       .rodata	00000000 gSpriteAnimations_Armos_1
-00000032 g       .rodata	00000000 gSpriteAnimations_Armos_2
-0000004b g       .rodata	00000000 gSpriteAnimations_Armos_3
-00000064 g       .rodata	00000000 gSpriteAnimations_Armos_4
-00000099 g       .rodata	00000000 gSpriteAnimations_Armos_5
-000000da g       .rodata	00000000 gSpriteAnimations_Armos_6
-000000f2 g       .rodata	00000000 gSpriteAnimations_Armos_7
-000000f8 g       .rodata	00000000 gSpriteAnimations_Armos
----- data/animations/enemy/ballChainSoldier.o ----
-build/USA/data/animations/enemy/ballChainSoldier.o  :
-section           size   addr
-.text                0      0
-.data                0      0
-.bss                 0      0
-.rodata            328      0
-.ARM.attributes     32      0
-Total              360
-
-
-build/USA/data/animations/enemy/ballChainSoldier.o:     file format elf32-littlearm
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
-00000000 l    d  .rodata	00000000 .rodata
-00000000 g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_3
-00000004 g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_2
-00000008 g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_1
-0000000c g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_0
-00000010 g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_19
-00000014 g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_18
-00000018 g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_17
-0000001c g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_16
-00000020 g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_4
-00000024 g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_7
-00000028 g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_6
-0000002c g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_5
-00000030 g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_20
-00000034 g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_23
-00000038 g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_22
-0000003c g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_21
-00000040 g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_9
-00000044 g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_8
-00000048 g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_11
-0000004c g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_10
-00000050 g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_25
-00000054 g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_24
-00000058 g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_27
-0000005c g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_26
-00000060 g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_12
-00000064 g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_13
-00000068 g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_14
-0000006c g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_15
-00000070 g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_28
-00000074 g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_29
-00000078 g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_30
-0000007c g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_31
-00000080 g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_32
-0000008d g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_33
-0000009a g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_34
-000000a7 g       .rodata	00000000 gSpriteAnimations_BallChainSoldier_35
-000000b4 g       .rodata	00000000 gSpriteAnimations_BallChainSoldier
----- data/animations/enemy/beetle.o ----
-build/USA/data/animations/enemy/beetle.o  :
-section           size   addr
-.text                0      0
-.data                0      0
-.bss                 0      0
-.rodata            176      0
-.ARM.attributes     32      0
-Total              208
-
-
-build/USA/data/animations/enemy/beetle.o:     file format elf32-littlearm
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
-00000000 l    d  .rodata	00000000 .rodata
-00000000 g       .rodata	00000000 gSpriteAnimations_Beetle_0
-00000014 g       .rodata	00000000 gSpriteAnimations_Beetle_1
-00000030 g       .rodata	00000000 gSpriteAnimations_Beetle_2
-00000041 g       .rodata	00000000 gSpriteAnimations_Beetle_3
-00000059 g       .rodata	00000000 gSpriteAnimations_Beetle_4
-00000071 g       .rodata	00000000 gSpriteAnimations_Beetle_5
-00000085 g       .rodata	00000000 gSpriteAnimations_Beetle_6
-00000090 g       .rodata	00000000 gSpriteAnimations_Beetle
----- data/animations/enemy/bobomb.o ----
-build/USA/data/animations/enemy/bobomb.o  :
-section           size   addr
-.text                0      0
-.data                0      0
-.bss                 0      0
-.rodata            212      0
-.ARM.attributes     32      0
-Total              244
-
-
-build/USA/data/animations/enemy/bobomb.o:     file format elf32-littlearm
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
-00000000 l    d  .rodata	00000000 .rodata
-00000000 g       .rodata	00000000 gSpriteAnimations_Bobomb_0
-00000011 g       .rodata	00000000 gSpriteAnimations_Bobomb_1
-00000022 g       .rodata	00000000 gSpriteAnimations_Bobomb_2
-00000033 g       .rodata	00000000 gSpriteAnimations_Bobomb_3
-00000044 g       .rodata	00000000 gSpriteAnimations_Bobomb_4
-00000049 g       .rodata	00000000 gSpriteAnimations_Bobomb_5
-0000004e g       .rodata	00000000 gSpriteAnimations_Bobomb_6
-00000057 g       .rodata	00000000 gSpriteAnimations_Bobomb_7
-00000060 g       .rodata	00000000 gSpriteAnimations_Bobomb_8
-00000084 g       .rodata	00000000 gSpriteAnimations_Bobomb_9
-000000a8 g       .rodata	00000000 gSpriteAnimations_Bobomb
----- data/animations/enemy/bombarossa.o ----
-build/USA/data/animations/enemy/bombarossa.o  :
-section           size   addr
-.text                0      0
-.data                0      0
-.bss                 0      0
-.rodata             20      0
-.ARM.attributes     32      0
-Total               52
-
-
-build/USA/data/animations/enemy/bombarossa.o:     file format elf32-littlearm
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
-00000000 l    d  .rodata	00000000 .rodata
-00000000 g       .rodata	00000000 gSpriteAnimations_Bombarossa_0
-0000000c g       .rodata	00000000 gSpriteAnimations_Bombarossa
----- data/animations/enemy/bombPeahat.o ----
-build/USA/data/animations/enemy/bombPeahat.o  :
-section           size   addr
-.text                0      0
-.data                0      0
-.bss                 0      0
-.rodata            176      0
-.ARM.attributes     32      0
-Total              208
-
-
-build/USA/data/animations/enemy/bombPeahat.o:     file format elf32-littlearm
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
-00000000 l    d  .rodata	00000000 .rodata
-00000000 g       .rodata	00000000 gSpriteAnimations_BombPeahat_0
-00000011 g       .rodata	00000000 gSpriteAnimations_BombPeahat_1
-00000052 g       .rodata	00000000 gSpriteAnimations_BombPeahat_2
-00000093 g       .rodata	00000000 gSpriteAnimations_BombPeahat_3
-0000009c g       .rodata	00000000 gSpriteAnimations_BombPeahat
----- data/animations/enemy/bowMoblin.o ----
-build/USA/data/animations/enemy/bowMoblin.o  :
-section           size   addr
-.text                0      0
-.data                0      0
-.bss                 0      0
-.rodata            324      0
-.ARM.attributes     32      0
-Total              356
-
-=== 2) Object files placed at 0x02037800 (unique list) ===
-asm/lib/libagbsyscall.o
-asm/lib/libgcc.o
-asm/lib/m4a_asm.o
-asm/src/code_08000E44.o
-asm/src/code_08000F10.o
-asm/src/code_08001A7C.o
-asm/src/code_08003FC4.o
-asm/src/code_080043E8.o
-asm/src/code_08007CAC.o
-asm/src/crt0.o
-asm/src/enemy.o
-asm/src/intr.o
-asm/src/player.o
-asm/src/projectileUpdate.o
-asm/src/script.o
-asm/src/veneer.o
-data/animations/enemy/acroBandits.o
-data/animations/enemy/armos.o
-data/animations/enemy/ballChainSoldier.o
-data/animations/enemy/beetle.o
-data/animations/object/jailBars.o
-data/animations/object/japaneseSubtitle.o
-data/animations/object/jarPortal.o
-
-=== 3) For each of those object files: show symbol table + sizes (trimmed) ===
----- asm/lib/libagbsyscall.o ----
-build/USA/asm/lib/libagbsyscall.o  :
-section           size   addr
-.text               92      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total              124
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/lib/libgcc.o ----
-build/USA/asm/lib/libgcc.o  :
-section           size   addr
-.text               56      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total               88
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/lib/m4a_asm.o ----
-build/USA/asm/lib/m4a_asm.o  :
-section           size   addr
-.text             2956      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total             2988
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/code_08000E44.o ----
-build/USA/asm/src/code_08000E44.o  :
-section           size   addr
-.text              148      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total              180
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/code_08000F10.o ----
-build/USA/asm/src/code_08000F10.o  :
-section           size   addr
-.text               68      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total              100
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/code_08001A7C.o ----
-build/USA/asm/src/code_08001A7C.o  :
-section           size   addr
-.text             3896      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total             3928
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/code_08003FC4.o ----
-build/USA/asm/src/code_08003FC4.o  :
-section           size   addr
-.text             1060      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total             1092
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/code_080043E8.o ----
-build/USA/asm/src/code_080043E8.o  :
-section           size   addr
-.text              700      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total              732
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/code_08007CAC.o ----
-build/USA/asm/src/code_08007CAC.o  :
-section           size   addr
-.text               56      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total               88
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/crt0.o ----
-build/USA/asm/src/crt0.o  :
-section           size   addr
-.text              264      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total              296
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/enemy.o ----
-build/USA/asm/src/enemy.o  :
-section           size   addr
-.text              440      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total              472
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/intr.o ----
-build/USA/asm/src/intr.o  :
-section           size   addr
-.text             4340      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total             4372
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/player.o ----
-build/USA/asm/src/player.o  :
-section           size   addr
-.text             1504      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total             1536
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/projectileUpdate.o ----
-build/USA/asm/src/projectileUpdate.o  :
-section           size   addr
-.text               76      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total              108
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/script.o ----
-build/USA/asm/src/script.o  :
-section           size   addr
-.text              352      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total              384
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
-00000006 g       .text	00000000 GetNextScriptCommandHalfwordAfterCommandMetadata
-00000014 g       .text	00000000 GetNextScriptCommandWordAfterCommandMetadata
----- asm/src/veneer.o ----
-build/USA/asm/src/veneer.o  :
-section           size   addr
-.text              600      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total              632
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- data/animations/enemy/acroBandits.o ----
-build/USA/data/animations/enemy/acroBandits.o  :
-section           size   addr
-.text                0      0
-.data                0      0
-.bss                 0      0
-.rodata            418      0
-.ARM.attributes     32      0
-Total              450
-
-
-build/USA/data/animations/enemy/acroBandits.o:     file format elf32-littlearm
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
-00000000 l    d  .rodata	00000000 .rodata
-00000000 g       .rodata	00000000 gSpriteAnimations_AcroBandits_0
-00000018 g       .rodata	00000000 gSpriteAnimations_AcroBandits_1
-00000049 g       .rodata	00000000 gSpriteAnimations_AcroBandits_2
-00000059 g       .rodata	00000000 gSpriteAnimations_AcroBandits_3
-00000081 g       .rodata	00000000 gSpriteAnimations_AcroBandits_4
-0000008a g       .rodata	00000000 gSpriteAnimations_AcroBandits_5
-0000008f g       .rodata	00000000 gSpriteAnimations_AcroBandits_6
-00000098 g       .rodata	00000000 gSpriteAnimations_AcroBandits_7
-000000a1 g       .rodata	00000000 gSpriteAnimations_AcroBandits_8
-000000b2 g       .rodata	00000000 gSpriteAnimations_AcroBandits_9
-000000c3 g       .rodata	00000000 gSpriteAnimations_AcroBandits_10
-000000c8 g       .rodata	00000000 gSpriteAnimations_AcroBandits_11
-000000cd g       .rodata	00000000 gSpriteAnimations_AcroBandits_12
-000000d9 g       .rodata	00000000 gSpriteAnimations_AcroBandits_13
-00000119 g       .rodata	00000000 gSpriteAnimations_AcroBandits_14
-00000162 g       .rodata	00000000 gSpriteAnimations_AcroBandits
----- data/animations/enemy/armos.o ----
-build/USA/data/animations/enemy/armos.o  :
-section           size   addr
-.text                0      0
-.data                0      0
-.bss                 0      0
-.rodata            284      0
-.ARM.attributes     32      0
-Total              316
-
-
----- data/animations/npc/mutoh.o (COMMON search) ----
----- data/ani=== 1) Map lines placing .bss at 0x02037800 (brief) ===
-2438:                0x02037800                        . = (. + 0x800)
-2440:                0x02037800                        _mazeState_end = .
-2442: .bss           0x02037800        0x0 asm/src/crt0.o
-2443: .bss           0x02037800        0x0 asm/src/veneer.o
-2444: .bss           0x02037800        0x0 data/data_08000360.o
-2445: .bss           0x02037800        0x0 asm/src/code_08000E44.o
-2446: .bss           0x02037800        0x0 asm/lib/libgcc.o
-2447: .bss           0x02037800        0x0 asm/src/code_08000F10.o
-2448: .bss           0x02037800        0x0 data/data_08000F54.o
-2449: .bss           0x02037800        0x0 asm/src/enemy.o
-2450: .bss           0x02037800        0x0 src/droptables.o
-2451: .bss           0x02037800        0x0 asm/src/code_08001A7C.o
-2452: .bss           0x02037800        0x0 data/gfx/sprite_ptrs.o
-2453: .bss           0x02037800        0x0 asm/src/code_08003FC4.o
-2454: .bss           0x02037800        0x0 asm/src/code_080043E8.o
-2455: .bss           0x02037800        0x0 src/data/data_080046A4.o
-2456: .bss           0x02037800        0x0 data/gfx/link_animations.o
-2457: .bss           0x02037800        0x0 src/data/mapActTileToSurfaceType.o
-2458: .bss           0x02037800        0x0 asm/src/code_08007CAC.o
-2459: .bss           0x02037800        0x0 data/data_08007DF4.o
-2460: .bss           0x02037800        0x0 asm/src/player.o
-2461: .bss           0x02037800        0x0 data/scripts.o
-2462: .bss           0x02037800        0x0 asm/src/script.o
-2463: .bss           0x02037800        0x0 asm/src/projectileUpdate.o
-2464: .bss           0x02037800        0x0 src/interrupts.o
-2465: .bss           0x02037800        0x0 src/playerItem.o
-2466: .bss           0x02037800        0x0 src/object.o
-2467: .bss           0x02037800        0x0 src/manager.o
-2468: .bss           0x02037800        0x0 src/npcFunctions.o
-2469: .bss           0x02037800        0x0 src/npc.o
-2470: .bss           0x02037800        0x0 src/collision.o
-2471: .bss           0x02037800        0x0 src/maze_gen.o
-2472: .bss           0x02037800        0x0 src/kinstone.o
-2473: .bss           0x02037800        0x0 src/playerItem/playerItemGustBig.o
-2474: .bss           0x02037800        0x0 src/playerItem/playerItemBow.o
-2475: .bss           0x02037800        0x0 src/playerItem/playerItemSwordBeam.o
-2476: .bss           0x02037800        0x0 src/beanstalkSubtask.o
-2477: .bss           0x02037800        0x0 src/backgroundAnimations.o
-2478: .bss           0x02037800        0x0 src/playerItem/playerItemBomb.o
-2479: .bss           0x02037800        0x0 src/playerItem/playerItemBoomerang.o
-2480: .bss           0x02037800        0x0 src/playerItem/playerItemDashSword.o
-2481: .bss           0x02037800        0x0 src/playerItem/playerItemBottle.o
-2482: .bss           0x02037800        0x0 src/playerItem/playerItemCellOverwriteSet.o
-2483: .bss           0x02037800        0x0 src/ui.o
-2484: .bss           0x02037800        0x0 src/color.o
-2485: .bss           0x02037800        0x0 src/common.o
-2486: .bss           0x02037800        0x0 src/enemy/octorok.o
-2487: .bss           0x02037800        0x0 src/enemy/chuchu.o
-2488: .bss           0x02037800        0x0 src/enemy/leever.o
-2489: .bss           0x02037800        0x0 src/enemy/peahat.o
-2490: .bss           0x02037800        0x0 src/enemy/rollobite.o
-2491: .bss           0x02037800        0x0 src/enemy/darkNut.o
-2558: .bss           0x02037800        0x0 src/enemy/lakituCloud.o
-2559: .bss           0x02037800        0x0 src/enemy/torchTrap.o
-
-=== 2) Object files placed at 0x02037800 (unique list) ===
-asm/lib/libagbsyscall.o
-asm/lib/libgcc.o
-asm/lib/m4a_asm.o
-asm/src/code_08000E44.o
-asm/src/code_08000F10.o
-asm/src/code_08001A7C.o
-asm/src/code_08003FC4.o
-asm/src/code_080043E8.o
-asm/src/code_08007CAC.o
-asm/src/crt0.o
-asm/src/enemy.o
-asm/src/intr.o
-asm/src/player.o
-asm/src/projectileUpdate.o
-asm/src/script.o
-asm/src/veneer.o
-
-=== 3) For each of those object files: show symbol table + sizes (trimmed) ===
----- asm/lib/libagbsyscall.o ----
-build/USA/asm/lib/libagbsyscall.o  :
-section           size   addr
-.text               92      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total              124
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/lib/libgcc.o ----
-build/USA/asm/lib/libgcc.o  :
-section           size   addr
-.text               56      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total               88
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/lib/m4a_asm.o ----
-build/USA/asm/lib/m4a_asm.o  :
-section           size   addr
-.text             2956      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total             2988
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/code_08000E44.o ----
-build/USA/asm/src/code_08000E44.o  :
-section           size   addr
-.text              148      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total              180
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/code_08000F10.o ----
-build/USA/asm/src/code_08000F10.o  :
-section           size   addr
-.text               68      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total              100
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/code_08001A7C.o ----
-build/USA/asm/src/code_08001A7C.o  :
-section           size   addr
-.text             3896      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total             3928
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/code_08003FC4.o ----
-build/USA/asm/src/code_08003FC4.o  :
-section           size   addr
-.text             1060      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total             1092
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/code_080043E8.o ----
-build/USA/asm/src/code_080043E8.o  :
-section           size   addr
-.text              700      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total              732
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/code_08007CAC.o ----
-build/USA/asm/src/code_08007CAC.o  :
-section           size   addr
-.text               56      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total               88
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/crt0.o ----
-build/USA/asm/src/crt0.o  :
-section           size   addr
-.text              264      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total              296
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/enemy.o ----
-build/USA/asm/src/enemy.o  :
-section           size   addr
-.text              440      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total              472
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/intr.o ----
-build/USA/asm/src/intr.o  :
-section           size   addr
-.text             4340      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total             4372
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/player.o ----
-build/USA/asm/src/player.o  :
-section           size   addr
-.text             1504      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total             1536
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/projectileUpdate.o ----
-build/USA/asm/src/projectileUpdate.o  :
-section           size   addr
-.text               76      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total              108
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- asm/src/script.o ----
-build/USA/asm/src/script.o  :
-section           size   addr
-.text              352      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total              384
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
-00000006 g       .text	00000000 GetNextScriptCommandHalfwordAfterCommandMetadata
-00000014 g       .text	00000000 GetNextScriptCommandWordAfterCommandMetadata
----- asm/src/veneer.o ----
-build/USA/asm/src/veneer.o  :
-section           size   addr
-.text              600      0
-.data                0      0
-.bss                 0      0
-.ARM.attributes     32      0
-Total              632
-
-
-00000000 l    d  .data	00000000 .data
-00000000 l    d  .bss	00000000 .bss
----- data/animations/enemy/acroBandits.o ----
-build/USA/data/animations/enemy/acroBandits.o  :
-section           size   addr
-.text                0      0
-.data                0      0
-.bss                 0      0
-.rodata            418      0
-.ARM.attributes     32      0
-Total              450
-
-
 
 === 4) Show any COMMON symbols in those object files (they become .bss at link-time) ===
----- asm/lib/libagbsyscall.o (COMMON search) ----
----- asm/lib/libgcc.o (COMMON search) ----
----- asm/lib/m4a_asm.o (COMMON search) ----
----- asm/src/code_08000E44.o (COMMON search) ----
----- asm/src/code_08000F10.o (COMMON search) ----
----- asm/src/code_08001A7C.o (COMMON search) ----
----- asm/src/code_08003FC4.o (COMMON search) ----
----- asm/src/code_080043E8.o (COMMON search) ----
----- asm/src/code_08007CAC.o (COMMON search) ----
----- asm/src/crt0.o (COMMON search) ----
----- asm/src/enemy.o (COMMON search) ----
----- asm/src/intr.o (COMMON search) ----
----- asm/src/player.o (COMMON search) ----
----- asm/src/projectileUpdate.o (COMMON search) ----
----- asm/src/script.o (COMMON search) ----
----- asm/src/veneer.o (COMMON search) ----
+
 === 5) Search source & asm for hard-coded EW-RAM addresses (0x0203xxxx / 0x02037xxx / 0x02036xxx) ===
 
 === 6) Search built object files for immediate constants referencing EW-RAM (movw/movt pairs / ldr literal pools) ===
@@ -1704,402 +21,402 @@ Total              450
 29588: 8017128:	02034350 	.word	0x02034350
 30147: 80175d8:	020342f8 	.word	0x020342f8
 30149: 80175e0:	02031ec0 	.word	0x02031ec0
-32072: 8018520:	02037000 	.word	0x02037000
-32117: 8018578:	02037000 	.word	0x02037000
-32143: 80185ac:	02037000 	.word	0x02037000
-32163: 80185d4:	02037000 	.word	0x02037000
-32214: 801863c:	02037000 	.word	0x02037000
-32256: 8018694:	02037000 	.word	0x02037000
-32311: 8018710:	02037000 	.word	0x02037000
-32456: 8018844:	02037000 	.word	0x02037000
-32631: 80189ac:	02037000 	.word	0x02037000
-32686: 8018a2c:	02033ab8 	.word	0x02033ab8
-32700: 8018a4c:	02033ab8 	.word	0x02033ab8
-32783: 8018b00:	02033ab8 	.word	0x02033ab8
-32805: 8018b30:	02033ab8 	.word	0x02033ab8
-32867: 8018bac:	02033a90 	.word	0x02033a90
-32879: 8018bc4:	02033a90 	.word	0x02033a90
-33120: 8018e04:	02034350 	.word	0x02034350
-34786: 8019c00:	02032ec0 	.word	0x02032ec0
-37316: 801b164:	02034350 	.word	0x02034350
-37595: 801b3c4:	02033a90 	.word	0x02033a90
-37663: 801b460:	02034350 	.word	0x02034350
-37690: 801b498:	02034350 	.word	0x02034350
-40148: 801c954:	02034cb0 	.word	0x02034cb0
-40206: 801c9d0:	02035160 	.word	0x02035160
-40248: 801ca28:	02035160 	.word	0x02035160
-40405: 801cb84:	02034cf0 	.word	0x02034cf0
-40574: 801cce8:	02034d30 	.word	0x02034d30
-40577: 801ccf4:	02034cf0 	.word	0x02034cf0
-40605: 801cd30:	02034d30 	.word	0x02034d30
-40708: 801ce08:	02034d30 	.word	0x02034d30
-40785: 801cec0:	020350e2 	.word	0x020350e2
-40838: 801cf30:	020350e2 	.word	0x020350e2
-40842: 801cf40:	02033a90 	.word	0x02033a90
-41265: 801d2a0:	02033a90 	.word	0x02033a90
-42670: 801dde8:	02035540 	.word	0x02035540
-42709: 801de38:	02035540 	.word	0x02035540
-42736: 801de70:	02035540 	.word	0x02035540
-42786: 801ded8:	02035542 	.word	0x02035542
-42823: 801df20:	02035540 	.word	0x02035540
-42847: 801df54:	0203553e 	.word	0x0203553e
-42857: 801df68:	02035540 	.word	0x02035540
-42910: 801dfe8:	02034cb0 	.word	0x02034cb0
-42960: 801e04c:	02034cb0 	.word	0x02034cb0
-42964: 801e05c:	020344b0 	.word	0x020344b0
-43013: 801e0c8:	02033a90 	.word	0x02033a90
-43180: 801e228:	02033a90 	.word	0x02033a90
-43204: 801e25c:	02033a90 	.word	0x02033a90
-43246: 801e2b8:	02033a90 	.word	0x02033a90
-43270: 801e2f0:	02032ec0 	.word	0x02032ec0
-47208: 8020360:	6800      	ldr	r0, [r0, #0]
-47209: 8020362:	6ac5      	ldr	r5, [r0, #44]	@ 0x2c
-47210: 8020364:	6b04      	ldr	r4, [r0, #48]	@ 0x30
-47211: 8020366:	4911      	ldr	r1, [pc, #68]	@ (80203ac <Leever_PlayerInRange+0x68>)
-47212: 8020368:	0130      	lsls	r0, r6, #4
-47213: 802036a:	1840      	adds	r0, r0, r1
-47214: 802036c:	2200      	movs	r2, #0
-47215: 802036e:	5e80      	ldrsh	r0, [r0, r2]
-47216: 8020370:	02c0      	lsls	r0, r0, #11
-47217: 8020372:	4681      	mov	r9, r0
-47218: 8020374:	0130      	lsls	r0, r6, #4
-47219: 8020376:	3080      	adds	r0, #128	@ 0x80
-47220: 8020378:	1840      	adds	r0, r0, r1
-47221: 802037a:	2100      	movs	r1, #0
-47222: 802037c:	5e40      	ldrsh	r0, [r0, r1]
-47223: 802037e:	02c0      	lsls	r0, r0, #11
-47224: 8020380:	4680      	mov	r8, r0
-47225: 8020382:	2600      	movs	r6, #0
-47226: 8020384:	444d      	add	r5, r9
-47227: 8020386:	4642      	mov	r2, r8
-47228: 8020388:	1aa4      	subs	r4, r4, r2
-47229: 802038a:	1429      	asrs	r1, r5, #16
-47230: 802038c:	1422      	asrs	r2, r4, #16
-47231: 802038e:	1c38      	adds	r0, r7, #0
-47237: 802039c:	d9f2      	bls.n	8020384 <Leever_PlayerInRange+0x40>
-58812: 802625c:	02034490 	.word	0x02034490
-59441: 8026778:	02034490 	.word	0x02034490
-59794: 8026a58:	02034490 	.word	0x02034490
-61582: 802792c:	02034490 	.word	0x02034490
-67797: 802ac40:	02033a90 	.word	0x02033a90
-72694: 802d400:	02033a90 	.word	0x02033a90
-72966: 802d648:	02034490 	.word	0x02034490
-73595: 802db90:	02034490 	.word	0x02034490
-73760: 802dce8:	02034490 	.word	0x02034490
-88805: 80357a0:	02034490 	.word	0x02034490
-89669: 8035ecc:	02034490 	.word	0x02034490
-89861: 8036054:	02034490 	.word	0x02034490
-92030: 8037208:	02034350 	.word	0x02034350
-92111: 80372ac:	02034350 	.word	0x02034350
-92196: 8037360:	02034350 	.word	0x02034350
-105696: 803e1c8:	02033a90 	.word	0x02033a90
-108738: 803faa8:	02033a90 	.word	0x02033a90
-108779: 803fb00:	02033a90 	.word	0x02033a90
-112132: 804169c:	02033a90 	.word	0x02033a90
-112183: 8041704:	02033a90 	.word	0x02033a90
-129194: 804a1cc:	020354b0 	.word	0x020354b0
-129215: 804a1f4:	020354b0 	.word	0x020354b0
-129226: 804a208:	020354b0 	.word	0x020354b0
-129248: 804a234:	020354b0 	.word	0x020354b0
-129264: 804a260:	020354b0 	.word	0x020354b0
-130907: 804af74:	02033a90 	.word	0x02033a90
-130932: 804afac:	02033a90 	.word	0x02033a90
-130953: 804afdc:	02033a90 	.word	0x02033a90
-130966: 804affc:	02033a90 	.word	0x02033a90
-130987: 804b02c:	02033a90 	.word	0x02033a90
-131000: 804b048:	02033a90 	.word	0x02033a90
-131066: 804b0e0:	02033a90 	.word	0x02033a90
-131067: 804b0e4:	02032ec0 	.word	0x02032ec0
-131133: 804b180:	02033a90 	.word	0x02033a90
-131168: 804b1cc:	02033a90 	.word	0x02033a90
-131169: 804b1d0:	02032edc 	.word	0x02032edc
-131197: 804b20c:	02033a90 	.word	0x02033a90
-131268: 804b2b0:	02033a90 	.word	0x02033a90
-131491: 804b484:	02033a90 	.word	0x02033a90
-131514: 804b4b4:	02034350 	.word	0x02034350
-131698: 804b644:	02034350 	.word	0x02034350
-131711: 804b660:	02034350 	.word	0x02034350
-131787: 804b71c:	02033a90 	.word	0x02033a90
-131809: 804b754:	02034350 	.word	0x02034350
-131822: 804b770:	02034398 	.word	0x02034398
-131832: 804b784:	02033a90 	.word	0x02033a90
-131951: 804b87c:	02034350 	.word	0x02034350
-132099: 804b96c:	02033a90 	.word	0x02033a90
-132115: 804b988:	02033a90 	.word	0x02033a90
-132522: 804bcd8:	02034350 	.word	0x02034350
-132579: 804bd5c:	02034350 	.word	0x02034350
-132635: 804bde0:	02034350 	.word	0x02034350
-132786: 804bf34:	02034350 	.word	0x02034350
-132841: 804bfb0:	02034350 	.word	0x02034350
-132863: 804bfe4:	02033a90 	.word	0x02033a90
-132878: 804c008:	02033a90 	.word	0x02033a90
-132895: 804c02c:	02034350 	.word	0x02034350
-132934: 804c08c:	02033a90 	.word	0x02033a90
-132969: 804c0d4:	02033a90 	.word	0x02033a90
-132985: 804c100:	02033a90 	.word	0x02033a90
-133073: 804c1cc:	02033a90 	.word	0x02033a90
-133664: 804c61c:	02033a90 	.word	0x02033a90
-133692: 804c654:	02034350 	.word	0x02034350
-133693: 804c658:	02033a90 	.word	0x02033a90
-133824: 804c780:	02033a90 	.word	0x02033a90
-133845: 804c7ac:	02033a90 	.word	0x02033a90
-134026: 804c8dc:	02034350 	.word	0x02034350
-134519: 804cc48:	02034350 	.word	0x02034350
-135466: 804d2bc:	02033a90 	.word	0x02033a90
-135492: 804d2e4:	02033a90 	.word	0x02033a90
-135625: 804d390:	02034350 	.word	0x02034350
-135721: 804d42c:	02033a90 	.word	0x02033a90
-135862: 804d4fc:	02033a90 	.word	0x02033a90
-136149: 804d674:	02033a90 	.word	0x02033a90
-136557: 804d8e8:	02033a90 	.word	0x02033a90
-137102: 804dbe0:	02033a90 	.word	0x02033a90
-137229: 804dcdc:	02033a90 	.word	0x02033a90
-137294: 804dd64:	02033a90 	.word	0x02033a90
-137409: 804de28:	02034350 	.word	0x02034350
-137411: 804de30:	02033a90 	.word	0x02033a90
-137435: 804de68:	02034350 	.word	0x02034350
-137459: 804dea0:	02033a90 	.word	0x02033a90
-137493: 804def4:	02033a90 	.word	0x02033a90
-137548: 804df3c:	02034350 	.word	0x02034350
-137809: 804e0d0:	02034350 	.word	0x02034350
-137834: 804e108:	02033a90 	.word	0x02033a90
-137867: 804e13c:	02034350 	.word	0x02034350
-137884: 804e160:	02033a90 	.word	0x02033a90
-138067: 804e228:	02034350 	.word	0x02034350
-138092: 804e260:	02033a90 	.word	0x02033a90
-138115: 804e288:	02034350 	.word	0x02034350
-138141: 804e2c4:	02033a90 	.word	0x02033a90
-138250: 804e3ac:	02033a90 	.word	0x02033a90
-138693: 804e76c:	02034350 	.word	0x02034350
-138713: 804e79c:	02033a90 	.word	0x02033a90
-138750: 804e7f8:	02033a90 	.word	0x02033a90
-139205: 804ec14:	02033a90 	.word	0x02033a90
-139236: 804ec58:	02033a90 	.word	0x02033a90
-139346: 804ed4c:	02033a90 	.word	0x02033a90
-139511: 804eeac:	02034350 	.word	0x02034350
-139519: 804eec0:	02034350 	.word	0x02034350
-139728: 804f05c:	02033a90 	.word	0x02033a90
-139743: 804f074:	02033a90 	.word	0x02033a90
-139758: 804f08c:	02033a90 	.word	0x02033a90
-139776: 804f0ac:	02033a90 	.word	0x02033a90
-139794: 804f0cc:	02033a90 	.word	0x02033a90
-139814: 804f0f0:	02034350 	.word	0x02034350
-139848: 804f140:	02033a90 	.word	0x02033a90
-139914: 804f1d8:	02034350 	.word	0x02034350
-139945: 804f220:	02033a90 	.word	0x02033a90
-139965: 804f248:	02033a90 	.word	0x02033a90
-140076: 804f364:	02033a90 	.word	0x02033a90
-140107: 804f3a8:	02033a90 	.word	0x02033a90
-140479: 804f6d0:	02033a90 	.word	0x02033a90
-140624: 804f7ac:	02033a90 	.word	0x02033a90
-140682: 804f820:	02034350 	.word	0x02034350
-140851: 804f9c8:	02034350 	.word	0x02034350
-140913: 804fa68:	02033a90 	.word	0x02033a90
-141838: 805015c:	02034350 	.word	0x02034350
-142180: 80502f4:	02034350 	.word	0x02034350
-142197: 8050318:	02033a90 	.word	0x02033a90
-142481: 80504cc:	020354c0 	.word	0x020354c0
-142500: 80504fc:	020354c0 	.word	0x020354c0
-142512: 8050514:	020354c0 	.word	0x020354c0
-142743: 80506f4:	020354c0 	.word	0x020354c0
-142939: 8050898:	02034cb0 	.word	0x02034cb0
-142965: 80508d0:	02032ec0 	.word	0x02032ec0
-142966: 80508d4:	02034cb0 	.word	0x02034cb0
-143077: 80509d8:	02032ec0 	.word	0x02032ec0
-143179: 8050ae0:	02032ec0 	.word	0x02032ec0
-143614: 8050e9c:	02032ec0 	.word	0x02032ec0
-143696: 8050f54:	02032ec0 	.word	0x02032ec0
-144078: 80512d4:	020344b0 	.word	0x020344b0
-145504: 8051f74:	02032ec0 	.word	0x02032ec0
-145624: 80520b0:	02033a90 	.word	0x02033a90
-145628: 80520c0:	02034490 	.word	0x02034490
-145629: 80520c4:	02034350 	.word	0x02034350
-145811: 80522c0:	02034350 	.word	0x02034350
-145945: 80523e8:	02032ec0 	.word	0x02032ec0
-145948: 80523f4:	02033a90 	.word	0x02033a90
-145989: 805245c:	02032ec0 	.word	0x02032ec0
-146011: 805248c:	02032ec0 	.word	0x02032ec0
-146114: 8052578:	020344b0 	.word	0x020344b0
-146742: 8052b2c:	02033a90 	.word	0x02033a90
-146764: 8052b54:	02033a90 	.word	0x02033a90
-146773: 8052b64:	02033a90 	.word	0x02033a90
-146782: 8052b74:	02033a90 	.word	0x02033a90
-146791: 8052b84:	02033a90 	.word	0x02033a90
-146800: 8052b94:	02033a90 	.word	0x02033a90
-146864: 8052c14:	02033a90 	.word	0x02033a90
-146874: 8052c28:	02033a90 	.word	0x02033a90
-146895: 8052c54:	02033a90 	.word	0x02033a90
-146921: 8052c8c:	02033a90 	.word	0x02033a90
-146941: 8052cb8:	02033a90 	.word	0x02033a90
-146963: 8052ce8:	02033a90 	.word	0x02033a90
-147015: 8052d60:	02033a90 	.word	0x02033a90
-147034: 8052d8c:	02033a90 	.word	0x02033a90
-147046: 8052da4:	02033a90 	.word	0x02033a90
-147093: 8052e0c:	02033a90 	.word	0x02033a90
-147374: 8053090:	02034490 	.word	0x02034490
-147445: 8053130:	02033a90 	.word	0x02033a90
-147462: 8053150:	02033a90 	.word	0x02033a90
-147573: 805323c:	02033a90 	.word	0x02033a90
-147613: 8053294:	02033a90 	.word	0x02033a90
-147658: 80532f8:	02033acc 	.word	0x02033acc
-147660: 8053300:	02033a90 	.word	0x02033a90
-147729: 8053394:	02033acc 	.word	0x02033acc
-147759: 80533dc:	02034350 	.word	0x02034350
-147760: 80533e0:	02033a90 	.word	0x02033a90
-147808: 8053444:	02033a90 	.word	0x02033a90
-147809: 8053448:	02034350 	.word	0x02034350
-147946: 805356c:	020342cc 	.word	0x020342cc
-147970: 80535a4:	02034350 	.word	0x02034350
-148061: 8053668:	02033a90 	.word	0x02033a90
-148113: 80536e4:	02033a90 	.word	0x02033a90
-148114: 80536e8:	02034350 	.word	0x02034350
-148288: 8053874:	02034cb0 	.word	0x02034cb0
-148290: 805387c:	020344b0 	.word	0x020344b0
-148391: 8053954:	02033a90 	.word	0x02033a90
-148564: 8053ad8:	02032ec0 	.word	0x02032ec0
-148611: 8053b3c:	02032ec0 	.word	0x02032ec0
-148806: 8053cd8:	02032ec0 	.word	0x02032ec0
-149126: 8053fa4:	02032ec0 	.word	0x02032ec0
-149891: 8054664:	02033a90 	.word	0x02033a90
-150372: 8054a48:	02033a90 	.word	0x02033a90
-150376: 8054a58:	02034398 	.word	0x02034398
-150383: 8054a64:	02034350 	.word	0x02034350
-150390: 8054a70:	02034350 	.word	0x02034350
-150413: 8054a9c:	02034350 	.word	0x02034350
-150469: 8054b4c:	02034398 	.word	0x02034398
-150666: 8054cf4:	02034350 	.word	0x02034350
-150768: 8054dd4:	02032ec0 	.word	0x02032ec0
-150812: 8054e48:	02032ec0 	.word	0x02032ec0
-150820: 8054e5c:	02032ec0 	.word	0x02032ec0
-150858: 8054eb0:	02033a90 	.word	0x02033a90
-150893: 8054f08:	02032ec0 	.word	0x02032ec0
-151540: 8055474:	02033280 	.word	0x02033280
-153454: 80564e8:	02038560 	.word	0x02038560
-153988: 8056944:	02036a40 	.word	0x02036a40
-153989: 8056948:	02036a38 	.word	0x02036a38
-154138: 8056a90:	02036a40 	.word	0x02036a40
-154969: 80571b0:	02036a38 	.word	0x02036a38
-154970: 80571b4:	02034cb0 	.word	0x02034cb0
-155046: 805724c:	02036a40 	.word	0x02036a40
-155092: 80572b0:	02036a40 	.word	0x02036a40
-155093: 80572b4:	02034cb0 	.word	0x02034cb0
-155095: 80572bc:	02036a38 	.word	0x02036a38
-155264: 8057408:	02036a40 	.word	0x02036a40
-155265: 805740c:	02034cb2 	.word	0x02034cb2
-155302: 805745c:	02036a40 	.word	0x02036a40
-155303: 8057460:	02034cb0 	.word	0x02034cb0
-156157: 8057b60:	02034350 	.word	0x02034350
-156190: 8057bb4:	02034350 	.word	0x02034350
-156250: 8057c30:	02033a90 	.word	0x02033a90
-156295: 8057c98:	02033a90 	.word	0x02033a90
-156379: 8057d44:	02033a90 	.word	0x02033a90
-156659: 8057f9c:	02034480 	.word	0x02034480
-157038: 80582bc:	02034350 	.word	0x02034350
-157059: 80582f0:	02034490 	.word	0x02034490
-157080: 8058324:	02034490 	.word	0x02034490
-157088: 8058334:	02034350 	.word	0x02034350
-157105: 8058358:	02034350 	.word	0x02034350
-157153: 80583c4:	02034350 	.word	0x02034350
-157189: 8058414:	02034350 	.word	0x02034350
-157512: 80586ac:	02034350 	.word	0x02034350
-157976: 8058ad0:	02033a90 	.word	0x02033a90
-158069: 8058b94:	02034350 	.word	0x02034350
-158070: 8058b98:	02033a90 	.word	0x02033a90
-158102: 8058be0:	02033a90 	.word	0x02033a90
-158925: 80592c0:	02033a90 	.word	0x02033a90
-159414: 80596e8:	02034350 	.word	0x02034350
-159428: 8059708:	02034350 	.word	0x02034350
-159433: 8059714:	02034350 	.word	0x02034350
-159471: 8059760:	02034350 	.word	0x02034350
-159474: 805976c:	02033a90 	.word	0x02033a90
-159745: 80599ac:	02034350 	.word	0x02034350
-159805: 8059a3c:	02033a90 	.word	0x02033a90
-159874: 8059ad4:	02034350 	.word	0x02034350
-159891: 8059afc:	02034350 	.word	0x02034350
-159915: 8059b2c:	02033a90 	.word	0x02033a90
-159932: 8059b54:	02033a90 	.word	0x02033a90
-159948: 8059b7c:	02033a90 	.word	0x02033a90
-160118: 8059ce8:	02034350 	.word	0x02034350
-160333: 8059ea8:	02033a90 	.word	0x02033a90
-160409: 8059f4c:	02034350 	.word	0x02034350
-160676: 805a1b0:	02034350 	.word	0x02034350
-160695: 805a1d4:	02034350 	.word	0x02034350
-161982: 805acd4:	02034490 	.word	0x02034490
-162477: 805b0e8:	02033a90 	.word	0x02033a90
-162478: 805b0ec:	02031ec0 	.word	0x02031ec0
-162480: 805b0f4:	020342f8 	.word	0x020342f8
-162719: 805b2f0:	02033a90 	.word	0x02033a90
-162753: 805b340:	02033a90 	.word	0x02033a90
-162897: 805b478:	02033a90 	.word	0x02033a90
-162924: 805b4b8:	02033a90 	.word	0x02033a90
-164090: 805be5c:	02033a90 	.word	0x02033a90
-164149: 805beec:	02033a90 	.word	0x02033a90
-164233: 805bfa0:	02033a90 	.word	0x02033a90
-164234: 805bfa4:	02034350 	.word	0x02034350
-164271: 805bfec:	02033a90 	.word	0x02033a90
-164313: 805c048:	02033a90 	.word	0x02033a90
-164318: 805c05c:	02034350 	.word	0x02034350
-164323: 805c068:	02033a90 	.word	0x02033a90
-164352: 805c0a8:	02034350 	.word	0x02034350
-164353: 805c0ac:	02033a90 	.word	0x02033a90
-164385: 805c0f0:	02033a90 	.word	0x02033a90
-164386: 805c0f4:	02034350 	.word	0x02034350
-164418: 805c138:	02033a90 	.word	0x02033a90
-164419: 805c13c:	02034350 	.word	0x02034350
-164437: 805c160:	02033a90 	.word	0x02033a90
-165559: 805cb10:	02033a90 	.word	0x02033a90
-167207: 805d8e0:	02033a90 	.word	0x02033a90
-167234: 805d920:	02033a90 	.word	0x02033a90
-168026: 805dfd0:	02033a90 	.word	0x02033a90
-168701: 805e564:	02033a90 	.word	0x02033a90
-168834: 805e680:	02033a90 	.word	0x02033a90
-168883: 805e6e8:	02034df0 	.word	0x02034df0
-168914: 805e72c:	02034df0 	.word	0x02034df0
-169357: 805eae8:	02034350 	.word	0x02034350
-169403: 805eb54:	02033290 	.word	0x02033290
-169405: 805eb5c:	020354b4 	.word	0x020354b4
-169703: 805ede8:	02033290 	.word	0x02033290
-169729: 805ee20:	020354b4 	.word	0x020354b4
-169748: 805ee44:	02033a90 	.word	0x02033a90
-169762: 805ee68:	020369f0 	.word	0x020369f0
-169772: 805ee7c:	020369f0 	.word	0x020369f0
-169890: 805ef6c:	020354b4 	.word	0x020354b4
-170905: 805f7e4:	02036540 	.word	0x02036540
-170925: 805f80c:	02036540 	.word	0x02036540
-171242: 805fac0:	02034330 	.word	0x02034330
-171410: 805fc34:	02034330 	.word	0x02034330
-171549: 805fd4c:	02036a58 	.word	0x02036a58
-171599: 805fdb4:	02036a58 	.word	0x02036a58
-171700: 805fe88:	02036ad8 	.word	0x02036ad8
-171703: 805fe94:	02036a58 	.word	0x02036a58
-171803: 805ff70:	02034cb0 	.word	0x02034cb0
-171807: 805ff80:	02032ec0 	.word	0x02032ec0
-173323: 8060c50:	02033280 	.word	0x02033280
-173352: 8060c84:	02033280 	.word	0x02033280
-176234: 8062488:	02033280 	.word	0x02033280
-177209: 8062c7c:	02033280 	.word	0x02033280
-177513: 8062f3c:	02033280 	.word	0x02033280
-178399: 80636b0:	02033280 	.word	0x02033280
-178418: 80636dc:	02033280 	.word	0x02033280
-178800: 80639f4:	02034350 	.word	0x02034350
-180148: 8064538:	02034350 	.word	0x02034350
-180305: 8064674:	02033280 	.word	0x02033280
-181044: 8064c84:	02033280 	.word	0x02033280
-182164: 80655f0:	02034350 	.word	0x02034350
-182391: 80657d8:	02034350 	.word	0x02034350
-182455: 806585c:	02034350 	.word	0x02034350
-182485: 8065894:	02034350 	.word	0x02034350
-182598: 8065998:	02034350 	.word	0x02034350
+32072: 8018520:	02038560 	.word	0x02038560
+32117: 8018578:	02038560 	.word	0x02038560
+32143: 80185ac:	02038560 	.word	0x02038560
+32163: 80185d4:	02038560 	.word	0x02038560
+32213: 8018638:	02036bd0 	.word	0x02036bd0
+32214: 801863c:	02038560 	.word	0x02038560
+32215: 8018640:	02036bc0 	.word	0x02036bc0
+32254: 801868c:	02036bc0 	.word	0x02036bc0
+32255: 8018690:	02036bd0 	.word	0x02036bd0
+32256: 8018694:	02038560 	.word	0x02038560
+32257: 8018698:	02036be0 	.word	0x02036be0
+32258: 801869c:	02036be4 	.word	0x02036be4
+32311: 8018710:	02038560 	.word	0x02038560
+32347: 8018764:	02036bc0 	.word	0x02036bc0
+32348: 8018768:	02036bd0 	.word	0x02036bd0
+32456: 8018844:	02038560 	.word	0x02038560
+32631: 80189ac:	02038560 	.word	0x02038560
+32674: 8018a04:	02033ab8 	.word	0x02033ab8
+32688: 8018a24:	02033ab8 	.word	0x02033ab8
+32771: 8018ad8:	02033ab8 	.word	0x02033ab8
+32793: 8018b08:	02033ab8 	.word	0x02033ab8
+32855: 8018b84:	02033a90 	.word	0x02033a90
+32867: 8018b9c:	02033a90 	.word	0x02033a90
+33108: 8018ddc:	02034350 	.word	0x02034350
+34774: 8019bd8:	02032ec0 	.word	0x02032ec0
+37304: 801b13c:	02034350 	.word	0x02034350
+37583: 801b39c:	02033a90 	.word	0x02033a90
+37651: 801b438:	02034350 	.word	0x02034350
+37678: 801b470:	02034350 	.word	0x02034350
+40136: 801c92c:	02034cb0 	.word	0x02034cb0
+40194: 801c9a8:	02035160 	.word	0x02035160
+40236: 801ca00:	02035160 	.word	0x02035160
+40393: 801cb5c:	02034cf0 	.word	0x02034cf0
+40562: 801ccc0:	02034d30 	.word	0x02034d30
+40565: 801cccc:	02034cf0 	.word	0x02034cf0
+40593: 801cd08:	02034d30 	.word	0x02034d30
+40696: 801cde0:	02034d30 	.word	0x02034d30
+40773: 801ce98:	020350e2 	.word	0x020350e2
+40826: 801cf08:	020350e2 	.word	0x020350e2
+40830: 801cf18:	02033a90 	.word	0x02033a90
+41253: 801d278:	02033a90 	.word	0x02033a90
+42658: 801ddc0:	02035540 	.word	0x02035540
+42697: 801de10:	02035540 	.word	0x02035540
+42724: 801de48:	02035540 	.word	0x02035540
+42774: 801deb0:	02035542 	.word	0x02035542
+42811: 801def8:	02035540 	.word	0x02035540
+42835: 801df2c:	0203553e 	.word	0x0203553e
+42845: 801df40:	02035540 	.word	0x02035540
+42898: 801dfc0:	02034cb0 	.word	0x02034cb0
+42948: 801e024:	02034cb0 	.word	0x02034cb0
+42952: 801e034:	020344b0 	.word	0x020344b0
+43001: 801e0a0:	02033a90 	.word	0x02033a90
+43168: 801e200:	02033a90 	.word	0x02033a90
+43192: 801e234:	02033a90 	.word	0x02033a90
+43234: 801e290:	02033a90 	.word	0x02033a90
+43258: 801e2c8:	02032ec0 	.word	0x02032ec0
+47074: 8020238:	f000 f8a6 	bl	8020388 <Leever_Move>
+47099: 802026c:	f000 f88c 	bl	8020388 <Leever_Move>
+47194: 8020334:	e020      	b.n	8020378 <Leever_PlayerInRange+0x5c>
+47195: 8020336:	4812      	ldr	r0, [pc, #72]	@ (8020380 <Leever_PlayerInRange+0x64>)
+47199: 802033e:	4911      	ldr	r1, [pc, #68]	@ (8020384 <Leever_PlayerInRange+0x68>)
+47216: 8020360:	1aa4      	subs	r4, r4, r2
+47217: 8020362:	1429      	asrs	r1, r5, #16
+47218: 8020364:	1422      	asrs	r2, r4, #16
+47219: 8020366:	1c38      	adds	r0, r7, #0
+47220: 8020368:	f7ff ff96 	bl	8020298 <sub_0801FDE4>
+47221: 802036c:	2800      	cmp	r0, #0
+47222: 802036e:	d0e0      	beq.n	8020332 <Leever_PlayerInRange+0x16>
+47223: 8020370:	3601      	adds	r6, #1
+47224: 8020372:	2e07      	cmp	r6, #7
+47225: 8020374:	d9f2      	bls.n	802035c <Leever_PlayerInRange+0x40>
+47226: 8020376:	2001      	movs	r0, #1
+47227: 8020378:	bc18      	pop	{r3, r4}
+47228: 802037a:	4698      	mov	r8, r3
+47229: 802037c:	46a1      	mov	r9, r4
+47230: 802037e:	bdf0      	pop	{r4, r5, r6, r7, pc}
+47231: 8020380:	020000b0 	.word	0x020000b0
+47232: 8020384:	080c969c 	.word	0x080c969c
+47234:08020388 <Leever_Move>:
+47235: 8020388:	b510      	push	{r4, lr}
+47236: 802038a:	1c04      	adds	r4, r0, #0
+47237: 802038c:	2101      	movs	r1, #1
+47238: 802038e:	f02a f87f 	bl	804a490 <sub_08049FDC>
+58800: 8026234:	02034490 	.word	0x02034490
+59429: 8026750:	02034490 	.word	0x02034490
+59782: 8026a30:	02034490 	.word	0x02034490
+61570: 8027904:	02034490 	.word	0x02034490
+67785: 802ac18:	02033a90 	.word	0x02033a90
+72682: 802d3d8:	02033a90 	.word	0x02033a90
+72954: 802d620:	02034490 	.word	0x02034490
+73583: 802db68:	02034490 	.word	0x02034490
+73748: 802dcc0:	02034490 	.word	0x02034490
+88793: 8035778:	02034490 	.word	0x02034490
+89657: 8035ea4:	02034490 	.word	0x02034490
+89849: 803602c:	02034490 	.word	0x02034490
+92018: 80371e0:	02034350 	.word	0x02034350
+92099: 8037284:	02034350 	.word	0x02034350
+92184: 8037338:	02034350 	.word	0x02034350
+105684: 803e1a0:	02033a90 	.word	0x02033a90
+108726: 803fa80:	02033a90 	.word	0x02033a90
+108767: 803fad8:	02033a90 	.word	0x02033a90
+112120: 8041674:	02033a90 	.word	0x02033a90
+112171: 80416dc:	02033a90 	.word	0x02033a90
+129182: 804a1a4:	020354b0 	.word	0x020354b0
+129203: 804a1cc:	020354b0 	.word	0x020354b0
+129214: 804a1e0:	020354b0 	.word	0x020354b0
+129236: 804a20c:	020354b0 	.word	0x020354b0
+129252: 804a238:	020354b0 	.word	0x020354b0
+130895: 804af4c:	02033a90 	.word	0x02033a90
+130920: 804af84:	02033a90 	.word	0x02033a90
+130941: 804afb4:	02033a90 	.word	0x02033a90
+130954: 804afd4:	02033a90 	.word	0x02033a90
+130975: 804b004:	02033a90 	.word	0x02033a90
+130988: 804b020:	02033a90 	.word	0x02033a90
+131054: 804b0b8:	02033a90 	.word	0x02033a90
+131055: 804b0bc:	02032ec0 	.word	0x02032ec0
+131121: 804b158:	02033a90 	.word	0x02033a90
+131156: 804b1a4:	02033a90 	.word	0x02033a90
+131157: 804b1a8:	02032edc 	.word	0x02032edc
+131185: 804b1e4:	02033a90 	.word	0x02033a90
+131256: 804b288:	02033a90 	.word	0x02033a90
+131479: 804b45c:	02033a90 	.word	0x02033a90
+131502: 804b48c:	02034350 	.word	0x02034350
+131676: 804b600:	02034350 	.word	0x02034350
+131689: 804b61c:	02034350 	.word	0x02034350
+131765: 804b6d8:	02033a90 	.word	0x02033a90
+131787: 804b710:	02034350 	.word	0x02034350
+131800: 804b72c:	02034398 	.word	0x02034398
+131810: 804b740:	02033a90 	.word	0x02033a90
+131929: 804b838:	02034350 	.word	0x02034350
+132077: 804b928:	02033a90 	.word	0x02033a90
+132093: 804b944:	02033a90 	.word	0x02033a90
+132500: 804bc94:	02034350 	.word	0x02034350
+132557: 804bd18:	02034350 	.word	0x02034350
+132613: 804bd9c:	02034350 	.word	0x02034350
+132764: 804bef0:	02034350 	.word	0x02034350
+132819: 804bf6c:	02034350 	.word	0x02034350
+132841: 804bfa0:	02033a90 	.word	0x02033a90
+132856: 804bfc4:	02033a90 	.word	0x02033a90
+132873: 804bfe8:	02034350 	.word	0x02034350
+132912: 804c048:	02033a90 	.word	0x02033a90
+132947: 804c090:	02033a90 	.word	0x02033a90
+132963: 804c0bc:	02033a90 	.word	0x02033a90
+133051: 804c188:	02033a90 	.word	0x02033a90
+133642: 804c5d8:	02033a90 	.word	0x02033a90
+133670: 804c610:	02034350 	.word	0x02034350
+133671: 804c614:	02033a90 	.word	0x02033a90
+133802: 804c73c:	02033a90 	.word	0x02033a90
+133823: 804c768:	02033a90 	.word	0x02033a90
+134004: 804c898:	02034350 	.word	0x02034350
+134497: 804cc04:	02034350 	.word	0x02034350
+135444: 804d278:	02033a90 	.word	0x02033a90
+135470: 804d2a0:	02033a90 	.word	0x02033a90
+135603: 804d34c:	02034350 	.word	0x02034350
+135699: 804d3e8:	02033a90 	.word	0x02033a90
+135840: 804d4b8:	02033a90 	.word	0x02033a90
+136127: 804d630:	02033a90 	.word	0x02033a90
+136535: 804d8a4:	02033a90 	.word	0x02033a90
+137080: 804db9c:	02033a90 	.word	0x02033a90
+137207: 804dc98:	02033a90 	.word	0x02033a90
+137272: 804dd20:	02033a90 	.word	0x02033a90
+137387: 804dde4:	02034350 	.word	0x02034350
+137389: 804ddec:	02033a90 	.word	0x02033a90
+137413: 804de24:	02034350 	.word	0x02034350
+137437: 804de5c:	02033a90 	.word	0x02033a90
+137471: 804deb0:	02033a90 	.word	0x02033a90
+137526: 804def8:	02034350 	.word	0x02034350
+137787: 804e08c:	02034350 	.word	0x02034350
+137812: 804e0c4:	02033a90 	.word	0x02033a90
+137845: 804e0f8:	02034350 	.word	0x02034350
+137862: 804e11c:	02033a90 	.word	0x02033a90
+138045: 804e1e4:	02034350 	.word	0x02034350
+138070: 804e21c:	02033a90 	.word	0x02033a90
+138093: 804e244:	02034350 	.word	0x02034350
+138119: 804e280:	02033a90 	.word	0x02033a90
+138228: 804e368:	02033a90 	.word	0x02033a90
+138671: 804e728:	02034350 	.word	0x02034350
+138691: 804e758:	02033a90 	.word	0x02033a90
+138728: 804e7b4:	02033a90 	.word	0x02033a90
+139183: 804ebd0:	02033a90 	.word	0x02033a90
+139214: 804ec14:	02033a90 	.word	0x02033a90
+139324: 804ed08:	02033a90 	.word	0x02033a90
+139489: 804ee68:	02034350 	.word	0x02034350
+139497: 804ee7c:	02034350 	.word	0x02034350
+139706: 804f018:	02033a90 	.word	0x02033a90
+139721: 804f030:	02033a90 	.word	0x02033a90
+139736: 804f048:	02033a90 	.word	0x02033a90
+139754: 804f068:	02033a90 	.word	0x02033a90
+139772: 804f088:	02033a90 	.word	0x02033a90
+139792: 804f0ac:	02034350 	.word	0x02034350
+139826: 804f0fc:	02033a90 	.word	0x02033a90
+139892: 804f194:	02034350 	.word	0x02034350
+139923: 804f1dc:	02033a90 	.word	0x02033a90
+139943: 804f204:	02033a90 	.word	0x02033a90
+140054: 804f320:	02033a90 	.word	0x02033a90
+140085: 804f364:	02033a90 	.word	0x02033a90
+140457: 804f68c:	02033a90 	.word	0x02033a90
+140602: 804f768:	02033a90 	.word	0x02033a90
+140660: 804f7dc:	02034350 	.word	0x02034350
+140829: 804f984:	02034350 	.word	0x02034350
+140891: 804fa24:	02033a90 	.word	0x02033a90
+141816: 8050118:	02034350 	.word	0x02034350
+142158: 80502b0:	02034350 	.word	0x02034350
+142175: 80502d4:	02033a90 	.word	0x02033a90
+142459: 8050488:	020354c0 	.word	0x020354c0
+142478: 80504b8:	020354c0 	.word	0x020354c0
+142490: 80504d0:	020354c0 	.word	0x020354c0
+142721: 80506b0:	020354c0 	.word	0x020354c0
+142917: 8050854:	02034cb0 	.word	0x02034cb0
+142943: 805088c:	02032ec0 	.word	0x02032ec0
+142944: 8050890:	02034cb0 	.word	0x02034cb0
+143055: 8050994:	02032ec0 	.word	0x02032ec0
+143157: 8050a9c:	02032ec0 	.word	0x02032ec0
+143592: 8050e58:	02032ec0 	.word	0x02032ec0
+143674: 8050f10:	02032ec0 	.word	0x02032ec0
+144056: 8051290:	020344b0 	.word	0x020344b0
+145482: 8051f30:	02032ec0 	.word	0x02032ec0
+145602: 805206c:	02033a90 	.word	0x02033a90
+145606: 805207c:	02034490 	.word	0x02034490
+145607: 8052080:	02034350 	.word	0x02034350
+145789: 805227c:	02034350 	.word	0x02034350
+145923: 80523a4:	02032ec0 	.word	0x02032ec0
+145926: 80523b0:	02033a90 	.word	0x02033a90
+145967: 8052418:	02032ec0 	.word	0x02032ec0
+145989: 8052448:	02032ec0 	.word	0x02032ec0
+146092: 8052534:	020344b0 	.word	0x020344b0
+146720: 8052ae8:	02033a90 	.word	0x02033a90
+146742: 8052b10:	02033a90 	.word	0x02033a90
+146751: 8052b20:	02033a90 	.word	0x02033a90
+146760: 8052b30:	02033a90 	.word	0x02033a90
+146769: 8052b40:	02033a90 	.word	0x02033a90
+146778: 8052b50:	02033a90 	.word	0x02033a90
+146842: 8052bd0:	02033a90 	.word	0x02033a90
+146852: 8052be4:	02033a90 	.word	0x02033a90
+146873: 8052c10:	02033a90 	.word	0x02033a90
+146899: 8052c48:	02033a90 	.word	0x02033a90
+146919: 8052c74:	02033a90 	.word	0x02033a90
+146941: 8052ca4:	02033a90 	.word	0x02033a90
+146993: 8052d1c:	02033a90 	.word	0x02033a90
+147012: 8052d48:	02033a90 	.word	0x02033a90
+147024: 8052d60:	02033a90 	.word	0x02033a90
+147071: 8052dc8:	02033a90 	.word	0x02033a90
+147352: 805304c:	02034490 	.word	0x02034490
+147423: 80530ec:	02033a90 	.word	0x02033a90
+147440: 805310c:	02033a90 	.word	0x02033a90
+147551: 80531f8:	02033a90 	.word	0x02033a90
+147591: 8053250:	02033a90 	.word	0x02033a90
+147636: 80532b4:	02033acc 	.word	0x02033acc
+147638: 80532bc:	02033a90 	.word	0x02033a90
+147707: 8053350:	02033acc 	.word	0x02033acc
+147737: 8053398:	02034350 	.word	0x02034350
+147738: 805339c:	02033a90 	.word	0x02033a90
+147786: 8053400:	02033a90 	.word	0x02033a90
+147787: 8053404:	02034350 	.word	0x02034350
+147924: 8053528:	020342cc 	.word	0x020342cc
+147948: 8053560:	02034350 	.word	0x02034350
+148039: 8053624:	02033a90 	.word	0x02033a90
+148091: 80536a0:	02033a90 	.word	0x02033a90
+148092: 80536a4:	02034350 	.word	0x02034350
+148266: 8053830:	02034cb0 	.word	0x02034cb0
+148268: 8053838:	020344b0 	.word	0x020344b0
+148369: 8053910:	02033a90 	.word	0x02033a90
+148542: 8053a94:	02032ec0 	.word	0x02032ec0
+148589: 8053af8:	02032ec0 	.word	0x02032ec0
+148784: 8053c94:	02032ec0 	.word	0x02032ec0
+149104: 8053f60:	02032ec0 	.word	0x02032ec0
+149869: 8054620:	02033a90 	.word	0x02033a90
+150350: 8054a04:	02033a90 	.word	0x02033a90
+150354: 8054a14:	02034398 	.word	0x02034398
+150361: 8054a20:	02034350 	.word	0x02034350
+150368: 8054a2c:	02034350 	.word	0x02034350
+150391: 8054a58:	02034350 	.word	0x02034350
+150447: 8054b08:	02034398 	.word	0x02034398
+150644: 8054cb0:	02034350 	.word	0x02034350
+150746: 8054d90:	02032ec0 	.word	0x02032ec0
+150790: 8054e04:	02032ec0 	.word	0x02032ec0
+150798: 8054e18:	02032ec0 	.word	0x02032ec0
+150836: 8054e6c:	02033a90 	.word	0x02033a90
+150871: 8054ec4:	02032ec0 	.word	0x02032ec0
+151518: 8055430:	02033280 	.word	0x02033280
+153299: 805633c:	02038560 	.word	0x02038560
+153300: 8056340:	02038d60 	.word	0x02038d60
+153317: 8056360:	02038560 	.word	0x02038560
+153318: 8056364:	02038d60 	.word	0x02038d60
+153394: 8056420:	02038560 	.word	0x02038560
+153495: 805652c:	02036be8 	.word	0x02036be8
+154029: 8056988:	02036a40 	.word	0x02036a40
+154030: 805698c:	02036a38 	.word	0x02036a38
+154179: 8056ad4:	02036a40 	.word	0x02036a40
+155010: 80571f4:	02036a38 	.word	0x02036a38
+155011: 80571f8:	02034cb0 	.word	0x02034cb0
+155087: 8057290:	02036a40 	.word	0x02036a40
+155133: 80572f4:	02036a40 	.word	0x02036a40
+155134: 80572f8:	02034cb0 	.word	0x02034cb0
+155136: 8057300:	02036a38 	.word	0x02036a38
+155305: 805744c:	02036a40 	.word	0x02036a40
+155306: 8057450:	02034cb2 	.word	0x02034cb2
+155343: 80574a0:	02036a40 	.word	0x02036a40
+155344: 80574a4:	02034cb0 	.word	0x02034cb0
+156198: 8057ba4:	02034350 	.word	0x02034350
+156231: 8057bf8:	02034350 	.word	0x02034350
+156291: 8057c74:	02033a90 	.word	0x02033a90
+156336: 8057cdc:	02033a90 	.word	0x02033a90
+156420: 8057d88:	02033a90 	.word	0x02033a90
+156700: 8057fe0:	02034480 	.word	0x02034480
+157079: 8058300:	02034350 	.word	0x02034350
+157100: 8058334:	02034490 	.word	0x02034490
+157121: 8058368:	02034490 	.word	0x02034490
+157129: 8058378:	02034350 	.word	0x02034350
+157146: 805839c:	02034350 	.word	0x02034350
+157194: 8058408:	02034350 	.word	0x02034350
+157230: 8058458:	02034350 	.word	0x02034350
+157553: 80586f0:	02034350 	.word	0x02034350
+158017: 8058b14:	02033a90 	.word	0x02033a90
+158110: 8058bd8:	02034350 	.word	0x02034350
+158111: 8058bdc:	02033a90 	.word	0x02033a90
+158143: 8058c24:	02033a90 	.word	0x02033a90
+158966: 8059304:	02033a90 	.word	0x02033a90
+159455: 805972c:	02034350 	.word	0x02034350
+159469: 805974c:	02034350 	.word	0x02034350
+159474: 8059758:	02034350 	.word	0x02034350
+159512: 80597a4:	02034350 	.word	0x02034350
+159515: 80597b0:	02033a90 	.word	0x02033a90
+159786: 80599f0:	02034350 	.word	0x02034350
+159846: 8059a80:	02033a90 	.word	0x02033a90
+159915: 8059b18:	02034350 	.word	0x02034350
+159932: 8059b40:	02034350 	.word	0x02034350
+159956: 8059b70:	02033a90 	.word	0x02033a90
+159973: 8059b98:	02033a90 	.word	0x02033a90
+159989: 8059bc0:	02033a90 	.word	0x02033a90
+160159: 8059d2c:	02034350 	.word	0x02034350
+160374: 8059eec:	02033a90 	.word	0x02033a90
+160450: 8059f90:	02034350 	.word	0x02034350
+160717: 805a1f4:	02034350 	.word	0x02034350
+160736: 805a218:	02034350 	.word	0x02034350
+162023: 805ad18:	02034490 	.word	0x02034490
+162518: 805b12c:	02033a90 	.word	0x02033a90
+162519: 805b130:	02031ec0 	.word	0x02031ec0
+162521: 805b138:	020342f8 	.word	0x020342f8
+162760: 805b334:	02033a90 	.word	0x02033a90
+162794: 805b384:	02033a90 	.word	0x02033a90
+162938: 805b4bc:	02033a90 	.word	0x02033a90
+162965: 805b4fc:	02033a90 	.word	0x02033a90
+164131: 805bea0:	02033a90 	.word	0x02033a90
+164190: 805bf30:	02033a90 	.word	0x02033a90
+164274: 805bfe4:	02033a90 	.word	0x02033a90
+164275: 805bfe8:	02034350 	.word	0x02034350
+164312: 805c030:	02033a90 	.word	0x02033a90
+164354: 805c08c:	02033a90 	.word	0x02033a90
+164359: 805c0a0:	02034350 	.word	0x02034350
+164364: 805c0ac:	02033a90 	.word	0x02033a90
+164393: 805c0ec:	02034350 	.word	0x02034350
+164394: 805c0f0:	02033a90 	.word	0x02033a90
+164426: 805c134:	02033a90 	.word	0x02033a90
+164427: 805c138:	02034350 	.word	0x02034350
+164459: 805c17c:	02033a90 	.word	0x02033a90
+164460: 805c180:	02034350 	.word	0x02034350
+164478: 805c1a4:	02033a90 	.word	0x02033a90
+165600: 805cb54:	02033a90 	.word	0x02033a90
+167248: 805d924:	02033a90 	.word	0x02033a90
+167275: 805d964:	02033a90 	.word	0x02033a90
+168067: 805e014:	02033a90 	.word	0x02033a90
+168742: 805e5a8:	02033a90 	.word	0x02033a90
+168875: 805e6c4:	02033a90 	.word	0x02033a90
+168924: 805e72c:	02034df0 	.word	0x02034df0
+168955: 805e770:	02034df0 	.word	0x02034df0
+169398: 805eb2c:	02034350 	.word	0x02034350
+169444: 805eb98:	02033290 	.word	0x02033290
+169446: 805eba0:	020354b4 	.word	0x020354b4
+169744: 805ee2c:	02033290 	.word	0x02033290
+169770: 805ee64:	020354b4 	.word	0x020354b4
+169789: 805ee88:	02033a90 	.word	0x02033a90
+169803: 805eeac:	020369f0 	.word	0x020369f0
+169813: 805eec0:	020369f0 	.word	0x020369f0
+169931: 805efb0:	020354b4 	.word	0x020354b4
+170946: 805f828:	02036540 	.word	0x02036540
+170966: 805f850:	02036540 	.word	0x02036540
+171283: 805fb04:	02034330 	.word	0x02034330
+171451: 805fc78:	02034330 	.word	0x02034330
+171590: 805fd90:	02036a58 	.word	0x02036a58
+171640: 805fdf8:	02036a58 	.word	0x02036a58
+171741: 805fecc:	02036ad8 	.word	0x02036ad8
+171744: 805fed8:	02036a58 	.word	0x02036a58
+171844: 805ffb4:	02034cb0 	.word	0x02034cb0
+171848: 805ffc4:	02032ec0 	.word	0x02032ec0
+173364: 8060c94:	02033280 	.word	0x02033280
 
 === 7) Check relocations that reference EW-RAM (relocs to 0x0203xxxx) ===
 
 === 8) Show EW-RAM symbol addresses & sizes (focused) ===
-02038560 B gEndOfEwram
+02036be8 B gEndOfEwram
 02036bc0 B gMPlayTracks
 02021ee0 B gSoundPlayingInfo
 02035540 B gzHeap
-02037800 B _mazeState_end
-02037000 B _mazeState_start
+02038d60 B _mazeState_end
+02038560 B _mazeState_start
 
 === 9) Dump the .map region around 0x02036BC0..0x02038560 (context ±50 lines) ===
                 0x000344b0                        . = 0x344b0
@@ -2153,22 +470,126 @@ Total              450
                 0x00036bc0                        . = 0x36bc0
  *fill*         0x02036bb8        0x8 
                 0x02036bc0                        gMPlayTracks = .
-                0x00037000                        . = 0x37000
- *fill*         0x02036bc0      0x440 
-                0x02037000                        _mazeState_start = .
-                0x02037800                        . = (. + 0x800)
- *fill*         0x02037000      0x800 
-                0x02037800                        _mazeState_end = .
  *(.bss)
- .bss           0x02037800        0x0 asm/src/crt0.o
- .bss           0x02037800        0x0 asm/src/veneer.o
- .bss           0x02037800        0x0 data/data_08000360.o
- .bss           0x02037800        0x0 asm/src/code_08000E44.o
- .bss           0x02037800        0x0 asm/lib/libgcc.o
- .bss           0x02037800        0x0 asm/src/code_08000F10.o
- .bss           0x02037800        0x0 data/data_08000F54.o
- .bss           0x02037800        0x0 asm/src/enemy.o
- .bss           0x02037800        0x0 src/enemy/mazaalBracelet.o
+ .bss           0x02036bc0        0x0 asm/src/crt0.o
+ .bss           0x02036bc0        0x0 asm/src/veneer.o
+ .bss           0x02036bc0        0x0 data/data_08000360.o
+ .bss           0x02036bc0        0x0 asm/src/code_08000E44.o
+ .bss           0x02036bc0        0x0 asm/lib/libgcc.o
+ .bss           0x02036bc0        0x0 asm/src/code_08000F10.o
+ .bss           0x02036bc0        0x0 data/data_08000F54.o
+ .bss           0x02036bc0        0x0 asm/src/enemy.o
+ .bss           0x02036bc0        0x0 src/droptables.o
+ .bss           0x02036bc0        0x0 asm/src/code_08001A7C.o
+ .bss           0x02036bc0        0x0 data/gfx/sprite_ptrs.o
+ .bss           0x02036bc0        0x0 asm/src/code_08003FC4.o
+ .bss           0x02036bc0        0x0 asm/src/code_080043E8.o
+ .bss           0x02036bc0        0x0 src/data/data_080046A4.o
+ .bss           0x02036bc0        0x0 data/gfx/link_animations.o
+ .bss           0x02036bc0        0x0 src/data/mapActTileToSurfaceType.o
+ .bss           0x02036bc0        0x0 asm/src/code_08007CAC.o
+ .bss           0x02036bc0        0x0 data/data_08007DF4.o
+ .bss           0x02036bc0        0x0 asm/src/player.o
+ .bss           0x02036bc0        0x0 data/scripts.o
+ .bss           0x02036bc0        0x0 asm/src/script.o
+ .bss           0x02036bc0        0x0 asm/src/projectileUpdate.o
+ .bss           0x02036bc0        0x0 src/interrupts.o
+ .bss           0x02036bc0        0x0 src/playerItem.o
+ .bss           0x02036bc0        0x0 src/object.o
+ .bss           0x02036bc0        0x0 src/manager.o
+ .bss           0x02036bc0        0x0 src/npcFunctions.o
+ .bss           0x02036bc0        0x0 src/npc.o
+ .bss           0x02036bc0        0x0 src/collision.o
+ .bss           0x02036bc0        0x0 src/maze_gen.o
+ .bss           0x02036bc0        0x0 src/kinstone.o
+ .bss           0x02036bc0        0x0 src/playerItem/playerItemGustBig.o
+ .bss           0x02036bc0        0x0 src/playerItem/playerItemBow.o
+ .bss           0x02036bc0        0x0 src/playerItem/playerItemSwordBeam.o
+ .bss           0x02036bc0        0x0 src/beanstalkSubtask.o
+ .bss           0x02036bc0        0x0 src/backgroundAnimations.o
+ .bss           0x02036bc0        0x0 src/playerItem/playerItemBomb.o
+ .bss           0x02036bc0        0x0 src/playerItem/playerItemBoomerang.o
+ .bss           0x02036bc0        0x0 src/playerItem/playerItemDashSword.o
+ .bss           0x02036bc0        0x0 src/playerItem/playerItemBottle.o
+ .bss           0x02036bc0        0x0 src/playerItem/playerItemCellOverwriteSet.o
+ .bss           0x02036bc0        0x0 src/ui.o
+ .bss           0x02036bc0        0x0 src/color.o
+ .bss           0x02036bc0        0x0 src/common.o
+ .bss           0x02036bc0        0x0 src/enemy/octorok.o
+ .bss           0x02036bc0        0x0 src/enemy/chuchu.o
+ .bss           0x02036bc0        0x0 src/enemy/leever.o
+ .bss           0x02036bc0        0x0 src/enemy/peahat.o
+ .bss           0x02036bc0        0x0 src/enemy/rollobite.o
+ .bss           0x02036bc0        0x0 src/enemy/darkNut.o
+ .bss           0x02036bc0        0x0 src/enemy/hangingSeed.o
+ .bss           0x02036bc0        0x0 src/enemy/beetle.o
+ .bss           0x02036bc0        0x0 src/enemy/keese.o
+ .bss           0x02036bc0        0x0 src/enemy/doorMimic.o
+ .bss           0x02036bc0        0x0 src/enemy/rockChuchu.o
+ .bss           0x02036bc0        0x0 src/enemy/spinyChuchu.o
+ .bss           0x02036bc0        0x0 src/enemy/cuccoChickAggr.o
+ .bss           0x02036bc0        0x0 src/enemy/moldorm.o
+ .bss           0x02036bc0        0x0 src/enemy/enemyE.o
+ .bss           0x02036bc0        0x0 src/enemy/moldworm.o
+ .bss           0x02036bc0        0x0 src/enemy/sluggula.o
+ .bss           0x02036bc0        0x0 src/enemy/pesto.o
+ .bss           0x02036bc0        0x0 src/enemy/puffstool.o
+ .bss           0x02036bc0        0x0 src/enemy/chuchuBoss.o
+ .bss           0x02036bc0        0x0 src/enemy/likeLike.o
+ .bss           0x02036bc0        0x0 src/enemy/spearMoblin.o
+ .bss           0x02036bc0        0x0 src/enemy/businessScrub.o
+ .bss           0x02036bc0        0x0 src/enemy/rupeeLike.o
+ .bss           0x02036bc0        0x0 src/enemy/madderpillar.o
+ .bss           0x02036bc0        0x0 src/enemy/waterDrop.o
+ .bss           0x02036bc0        0x0 src/enemy/wallMaster.o
+ .bss           0x02036bc0        0x0 src/enemy/bombPeahat.o
+ .bss           0x02036bc0        0x0 src/enemy/spark.o
+ .bss           0x02036bc0        0x0 src/enemy/chaser.o
+ .bss           0x02036bc0        0x0 src/enemy/spikedBeetle.o
+ .bss           0x02036bc0        0x0 src/enemy/sensorBladeTrap.o
+ .bss           0x02036bc0        0x0 src/enemy/helmasaur.o
+ .bss           0x02036bc0        0x0 src/enemy/fallingBoulder.o
+ .bss           0x02036bc0        0x0 src/enemy/bobomb.o
+ .bss           0x02036bc0        0x0 src/enemy/wallMaster2.o
+ .bss           0x02036bc0        0x0 src/enemy/gleerok.o
+ .bss           0x02036bc0        0x0 src/enemy/vaatiEyesMacro.o
+ .bss           0x02036bc0        0x0 src/enemy/tektite.o
+ .bss           0x02036bc0        0x0 src/enemy/wizzrobeWind.o
+ .bss           0x02036bc0        0x0 src/enemy/wizzrobeFire.o
+ .bss           0x02036bc0        0x0 src/enemy/wizzrobeIce.o
+ .bss           0x02036bc0        0x0 src/enemy/armos.o
+ .bss           0x02036bc0        0x0 src/enemy/eyegore.o
+ .bss           0x02036bc0        0x0 src/enemy/rope.o
+ .bss           0x02036bc0        0x0 src/enemy/smallPesto.o
+ .bss           0x02036bc0        0x0 src/enemy/acroBandits.o
+ .bss           0x02036bc0        0x0 src/enemy/bladeTrap.o
+ .bss           0x02036bc0        0x0 src/enemy/keaton.o
+ .bss           0x02036bc0        0x0 src/enemy/crow.o
+ .bss           0x02036bc0        0x0 src/enemy/mulldozer.o
+ .bss           0x02036bc0        0x0 src/enemy/bombarossa.o
+ .bss           0x02036bc0        0x0 src/enemy/wisp.o
+ .bss           0x02036bc0        0x0 src/enemy/spinyBeetle.o
+ .bss           0x02036bc0        0x0 src/enemy/mazaalHead.o
+ .bss           0x02036bc0        0x0 src/enemy/mazaalMacro.o
+ .bss           0x02036bc0        0x0 src/enemy/mazaalHand.o
+ .bss           0x02036bc0        0x0 src/enemy/octorokBoss.o
+ .bss           0x02036bc0        0x0 src/enemy/flyingPot.o
+ .bss           0x02036bc0        0x0 src/enemy/gibdo.o
+ .bss           0x02036bc0        0x0 src/enemy/octorokGolden.o
+ .bss           0x02036bc0        0x0 src/enemy/tektiteGolden.o
+ .bss           0x02036bc0        0x0 src/enemy/ropeGolden.o
+ .bss           0x02036bc0        0x0 src/enemy/cloudPiranha.o
+ .bss           0x02036bc0        0x0 src/enemy/scissorsBeetle.o
+ .bss           0x02036bc0        0x0 src/enemy/cuccoAggr.o
+ .bss           0x02036bc0        0x0 src/enemy/stalfos.o
+ .bss           0x02036bc0        0x0 src/enemy/flyingSkull.o
+ .bss           0x02036bc0        0x0 src/enemy/mazaalBracelet.o
+ .bss           0x02036bc0        0x0 src/enemy/takkuri.o
+ .bss           0x02036bc0        0x0 src/enemy/bowMoblin.o
+ .bss           0x02036bc0        0x0 src/enemy/lakitu.o
+ .bss           0x02036bc0        0x0 src/enemy/lakituCloud.o
+ .bss           0x02036bc0        0x0 src/enemy/torchTrap.o
+ .bss           0x02036bc0        0x0 src/enemy/vaatiRebornEnemy.o
 
 === 10) Check maze_gen.o for any unexpected sections (defensive double-check) ===
 
@@ -2182,11 +603,10 @@ SYMBOL TABLE:
 00000000 l    d  .data	00000000 .data
 00000000 l    d  .bss	00000000 .bss
 00000000 l       .text	00000000 .gcc2_compiled.
-00000000 l    d  .rodata	00000000 .rodata
-00000000 l     O .rodata	00000010 DIR_DX
-00000010 l     O .rodata	00000010 DIR_DY
-00000020 l     O .rodata	00000004 DIR_BIT
-00000024 l     O .rodata	00000004 OPP_BIT
+00000000 l     O .data	00000010 DIR_DX
+00000010 l     O .data	00000010 DIR_DY
+00000020 l     O .data	00000004 DIR_BIT
+00000024 l     O .data	00000004 OPP_BIT
 00000000 l     F .text	00000028 local_rng_next
 00000028 l     F .text	0000001c local_rng_range
 00000044 l     F .text	0000003c init_cells
@@ -2212,9 +632,13 @@ SYMBOL TABLE:
 
 
 === 11) Quick check: are there any large .bss/.data consumers earlier than maze area? (top 30 .bss by size) ===
-02038560 B gEndOfEwram
-02037800 B _mazeState_end
-02037000 B _mazeState_start
+02036bd0 00000010 b
+02036bc0 00000010 b
+02036be4 00000004 b
+02036be0 00000004 b
+02038d60 B _mazeState_end
+02038560 B _mazeState_start
+02036be8 B gEndOfEwram
 02036bc0 B gMPlayTracks
 02036bb8 B gUnk_02036BB8
 02036ad8 B gUnk_02036AD8
@@ -2268,10 +692,6 @@ SYMBOL TABLE:
 02021ee0 B gSoundPlayingInfo
 0201aee0 B gDungeonMap
 02019ee0 B gMapDataBottomSpecial
-02018ee0 B gUnk_02018EE0
-02018eb0 B gUnk_02018EB0
-02018ea0 B gUnk_02018EA0
-02017ba0 B gUnk_02017BA0
 
 === 12) If you suspect a runtime write to the maze block: show memory-mapped audio buffers & heap pointers (addresses) ===
 03004ee0 B gMPlayInfos

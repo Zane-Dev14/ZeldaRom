@@ -188,52 +188,15 @@ void LoadRoom(void) {
         sub_0804B058(GetCurrentRoomProperty(2));
 
     LoadRoomTileEntities(GetCurrentRoomProperty(3));
+
+    /* Apply maze ONLY in Link's House */
+    if (gRoomControls.area == 34 && gRoomControls.room == 16) {
+        GenerateAndApplyMazeToLayer(1, 0xDEADBEEF);
+    }
+
     sub_0801AC98();
-    /* DEBUG: Force current room to Area 014 (014_Empty), Room 00_0 and apply maze.
-     * This attempts to set the current room pointer for immediate debugging.
-     */
-    /* Maze only for Link's House entrance (Area 34, Room 16) */
-//     if (gRoomControls.area == 34 && gRoomControls.room == 16) {
-//     int layerIndex = 1;  /* CHANGE TO 1 - interior bottom layer */
-//     uint32_t seed = Random();
-//     GenerateAndApplyMazeToLayer(layerIndex, seed);
-// }
-/*
-    {
-        const int targetArea = 14;
-        const int targetRoom = 0;
-        void **targetProps;
-        int i;
-        int layerIndex;
-        u32 seed;
-
-        if (gAreaTable[targetArea] != NULL) {
-            targetProps = gAreaTable[targetArea][targetRoom];
-            if (targetProps != NULL) {
-
-                gCurrentRoomProperties = targetProps;
-
-                for (i = 0; i < 8; ++i) {
-                    gRoomVars.properties[i] = gCurrentRoomProperties[i];
-                }
-
-                layerIndex = 0;
-                seed = Random();
-                GenerateAndApplyMazeToLayer(layerIndex, seed);
-
-                gPlayerEntity.base.x.HALF.HI = gRoomControls.origin_x + (1 << 3) + 4;
-                gPlayerEntity.base.y.HALF.HI = gRoomControls.origin_y + (1 << 3) + 4;
-                if (gRoomControls.camera_target != NULL) {
-                    gRoomControls.camera_target->x.HALF.HI = gPlayerEntity.base.x.HALF.HI;
-                    gRoomControls.camera_target->y.HALF.HI = gPlayerEntity.base.y.HALF.HI;
-                }
-            }
-        }
-    }*/
-
-
-
 }
+
 
 static void sub_0804B058(EntityData* dat) {
     Entity* ent;

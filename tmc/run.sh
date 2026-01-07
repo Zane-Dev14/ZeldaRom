@@ -12,14 +12,6 @@ egrep -n "02037800.+\\.o" build/USA/tmc.map \
   | sed -n '1,200p'
 echo
 
-echo "=== 3) For each of those object files: show symbol table + sizes (trimmed) ==="
-for o in $(egrep -n "02037800.+\\.o" build/USA/tmc.map | sed -E 's/.* ([^ ]+\.o).*/\1/' | sort -u); do
-  echo "---- $o ----"
-  arm-none-eabi-size -A "build/USA/$o" 2>/dev/null || arm-none-eabi-size -A "$o" 2>/dev/null
-  arm-none-eabi-objdump -t "build/USA/$o" 2>/dev/null | egrep '\.bss|COMMON|.data|.rodata|__bss' || true
-done | sed -n '1,500p'
-echo
-
 echo "=== 4) Show any COMMON symbols in those object files (they become .bss at link-time) ==="
 for o in $(egrep -n "02037800.+\\.o" build/USA/tmc.map | sed -E 's/.* ([^ ]+\.o).*/\1/' | sort -u); do
   echo "---- $o (COMMON search) ----"

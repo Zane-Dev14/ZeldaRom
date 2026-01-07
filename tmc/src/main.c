@@ -14,39 +14,6 @@
 #include "screen.h"
 #include "sound.h"
 /* --- Maze-region probe helpers --- */
-/* Uses symbols provided by the linker script */
-extern unsigned char _mazeState_start[];
-extern unsigned char _mazeState_end[];
-
-/* a place to write result so you can read it from memory/emulator.
- *   pick any safe EW-RAM global you have; gUnk_02000030 exists in main.c top scope */
-extern unsigned char gUnk_02000030[]; /* already referenced in your repo earlier */
-
-/* Stamp the maze region with 0xAA */
-static void probe_maze_region_stamp(void) {
-    volatile unsigned char *p = (volatile unsigned char*)_mazeState_start;
-    size_t sz = (size_t)((uintptr_t)_mazeState_end - (uintptr_t)_mazeState_start);
-    size_t i;
-    for (i = 0; i < sz; ++i) p[i] = 0xAA;
-}
-
-/* Check the region and write result into gUnk_02000030[0..3] as little-endian 32-bit */
-static void probe_maze_region_check_and_report(void) {
-    volatile unsigned char *p = (volatile unsigned char*)_mazeState_start;
-    size_t sz = (size_t)((uintptr_t)_mazeState_end - (uintptr_t)_mazeState_start);
-    size_t i;
-    unsigned int first_mismatch = 0;
-    for (i = 0; i < sz; ++i) {
-        if (p[i] != 0xAA) { first_mismatch = (unsigned int)(i + 1); break; }
-    }
-    /* write 32-bit result into gUnk_02000030[0..3] so you can inspect it later */
-    if (gUnk_02000030) {
-        gUnk_02000030[0] = (unsigned char)(first_mismatch & 0xFF);
-        gUnk_02000030[1] = (unsigned char)((first_mismatch >> 8) & 0xFF);
-        gUnk_02000030[2] = (unsigned char)((first_mismatch >> 16) & 0xFF);
-        gUnk_02000030[3] = (unsigned char)((first_mismatch >> 24) & 0xFF);
-    }
-}
 
 extern u32 gRand;
 
@@ -69,18 +36,12 @@ void (*const sTaskHandlers[])(void) = {
 
 void AgbMain(void) {
     // Initialization
-    volatile unsigned char *m = _mazeState_start;
-    volatile unsigned char *g = gUnk_02000030;
     InitOverlays();
-    probe_maze_region_stamp();
     InitSound();
     InitDMA();
     InitSaveData();
     InitSaveHeader();
     InitVBlankDMA();
-    probe_maze_region_check_and_report();
-
-    g[4] = m[0];   // store the BYTE that overwrote AA in gUnk_02000030[4]
 
     gUnk_02000010.field_0x4 = 0xc1;
     InitFade();
