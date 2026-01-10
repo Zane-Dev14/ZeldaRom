@@ -386,6 +386,8 @@ SECTIONS {
         src/enemyUtils.o(.text);
         src/enterPortalSubtask.o(.text);
         src/room.o(.text);
+        src/maze_gen.o(.text);
+        src/maze_gen.o(.rodata);
         src/roomInit.o(.text);
         src/fade.o(.text);
         src/fileselect.o(.text);
@@ -1694,8 +1696,6 @@ SECTIONS {
         data/sound/direct_sound_samples.o(.rodata);
         data/sound/sounds.o(.rodata);
         src/eeprom.o(.rodata);
-        src/maze_gen.o(.rodata);
-        src/maze_gen.o(.text);
     } >rom
 
     /* DWARF 2 sections */

@@ -117,9 +117,11 @@ $(BUILD_DIR)/src/gba/m4a.o
 $(interwork): CFLAGS += -mthumb-interwork
 $(BUILD_DIR)/src/eeprom.o: CFLAGS += -O1 -mthumb-interwork
 $(BUILD_DIR)/src/maze_gen.o: src/maze_gen.c
+	@mkdir -p $(BUILD_DIR)/src
 	$(CPP) $(CPPFLAGS) $< -o $(BUILD_DIR)/src/maze_gen.i
 	$(CC1) $(CFLAGS) -mthumb-interwork -o $(BUILD_DIR)/src/maze_gen.s $(BUILD_DIR)/src/maze_gen.i
 	$(AS) $(ASFLAGS) -o $@ $(BUILD_DIR)/src/maze_gen.s
+
 
 # if this is too broad dependency scanning will clash with ASM file
 $(BUILD_DIR)/src/%.o: deps = $(shell $(SCANINC) $(CINCLUDE) $*.c)
