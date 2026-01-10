@@ -12,12 +12,21 @@ if (NOT _project_options_POPULATED)
 endif()
 
 project(tools LANGUAGES CXX C)
-
 add_library(project_settings INTERFACE)
 
 # use CompilerWarnings.cmake directly since project_options normally requires cmake 3.16
 include(${_project_options_SOURCE_DIR}/src/CompilerWarnings.cmake)
 set_project_warnings(project_settings ON "" "" "" "")
+
+# GCC 14+/15 fixes
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    target_compile_options(project_settings INTERFACE
+        -Wno-error=dangling-reference
+        -Wno-error=null-dereference
+    )
+endif()
+
+
 
 # nlohmann/json
 # this repo is a mirror, that only holds the release versions of the headers to keep the size small

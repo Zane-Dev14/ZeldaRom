@@ -61,9 +61,9 @@ COMPARE ?= $(if $(CUSTOM),0,1)
 .PHONY: build extract_assets build_assets
 build: $(if $(CUSTOM), build_assets, $(BUILD_DIR)/extracted_assets_$(GAME_VERSION))
 	@$(MAKE) -f GBA.mk $(ROM)
-# ifeq ($(COMPARE), 1)
-# 	@$(SHA1) $(BUILD_NAME).sha1
-# endif
+ifeq ($(COMPARE), 1)
+	@$(SHA1) $(BUILD_NAME).sha1
+endif
 extract_assets: $(BUILD_DIR)/converted_assets_$(GAME_VERSION)
 # TODO this is slow, especially on builds with minor/no changes
 build_assets: $(BUILD_DIR)/converted_assets_$(GAME_VERSION)

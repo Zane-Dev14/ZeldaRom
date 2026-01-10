@@ -188,15 +188,9 @@ void LoadRoom(void) {
         sub_0804B058(GetCurrentRoomProperty(2));
 
     LoadRoomTileEntities(GetCurrentRoomProperty(3));
-
-    /* Apply maze ONLY in Link's House */
-    if (gRoomControls.area == 34 && gRoomControls.room == 16) {
-        GenerateAndApplyMazeToLayer(1, 0xDEADBEEF);
-    }
-
     sub_0801AC98();
-}
 
+}
 
 static void sub_0804B058(EntityData* dat) {
     Entity* ent;

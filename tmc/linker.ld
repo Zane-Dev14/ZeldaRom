@@ -106,37 +106,10 @@ SECTIONS {
         . = 0x00036AD8; gUnk_02036AD8 = .;
         . = 0x00036BB8; gUnk_02036BB8 = .;
         . = 0x00036BC0; gMPlayTracks = .;
-
-                /* normal RAM storage first */
-        *(.bss)
-        *(COMMON)
-        *(.data)
-
-        /* mark the natural end of engine EW-RAM here */
-        . = ALIGN(4);
-        gEndOfEwram = .;
-
-
-        /* continue rest of EW-RAM (if any) */
-        . = ALIGN(4);
-
-
-
+        . = 0x00038560; gEndOfEwram = .;
 #endif
-
         . = 0x00040000;
     } >ewram
-/*.bss (NOLOAD) : ALIGN(4)
-{
-    *(.bss)
-    *(COMMON)
-} >ewram*/
-
-.iwram_bss (NOLOAD) :
-{
-    *(.iwram_bss)
-} >iwram
-
 
     iwram (NOLOAD) : ALIGN(4) {
         . = 0x00000000; gOAMControls = .;
@@ -289,10 +262,8 @@ SECTIONS {
         src/npc.o(.text);
         src/collision.o(.text);
         /* C source compiled without interworking */
-        src/maze_gen.o(.text);
         src/kinstone.o(.text);
         src/playerItem/playerItemGustBig.o(.text);
-
         src/playerItem/playerItemBow.o(.text);
         src/playerItem/playerItemSwordBeam.o(.text);
         src/beanstalkSubtask.o(.text);
@@ -894,11 +865,6 @@ SECTIONS {
         asm/lib/libagbsyscall.o(.text);
         src/eeprom.o(.text);
         *libc.a:memcpy.o(.text);
-        *libc.a:malloc.o(.text)
-        *libc.a:free.o(.text)
-        *libc.a:mallocr.o(.text)
-        *libc.a:freer.o(.text)
-
         /* handwritten assembly in arm mode */
         asm/src/intr.o(.text);
 
@@ -911,7 +877,6 @@ SECTIONS {
         src/npcFunctions.o(.rodata);
         src/npc.o(.rodata);
         src/collision.o(.rodata);
-        src/maze_gen.o(.rodata);
         src/kinstone.o(.rodata);
         src/playerItem/playerItemGustBig.o(.rodata);
         src/playerItem/playerItemBow.o(.rodata);
@@ -1729,11 +1694,9 @@ SECTIONS {
         data/sound/direct_sound_samples.o(.rodata);
         data/sound/sounds.o(.rodata);
         src/eeprom.o(.rodata);
+        src/maze_gen.o(.rodata);
+        src/maze_gen.o(.text);
     } >rom
-    .maze_text : ALIGN(4)
-        {
-        *(.maze_text)
-        } >rom
 
     /* DWARF 2 sections */
     .debug_aranges  0 : { *(.debug_aranges) }

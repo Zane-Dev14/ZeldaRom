@@ -13,7 +13,6 @@
 #include "save.h"
 #include "screen.h"
 #include "sound.h"
-/* --- Maze-region probe helpers --- */
 
 extern u32 gRand;
 
@@ -42,7 +41,6 @@ void AgbMain(void) {
     InitSaveData();
     InitSaveHeader();
     InitVBlankDMA();
-
     gUnk_02000010.field_0x4 = 0xc1;
     InitFade();
     DmaCopy32(3, BG_PLTT, gPaletteBuffer, BG_PLTT_SIZE);

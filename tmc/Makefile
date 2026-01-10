@@ -26,11 +26,14 @@ extract_assets: tools
 
 .PHONY: tools
 tools: tools/bin
-
 tools/bin:
 	mkdir -p tools/cmake-build
-	cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=tools -S tools -B tools/cmake-build
+	cmake -DCMAKE_BUILD_TYPE=Release \
+	      -DCMAKE_INSTALL_PREFIX=tools \
+	      -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+	      -S tools -B tools/cmake-build
 	cmake --build tools/cmake-build -j --target install
+
 
 .PHONY: clean clean-tools
 clean:
