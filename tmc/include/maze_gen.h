@@ -23,11 +23,10 @@ typedef struct {
     int stackTop;
 } MazeGenState;
 
-extern unsigned char _mazeState_start[];
 extern unsigned char _mazeState_end[];
 
-#define g_mazeState ((MazeGenState*)_mazeState_start)
 
-void GenerateAndApplyMazeToLayer(int layerIndex, uint32_t seed);
+void ApplyMazeToLayer(int layerIndex);
 
+void GenerateMaze(uint32_t seed);
 #endif

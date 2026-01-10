@@ -11,7 +11,6 @@
 #include "object.h"
 #include "room.h"
 #include "tiles.h"
-#include "maze_gen.h"
 
 static void sub_0804B058(EntityData* dat);
 extern void sub_0801AC98(void);
@@ -189,14 +188,8 @@ void LoadRoom(void) {
 
     LoadRoomTileEntities(GetCurrentRoomProperty(3));
 
-    /* Apply maze ONLY in Link's House */
-    if (gRoomControls.area == 34 && gRoomControls.room == 16) {
-        GenerateAndApplyMazeToLayer(1, 0xDEADBEEF);
-    }
-
     sub_0801AC98();
 }
-
 
 static void sub_0804B058(EntityData* dat) {
     Entity* ent;

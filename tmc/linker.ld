@@ -106,15 +106,8 @@ SECTIONS {
         . = 0x00036AD8; gUnk_02036AD8 = .;
         . = 0x00036BB8; gUnk_02036BB8 = .;
         . = 0x00036BC0; gMPlayTracks = .;
+        . = 0x00038560; gEndOfEwram = .;
 
-                /* normal RAM storage first */
-        *(.bss)
-        *(COMMON)
-        *(.data)
-
-        /* mark the natural end of engine EW-RAM here */
-        . = ALIGN(4);
-        gEndOfEwram = .;
 
 
         /* continue rest of EW-RAM (if any) */
@@ -289,7 +282,6 @@ SECTIONS {
         src/npc.o(.text);
         src/collision.o(.text);
         /* C source compiled without interworking */
-        src/maze_gen.o(.text);
         src/kinstone.o(.text);
         src/playerItem/playerItemGustBig.o(.text);
 
@@ -911,7 +903,6 @@ SECTIONS {
         src/npcFunctions.o(.rodata);
         src/npc.o(.rodata);
         src/collision.o(.rodata);
-        src/maze_gen.o(.rodata);
         src/kinstone.o(.rodata);
         src/playerItem/playerItemGustBig.o(.rodata);
         src/playerItem/playerItemBow.o(.rodata);
