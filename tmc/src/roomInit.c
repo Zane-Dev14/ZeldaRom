@@ -16,6 +16,8 @@
 #include "tiles.h"
 #include "windcrest.h"
 
+#include "maze_gen.h"
+
 extern u32 sub_08060354(void);
 extern void sub_08057E64(void);
 extern void sub_0809F814(u32);
@@ -4859,16 +4861,19 @@ u32 sub_unk3_HouseInteriors2_LinksHouseEntrance(void) {
 }
 
 extern EntityData gUnk_080F2E2C;
-
 void sub_StateChange_HouseInteriors2_LinksHouseEntrance(void) {
-    if (!CheckGlobalFlag(OUTDOOR)) {
-        gArea.bgm = gArea.queued_bgm;
-        SoundReq(SONG_PLAY_VOL_RESET | BGM_MINISH_CAP);
-    }
-    if (!CheckGlobalFlag(START)) {
-        LoadRoomEntityList(&gUnk_080F2E2C);
-    }
+    MapLayer* layer = GetLayerByIndex(0);
+    int i;
+
+    if (!layer || !layer->mapData)
+        return;
+
+    for (i = 0; i < 64 * 64; i++)
+        layer->mapData[i] = 0x3001;
+
+    gUpdateVisibleTiles = 1;
 }
+
 
 u32 sub_unk3_HouseInteriors2_LinksHouseSmith(void) {
     return 1;
