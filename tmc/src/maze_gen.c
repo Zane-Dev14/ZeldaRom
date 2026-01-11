@@ -3,6 +3,7 @@
 
 #define MAZE_CELLS_X 10
 #define MAZE_CELLS_Y 10
+extern u8 gUpdateVisibleTiles;
 
 typedef struct {
     u8 visited;
@@ -113,7 +114,6 @@ static void generate_cells(MazeGenState* s, u32 seed) {
         push_cell(s, nx, ny);
     }
 }
-
 void GenerateAndApplyMaze(int layerIndex, u32 seed) {
     MazeGenState state;
     MapLayer* layer;
@@ -121,7 +121,8 @@ void GenerateAndApplyMaze(int layerIndex, u32 seed) {
     int startX, startY, cx, cy, tx, ty;
 
     layer = GetLayerByIndex(layerIndex);
-    if (!layer || !layer->mapData) return;
+    if (!layer || !layer->mapData)
+        return;
 
     roomW = (gRoomControls.width + 7) >> 3;
     roomH = (gRoomControls.height + 7) >> 3;
@@ -131,7 +132,9 @@ void GenerateAndApplyMaze(int layerIndex, u32 seed) {
     if (roomH > 64) roomH = 64;
 
     centerTile = layer->mapData[(roomH >> 1) * 64 + (roomW >> 1)] & 0x0FFF;
-    if (centerTile == 0) centerTile = 0x3001;
+    if (centerTile == 0)
+        centerTile = 0x3001;
+
     wallTile = centerTile + 0x10;
 
     generate_cells(&state, seed);
@@ -143,6 +146,7 @@ void GenerateAndApplyMaze(int layerIndex, u32 seed) {
         for (cx = 0; cx < MAZE_CELLS_X; ++cx) {
             tx = startX + (cx * 2 + 1);
             ty = startY + (cy * 2 + 1);
+
             if (tx >= 0 && tx < roomW && ty >= 0 && ty < roomH) {
                 if ((state.maze[cy][cx].walls & 1) && ty > 0)
                     layer->mapData[(ty - 1) * 64 + tx] = wallTile;
@@ -155,4 +159,8 @@ void GenerateAndApplyMaze(int layerIndex, u32 seed) {
             }
         }
     }
+
+    /* REQUIRED in TMC: force tilemap refresh */
+    gUpdateVisibleTiles = 1;
 }
+

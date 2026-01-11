@@ -189,10 +189,10 @@ void LoadRoom(void) {
 
     LoadRoomTileEntities(GetCurrentRoomProperty(3));
     sub_0801AC98();
-    if (gRoomControls.area == 34 && gRoomControls.room == 16) {
-        GenerateAndApplyMaze(1, 0xDEADBEEF);
-    }
 
+}
+void Room34_MazeInit(void) {
+    GenerateAndApplyMaze(0, 0xDEADBEEF);
 }
 
 static void sub_0804B058(EntityData* dat) {
