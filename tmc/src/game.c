@@ -36,6 +36,8 @@
 #include "subtask.h"
 #include "transitions.h"
 #include "ui.h"
+#include "tiles.h"
+
 
 // Game task
 
@@ -164,6 +166,7 @@ static void GameTask_Main(void) {
 }
 
 static void GameMain_InitRoom(void) {
+    int i;
     SetInitializationPriority();
     gScreen.lcd.displayControl = DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP;
     gMain.substate = GAMEMAIN_CHANGEROOM;
@@ -174,6 +177,21 @@ static void GameMain_InitRoom(void) {
     InitRoom();
     InitUI(FALSE);
     InitializeEntities();
+
+    if (gRoomControls.area == AREA_DEEPWOOD_SHRINE &&
+        gRoomControls.room == ROOM_DEEPWOOD_SHRINE_MAP) {
+
+        SetTileType(TILE_TYPE_372, TILE_POS(1, 1), LAYER_BOTTOM);
+    SetTileType(TILE_TYPE_372, TILE_POS(2, 1), LAYER_BOTTOM);
+    SetTileType(TILE_TYPE_372, TILE_POS(3, 1), LAYER_BOTTOM);
+
+    for (i = 0; i < 32; i++) {
+        SetTileType(TILE_TYPE_372, TILE_POS(i, 0), LAYER_BOTTOM);
+    }
+
+    gUpdateVisibleTiles = 1;
+        }
+
 #ifndef EU
     sub_0801855C();
 #endif
@@ -240,8 +258,12 @@ static void GameMain_ChangeRoom(void) {
         RequestPriorityDuration(NULL, 1);
     }
 }
+#include "maze_gen.h"
+extern void FORCE_ROOM_MAPDATA(void);
 
 static void GameMain_Update(void) {
+    int i;
+
     if (CheckInitPauseMenu() || CheckInitPortal()) {
         return;
     }
@@ -261,7 +283,23 @@ static void GameMain_Update(void) {
     CollisionMain();
     UpdateScroll();
     UpdateBgAnimations();
+
+    if (gRoomControls.reload_flags == RELOAD_ALL) {
+        FORCE_ROOM_MAPDATA();
+    }
+
     UpdateScrollVram();
+
+    if (gRoomControls.reload_flags == RELOAD_ALL) {
+        FORCE_ROOM_MAPDATA();
+    }
+
+
+    if (gRoomControls.area == AREA_DEEPWOOD_SHRINE &&
+        gRoomControls.room == ROOM_DEEPWOOD_SHRINE_MAP) {
+
+
+        }
     DecreasePortalTimer();
     DrawUI();
     UpdateManagers();

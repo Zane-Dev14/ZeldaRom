@@ -27,6 +27,7 @@ extern void sub_0807BB98(u32, u32, u32, u32);
 extern void sub_080AF2E4(void);
 extern void sub_08059994(void);
 
+extern u8 gUpdateVisibleTiles;
 static void sub_0804E150(void);
 static void sub_0804D0B4(void);
 static void sub_0804D9B0(void);
@@ -2178,10 +2179,15 @@ u32 sub_unk3_DeepwoodShrine_DoubleStatue(void) {
 
 void sub_StateChange_DeepwoodShrine_DoubleStatue(void) {
 }
-
+// roomInit.c
 u32 sub_unk3_DeepwoodShrine_Map(void) {
+    int x;
+    for (x = 0; x < 64; x++) {
+        SetTileType(TILE_TYPE_372, TILE_POS(x, 10), LAYER_BOTTOM);
+    }
     return 1;
 }
+
 
 void sub_StateChange_DeepwoodShrine_Map(void) {
 }
@@ -2238,10 +2244,11 @@ u32 sub_unk3_DeepwoodShrine_Lever(void) {
 
 void sub_StateChange_DeepwoodShrine_Lever(void) {
 }
-
 u32 sub_unk3_DeepwoodShrine_Entrance(void) {
+
     return 1;
 }
+
 
 #if defined(DEMO_USA) || defined(DEMO_JP)
 void sub_StateChange_DeepwoodShrine_Entrance(void) {
@@ -2310,7 +2317,6 @@ u32 sub_unk3_DeepwoodShrineBoss_Main(void) {
 
 extern EntityData gUnk_additional_a_DeepwoodShrineBoss_Main;
 
-extern u8 gUpdateVisibleTiles;
 extern u32 gUsedPalettes;
 
 void sub_StateChange_DeepwoodShrineBoss_Main(void) {

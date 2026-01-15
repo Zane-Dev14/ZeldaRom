@@ -4,5 +4,5 @@
 #include "global.h"
 
 extern void GenerateAndApplyMaze(int layerIndex, u32 seed);
-
+extern void FORCE_ROOM_MAPDATA(void);
 #endif
