@@ -191,22 +191,24 @@ static void GameMain_InitRoom(void) {
     InitRoom();
     InitUI(FALSE);
     InitializeEntities();
-    if (gRoomControls.area == AREA_DEEPWOOD_SHRINE) {
-        ClearEntireRoomTiles();
-    }
 
         #ifndef EU
         sub_0801855C();
         #endif
 }
 
+#include "maze_gen.h"
+extern void GenerateAndApplyMaze(int layerIndex, u32 seed);
+
 static void GameMain_ChangeRoom(void) {
     UpdateEntities();
     if (!UpdateLightLevel())
         UpdateScroll();
     UpdateBgAnimations();
+
     if (gRoomControls.area == AREA_DEEPWOOD_SHRINE) {
         ClearEntireRoomTiles();
+        GenerateAndApplyMaze(LAYER_BOTTOM, gRoomControls.room + 1);
     }
     UpdateScrollVram();
 
@@ -266,7 +268,6 @@ static void GameMain_ChangeRoom(void) {
         RequestPriorityDuration(NULL, 1);
     }
 }
-#include "maze_gen.h"
 static void GameMain_Update(void) {
     int i;
 
@@ -289,9 +290,6 @@ static void GameMain_Update(void) {
     CollisionMain();
     UpdateScroll();
     UpdateBgAnimations();
-    if (gRoomControls.area == AREA_DEEPWOOD_SHRINE) {
-        ClearEntireRoomTiles();
-    }
     UpdateScrollVram();
 
     DecreasePortalTimer();

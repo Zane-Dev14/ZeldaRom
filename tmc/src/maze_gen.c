@@ -141,21 +141,28 @@ void GenerateAndApplyMaze(int layerIndex, u32 seed) {
 
     startX = (roomW > 21) ? ((roomW - 21) >> 1) : 0;
     startY = (roomH > 21) ? ((roomH - 21) >> 1) : 0;
-
     for (cy = 0; cy < MAZE_CELLS_Y; ++cy) {
         for (cx = 0; cx < MAZE_CELLS_X; ++cx) {
             tx = startX + (cx * 2 + 1);
             ty = startY + (cy * 2 + 1);
 
             if (tx >= 0 && tx < roomW && ty >= 0 && ty < roomH) {
+
+                // North
                 if ((state.maze[cy][cx].walls & 1) && ty > 0)
-                    layer->mapData[(ty - 1) * 64 + tx] = wallTile;
+                    SetTileType(wallTile, TILE_POS(tx, ty - 1), layerIndex);
+
+                // East
                 if ((state.maze[cy][cx].walls & 2) && tx < roomW - 1)
-                    layer->mapData[ty * 64 + (tx + 1)] = wallTile;
+                    SetTileType(wallTile, TILE_POS(tx + 1, ty), layerIndex);
+
+                // South
                 if ((state.maze[cy][cx].walls & 4) && ty < roomH - 1)
-                    layer->mapData[(ty + 1) * 64 + tx] = wallTile;
+                    SetTileType(wallTile, TILE_POS(tx, ty + 1), layerIndex);
+
+                // West
                 if ((state.maze[cy][cx].walls & 8) && tx > 0)
-                    layer->mapData[ty * 64 + (tx - 1)] = wallTile;
+                    SetTileType(wallTile, TILE_POS(tx - 1, ty), layerIndex);
             }
         }
     }
