@@ -99,14 +99,14 @@ void GameTask(void) {
 
     gRoomTransition.frameCount++;
     sStates[gMain.state]();
-#ifdef DEMO_USA
+    #ifdef DEMO_USA
     if (gSave.demo_timer != 0) {
         if (--gSave.demo_timer == 0) {
             SetFade(FADE_IN_OUT | FADE_BLACK_WHITE | FADE_INSTANT, 2);
             gMain.state = GAMETASK_EXIT;
         }
     }
-#endif
+    #endif
 }
 
 static void GameTask_Transition(void) {
@@ -164,6 +164,20 @@ static void GameTask_Main(void) {
     };
     sStates[gMain.substate]();
 }
+static void ClearEntireRoomTiles(void) {
+    int x, y;
+    int w = gRoomControls.width >> 4;
+    int h = gRoomControls.height >> 4;
+
+    for (y = 0; y < h; y++) {
+        for (x = 0; x < w; x++) {
+            SetTileType(0, TILE_POS(x, y), LAYER_BOTTOM);
+            SetTileType(0, TILE_POS(x, y), LAYER_TOP);
+        }
+    }
+
+    gUpdateVisibleTiles = 1;
+}
 
 static void GameMain_InitRoom(void) {
     int i;
@@ -177,24 +191,13 @@ static void GameMain_InitRoom(void) {
     InitRoom();
     InitUI(FALSE);
     InitializeEntities();
-
-    if (gRoomControls.area == AREA_DEEPWOOD_SHRINE &&
-        gRoomControls.room == ROOM_DEEPWOOD_SHRINE_MAP) {
-
-        SetTileType(TILE_TYPE_372, TILE_POS(1, 1), LAYER_BOTTOM);
-    SetTileType(TILE_TYPE_372, TILE_POS(2, 1), LAYER_BOTTOM);
-    SetTileType(TILE_TYPE_372, TILE_POS(3, 1), LAYER_BOTTOM);
-
-    for (i = 0; i < 32; i++) {
-        SetTileType(TILE_TYPE_372, TILE_POS(i, 0), LAYER_BOTTOM);
+    if (gRoomControls.area == AREA_DEEPWOOD_SHRINE) {
+        ClearEntireRoomTiles();
     }
 
-    gUpdateVisibleTiles = 1;
-        }
-
-#ifndef EU
-    sub_0801855C();
-#endif
+        #ifndef EU
+        sub_0801855C();
+        #endif
 }
 
 static void GameMain_ChangeRoom(void) {
@@ -202,7 +205,12 @@ static void GameMain_ChangeRoom(void) {
     if (!UpdateLightLevel())
         UpdateScroll();
     UpdateBgAnimations();
+    if (gRoomControls.area == AREA_DEEPWOOD_SHRINE) {
+        ClearEntireRoomTiles();
+    }
     UpdateScrollVram();
+
+
     DrawUI();
     UpdateManagers();
     FlushSprites();
@@ -232,35 +240,33 @@ static void GameMain_ChangeRoom(void) {
     gMain.substate = GAMEMAIN_UPDATE;
     SetPlayerControl(0);
     gPauseMenuOptions.disabled = 0;
-#if defined(USA) || defined(DEMO_USA)
+    #if defined(USA) || defined(DEMO_USA)
     if (gArea.unk28.textBaseIndex != 0xff) {
         sub_0801855C();
     }
     CreateMiscManager();
     CheckAreaDiscovery();
-#elif defined(EU)
+    #elif defined(EU)
     CheckAreaDiscovery();
     sub_0801855C();
-#elif defined(JP)
+    #elif defined(JP)
     CheckAreaDiscovery();
     if (gArea.unk28.textBaseIndex != 0xff) {
         sub_0801855C();
     }
-#elif defined(DEMO_JP)
+    #elif defined(DEMO_JP)
     if (gRoomTransition.field31)
         CheckAreaDiscovery();
     if (gArea.unk28.textBaseIndex != 0xff) {
         sub_0801855C();
     }
     CreateMiscManager();
-#endif
+    #endif
     if (!gRoomVars.didEnterScrolling) {
         RequestPriorityDuration(NULL, 1);
     }
 }
 #include "maze_gen.h"
-extern void FORCE_ROOM_MAPDATA(void);
-
 static void GameMain_Update(void) {
     int i;
 
@@ -283,23 +289,11 @@ static void GameMain_Update(void) {
     CollisionMain();
     UpdateScroll();
     UpdateBgAnimations();
-
-    if (gRoomControls.reload_flags == RELOAD_ALL) {
-        FORCE_ROOM_MAPDATA();
+    if (gRoomControls.area == AREA_DEEPWOOD_SHRINE) {
+        ClearEntireRoomTiles();
     }
-
     UpdateScrollVram();
 
-    if (gRoomControls.reload_flags == RELOAD_ALL) {
-        FORCE_ROOM_MAPDATA();
-    }
-
-
-    if (gRoomControls.area == AREA_DEEPWOOD_SHRINE &&
-        gRoomControls.room == ROOM_DEEPWOOD_SHRINE_MAP) {
-
-
-        }
     DecreasePortalTimer();
     DrawUI();
     UpdateManagers();
@@ -361,13 +355,13 @@ static void GameMain_ChangeArea(void) {
 }
 
 static void GameTask_Exit(void) {
-#ifdef DEMO_USA
+    #ifdef DEMO_USA
     if (!gFadeControl.active)
         DoSoftReset();
-#else
+    #else
     SetFade(FADE_IN_OUT | FADE_BLACK_WHITE | FADE_INSTANT, 8);
     SetTask(TASK_GAMEOVER);
-#endif
+    #endif
 }
 
 // TODO End of GameTask?

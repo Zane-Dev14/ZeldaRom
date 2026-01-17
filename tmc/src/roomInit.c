@@ -2248,26 +2248,11 @@ u32 sub_unk3_DeepwoodShrine_Entrance(void) {
 
     return 1;
 }
-
-
-#if defined(DEMO_USA) || defined(DEMO_JP)
+#include "maze_gen.h"
+extern void ClearRoomMapDataOriginal(void);
 void sub_StateChange_DeepwoodShrine_Entrance(void) {
-#ifdef DEMO_USA
-    if (gSaveHeader->saveFileId != 0 && GetInventoryValue(ITEM_EARTH_ELEMENT) == 0) {
-#else
-#ifdef DEMO_JP
-    if (GetInventoryValue(ITEM_EARTH_ELEMENT) == 0) {
-#endif
-#endif
-        SetTileType(TILE_TYPE_869, TILE_POS(9, 13), LAYER_BOTTOM);
-        SetTileType(TILE_TYPE_869, TILE_POS(10, 13), LAYER_BOTTOM);
-        SetTileType(TILE_TYPE_869, TILE_POS(11, 13), LAYER_BOTTOM);
-    }
+    // ClearRoomMapDataOriginal();
 }
-#else
-void sub_StateChange_DeepwoodShrine_Entrance(void) {
-}
-#endif
 
 u32 sub_unk3_DeepwoodShrine_Torch(void) {
     return 1;

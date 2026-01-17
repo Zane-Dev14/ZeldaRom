@@ -164,25 +164,14 @@ void GenerateAndApplyMaze(int layerIndex, u32 seed) {
     gUpdateVisibleTiles = 1;
 }
 
-static void FORCE_ROOM_MAPDATA(void) {
+void ClearRoomMapDataOriginal(void) {
     int i;
     int w = gRoomControls.width >> 4;
     int h = gRoomControls.height >> 4;
     int count = w * h;
 
-    // Bottom layer
     for (i = 0; i < count; i++) {
-        gMapBottom.mapData[i] = 0x1001;
-        gMapBottom.mapDataOriginal[i] = 0x1001;
+        gMapBottom.mapDataOriginal[i] = 0;
+        gMapTop.mapDataOriginal[i] = 0;
     }
-
-    // Top layer
-    for (i = 0; i < count; i++) {
-        gMapTop.mapData[i] = 0x0000;
-        gMapTop.mapDataOriginal[i] = 0x0000;
-    }
-
-    // Force visible tile rebuild
-    gUpdateVisibleTiles = 1;
 }
-
