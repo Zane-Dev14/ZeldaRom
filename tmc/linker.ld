@@ -11,6 +11,7 @@ MEMORY {
 
 SECTIONS {
     ewram (NOLOAD) : ALIGN(4) {
+
         . = 0x00000010; gUnk_02000010 = .;
         . = 0x00000020; gUnk_02000020 = .;
         . = 0x00000030; gUnk_02000030 = .;
@@ -106,6 +107,15 @@ SECTIONS {
         . = 0x00036AD8; gUnk_02036AD8 = .;
         . = 0x00036BB8; gUnk_02036BB8 = .;
         . = 0x00036BC0; gMPlayTracks = .;
+        . = ALIGN(4);
+        __ewram_free_start = .;
+
+        *(.ewram*)
+        *(.bss)
+        *(.sbss)
+        *(.common)
+
+        __ewram_free_end = .;
         . = 0x00038560; gEndOfEwram = .;
 #endif
         . = 0x00040000;

@@ -1,8 +1,8 @@
 #include "global.h"
 #include "room.h"
 
-#define MAZE_CELLS_X 10
-#define MAZE_CELLS_Y 10
+#define MAZE_CELLS_X 6
+#define MAZE_CELLS_Y 6
 extern u8 gUpdateVisibleTiles;
 
 typedef struct {
@@ -35,14 +35,23 @@ static u32 local_rng_next(MazeGenState* s) {
     s->rng_state = x ? x : 0xDEADBEEFu;
     return s->rng_state;
 }
-
 static u32 local_rng_range(MazeGenState* s, u32 n) {
     u32 r;
-    if (n == 0) return 0;
-    r = local_rng_next(s);
-    while (r >= n) r -= n;
+
+    if (n == 0)
+        return 0;
+
+    r = local_rng_next(s) >> 28; // 0..15
+
+    if (r >= n)
+        r -= n;
+    if (r >= n)
+        r -= n;
+
     return r;
 }
+
+
 
 static void init_cells(MazeGenState* s) {
     int y, x;
@@ -55,13 +64,22 @@ static void init_cells(MazeGenState* s) {
     s->stackTop = 0;
 }
 
-static void push_cell(MazeGenState* s, int x, int y) {
+static int push_cell(MazeGenState* s, int x, int y) {
+    if (s->stackTop >= MAZE_CELLS_X * MAZE_CELLS_Y)
+        return 0;
+
     s->stack[s->stackTop].x = x;
     s->stack[s->stackTop].y = y;
     s->stackTop++;
+    return 1;
 }
 
+
 static CellPos pop_cell(MazeGenState* s) {
+    if (s->stackTop <= 0) {
+        CellPos z = {0,0};
+        return z;
+    }
     s->stackTop--;
     return s->stack[s->stackTop];
 }
@@ -84,7 +102,7 @@ static void carve_between(MazeGenState* s, int x, int y, int d) {
     s->maze[y][x].walls &= ~DIR_BIT[d];
     s->maze[ny][nx].walls &= ~OPP_BIT[d];
 }
-
+/*
 static void generate_cells(MazeGenState* s, u32 seed) {
     int sx, sy, dirs[4], n, ri, d, nx, ny;
     CellPos cur;
@@ -113,72 +131,139 @@ static void generate_cells(MazeGenState* s, u32 seed) {
         s->maze[ny][nx].visited = 1;
         push_cell(s, nx, ny);
     }
+}*/
+#define MAZE_DEBUG_LIMIT 64
+
+static void generate_cells(MazeGenState* s, u32 seed) {
+    int sx, sy, dirs[4], n, ri, d, nx, ny;
+    CellPos cur;
+    int iter = 0;
+
+    s->rng_state = seed ? seed : 0xA5A5A5A5u;
+    init_cells(s);
+
+    sx = local_rng_range(s, MAZE_CELLS_X);
+    sy = local_rng_range(s, MAZE_CELLS_Y);
+
+    s->maze[sy][sx].visited = 1;
+    push_cell(s, sx, sy);
+
+    while (s->stackTop > 0) {
+
+        if (++iter > MAZE_DEBUG_LIMIT)
+            break;
+
+        cur = s->stack[s->stackTop - 1];
+
+        n = count_unvisited_neighbors(s, cur.x, cur.y, dirs);
+        if (n <= 0) {
+            pop_cell(s);
+            continue;
+        }
+
+        d = dirs[local_rng_range(s, n)];
+
+        nx = cur.x + DIR_DX[d];
+        ny = cur.y + DIR_DY[d];
+
+        carve_between(s, cur.x, cur.y, d);
+        s->maze[ny][nx].visited = 1;
+
+        if (!push_cell(s, nx, ny)) {
+            pop_cell(s);
+        }
+    }
+
 }
+
+#include "common.h"
+#include "tiles.h"
+__attribute__((section(".ewram")))
+MazeGenState gMazeState;
+
 void GenerateAndApplyMaze(int layerIndex, u32 seed) {
-    MazeGenState state;
+    MazeGenState* state = &gMazeState;
     MapLayer* layer;
-    int roomW, roomH, centerTile, wallTile;
-    int startX, startY, cx, cy, tx, ty;
+    int roomW, roomH;
+    int floorTile, wallTile;  // Changed variable names
+    int startX, startY;
+    int cx, cy, tx, ty;
 
     layer = GetLayerByIndex(layerIndex);
     if (!layer || !layer->mapData)
         return;
 
-    roomW = (gRoomControls.width + 7) >> 3;
-    roomH = (gRoomControls.height + 7) >> 3;
-    if (roomW < 1) roomW = 1;
+    roomW = (gRoomControls.width  >> 4);
+    roomH = (gRoomControls.height >> 4);
+
     if (roomW > 64) roomW = 64;
-    if (roomH < 1) roomH = 1;
     if (roomH > 64) roomH = 64;
 
-    centerTile = layer->mapData[(roomH >> 1) * 64 + (roomW >> 1)] & 0x0FFF;
-    if (centerTile == 0)
-        centerTile = 0x3001;
+    // Use actual visible tiles
+    floorTile = TILE_TYPE_372;      // Floor tile
+    wallTile = TILE_TYPE_467;       // PERMA_ROCK for walls
 
-    wallTile = centerTile + 0x10;
+    generate_cells(state, seed);
+    startX = 5;
+    startY = 5;
 
-    generate_cells(&state, seed);
+    // Draw the maze
+    for (cy = 0; cy < MAZE_CELLS_Y; cy++)
+    {
+        for (cx = 0; cx < MAZE_CELLS_X; cx++)
+        {
+            tx = (startX + ((cx * 2) + 1));
+            ty = (startY + ((cy * 2) + 1));
 
-    startX = (roomW > 21) ? ((roomW - 21) >> 1) : 0;
-    startY = (roomH > 21) ? ((roomH - 21) >> 1) : 0;
-    for (cy = 0; cy < MAZE_CELLS_Y; ++cy) {
-        for (cx = 0; cx < MAZE_CELLS_X; ++cx) {
-            tx = startX + (cx * 2 + 1);
-            ty = startY + (cy * 2 + 1);
+            // Draw cell center as floor
+            SetTileType(
+                floorTile,  // Use floor tile instead of 0
+                TILE_POS((tx), (ty)),
+                        layerIndex
+            );
 
-            if (tx >= 0 && tx < roomW && ty >= 0 && ty < roomH) {
+            // North wall
+            if (state->maze[cy][cx].walls & 1)
+            {
+                SetTileType(
+                    wallTile,  // Use wall tile instead of 0
+                    TILE_POS((tx), (ty - 1)),
+                            layerIndex
+                );
+            }
 
-                // North
-                if ((state.maze[cy][cx].walls & 1) && ty > 0)
-                    SetTileType(wallTile, TILE_POS(tx, ty - 1), layerIndex);
+            // East wall
+            if (state->maze[cy][cx].walls & 2)
+            {
+                SetTileType(
+                    wallTile,
+                    TILE_POS((tx + 1), (ty)),
+                            layerIndex
+                );
+            }
 
-                // East
-                if ((state.maze[cy][cx].walls & 2) && tx < roomW - 1)
-                    SetTileType(wallTile, TILE_POS(tx + 1, ty), layerIndex);
+            // South wall
+            if (state->maze[cy][cx].walls & 4)
+            {
+                SetTileType(
+                    wallTile,
+                    TILE_POS((tx), (ty + 1)),
+                            layerIndex
+                );
+            }
 
-                // South
-                if ((state.maze[cy][cx].walls & 4) && ty < roomH - 1)
-                    SetTileType(wallTile, TILE_POS(tx, ty + 1), layerIndex);
-
-                // West
-                if ((state.maze[cy][cx].walls & 8) && tx > 0)
-                    SetTileType(wallTile, TILE_POS(tx - 1, ty), layerIndex);
+            // West wall
+            if (state->maze[cy][cx].walls & 8)
+            {
+                SetTileType(
+                    wallTile,
+                    TILE_POS((tx - 1), (ty)),
+                            layerIndex
+                );
             }
         }
     }
 
-    /* REQUIRED in TMC: force tilemap refresh */
     gUpdateVisibleTiles = 1;
 }
 
-void ClearRoomMapDataOriginal(void) {
-    int i;
-    int w = gRoomControls.width >> 4;
-    int h = gRoomControls.height >> 4;
-    int count = w * h;
-
-    for (i = 0; i < count; i++) {
-        gMapBottom.mapDataOriginal[i] = 0;
-        gMapTop.mapDataOriginal[i] = 0;
-    }
-}
