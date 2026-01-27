@@ -112,8 +112,9 @@ SECTIONS {
 
         *(.ewram*)
         *(.bss)
-        *(.sbss)
         *(.common)
+        *(.data)
+
 
         __ewram_free_end = .;
         . = 0x00038560; gEndOfEwram = .;

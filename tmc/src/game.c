@@ -165,27 +165,6 @@ static void GameTask_Main(void) {
     sStates[gMain.substate]();
 }
 
-static void ClearEntireRoomTiles(void) {
-    int x, y;
-    int w, h;
-
-    if (!GetLayerByIndex(LAYER_BOTTOM))
-        return;
-
-    w = gRoomControls.width >> 4;
-    h = gRoomControls.height >> 4;
-
-    if (w <= 0 || h <= 0 || w > 64 || h > 64)
-        return;
-
-    for (y = 0; y < h; y++) {
-        for (x = 0; x < w; x++) {
-            SetTileType(0x174, TILE_POS(x, y), LAYER_BOTTOM);
-        }
-    }
-
-    gUpdateVisibleTiles = 1;
-}
 
 
 static void GameMain_InitRoom(void) {
@@ -208,16 +187,17 @@ static void GameMain_InitRoom(void) {
 
 #include "maze_gen.h"
 extern void GenerateAndApplyMaze(int layerIndex, u32 seed);
+extern u32 gRand;
 
 static void GameMain_ChangeRoom(void) {
+    u32 seed;
     UpdateEntities();
     if (!UpdateLightLevel())
         UpdateScroll();
     UpdateBgAnimations();
 
     if (gRoomControls.area == AREA_DEEPWOOD_SHRINE) {
-        ClearEntireRoomTiles();
-         GenerateAndApplyMaze(LAYER_BOTTOM, gRoomControls.room + 1);
+         GenerateAndApplyMaze(LAYER_BOTTOM, gRand);
 
     }
     UpdateScrollVram();

@@ -5,6 +5,7 @@
 #define MAZE_CELLS_Y 6
 extern u8 gUpdateVisibleTiles;
 
+extern u16 GetTileTypeAtRoomTile(int x, int y, int layerIndex);
 typedef struct {
     u8 visited;
     u8 walls;
@@ -132,7 +133,12 @@ static void generate_cells(MazeGenState* s, u32 seed) {
         push_cell(s, nx, ny);
     }
 }*/
-#define MAZE_DEBUG_LIMIT 64
+static void DrawWallBlock(u16 tile, int x, int y, int layer) {
+    SetTileType(tile, TILE_POS(x, y), layer);
+    SetTileType(tile, TILE_POS((x+1), y), layer);
+    SetTileType(tile, TILE_POS(x, (y+1)), layer);
+    SetTileType(tile, TILE_POS((x+1), (y+1)), layer);
+}
 
 static void generate_cells(MazeGenState* s, u32 seed) {
     int sx, sy, dirs[4], n, ri, d, nx, ny;
@@ -178,89 +184,148 @@ static void generate_cells(MazeGenState* s, u32 seed) {
 
 #include "common.h"
 #include "tiles.h"
+static u16 DeriveWallTile(u16 floorTile) {
+    return floorTile + 1;
+}
+
+static u16 SampleWallTile(int layerIndex, int roomW, int roomH) {
+    u16 tile;
+
+    /* Sample near top edge (likely wall) */
+    tile = GetTileTypeAtRoomTile(1, 1, layerIndex);
+    if (tile && tile < 0x400)
+        return tile;
+
+    /* Sample left edge */
+    tile = GetTileTypeAtRoomTile(1, roomH - 2, layerIndex);
+    if (tile && tile < 0x400)
+        return tile;
+
+    /* Fallback: known dungeon wall */
+    return 0x175;
+}
+
+static void ClearRoomWithTile(int layerIndex, u16 tile) {
+    int x, y;
+    int w = gRoomControls.width >> 4;
+    int h = gRoomControls.height >> 4;
+
+    if (w <= 0 || h <= 0 || w > 64 || h > 64)
+        return;
+
+    for (y = 0; y < (h -1); y++) {
+        for (x = 0; x < (w-1); x++) {
+            SetTileType(tile, TILE_POS(x, y), layerIndex);
+        }
+    }
+}
+static u16 SampleCenterFloorTile(int layerIndex, int roomW, int roomH) {
+    int cx = roomW >> 1;
+    int cy = roomH >> 1;
+    u16 tile;
+
+    tile = GetTileTypeAtRoomTile(cx, cy, layerIndex);
+
+    /* Reject invalid tiles */
+    if (tile == 0 || tile >= 0x400) {
+        /* Try nearby tiles */
+        tile = GetTileTypeAtRoomTile(cx + 1, cy, layerIndex);
+    }
+    if (tile == 0 || tile >= 0x400) {
+        tile = GetTileTypeAtRoomTile(cx, cy + 1, layerIndex);
+    }
+    if (tile == 0 || tile >= 0x400) {
+        tile = GetTileTypeAtRoomTile(cx + 1, cy + 1, layerIndex);
+    }
+    if (tile == 0 || tile >= 0x400)
+        tile = GetTileTypeAtRoomTile(cx - 1, cy - 1, layerIndex);
+
+
+    /* Final hard fallback */
+    if (tile == 0 || tile >= 0x400)
+        tile = 0x174; /* known safe dungeon floor */
+
+        return tile;
+}
+
 __attribute__((section(".ewram")))
 MazeGenState gMazeState;
-
 void GenerateAndApplyMaze(int layerIndex, u32 seed) {
     MazeGenState* state = &gMazeState;
     MapLayer* layer;
     int roomW, roomH;
-    int floorTile, wallTile;  // Changed variable names
     int startX, startY;
-    int cx, cy, tx, ty;
+    int cx, cy, tx, ty, x,y,mazeW,mazeH;
+    u16 floorTile, wallTile;
 
     layer = GetLayerByIndex(layerIndex);
-    if (!layer || !layer->mapData)
+    if (!layer)
         return;
 
-    roomW = (gRoomControls.width  >> 4);
-    roomH = (gRoomControls.height >> 4);
+
+    roomW = gRoomControls.width >> 4;
+    roomH = gRoomControls.height >> 4;
 
     if (roomW > 64) roomW = 64;
     if (roomH > 64) roomH = 64;
 
-    // Use actual visible tiles
-    floorTile = TILE_TYPE_372;      // Floor tile
-    wallTile = TILE_TYPE_467;       // PERMA_ROCK for walls
+    /* ---- 1. Sample center tiles ---- */
+    floorTile = SampleCenterFloorTile(layerIndex, roomW, roomH);
+    wallTile = SampleWallTile(layerIndex, roomW, roomH);
 
+
+    /* ---- 2. Clear entire room ---- */
+    ClearRoomWithTile(layerIndex, floorTile);
+
+    /* ---- 3. Generate maze ---- */
     generate_cells(state, seed);
-    startX = 5;
-    startY = 5;
 
-    // Draw the maze
-    for (cy = 0; cy < MAZE_CELLS_Y; cy++)
-    {
-        for (cx = 0; cx < MAZE_CELLS_X; cx++)
-        {
-            tx = (startX + ((cx * 2) + 1));
-            ty = (startY + ((cy * 2) + 1));
+    startX = (roomW - ((MAZE_CELLS_X * 2) + 1)) >> 1;
+    startY = (roomH - ((MAZE_CELLS_Y * 2) + 1)) >> 1;
 
-            // Draw cell center as floor
-            SetTileType(
-                floorTile,  // Use floor tile instead of 0
-                TILE_POS((tx), (ty)),
-                        layerIndex
-            );
+    if (startX < 1) startX = 1;
+    if (startY < 1) startY = 1;
+     mazeW = (MAZE_CELLS_X * 2) + 1;
+     mazeH = (MAZE_CELLS_Y * 2) + 1;
 
-            // North wall
-            if (state->maze[cy][cx].walls & 1)
-            {
-                SetTileType(
-                    wallTile,  // Use wall tile instead of 0
-                    TILE_POS((tx), (ty - 1)),
-                            layerIndex
-                );
+    for (x = 0; x < mazeW; x += 2) {
+        DrawWallBlock(wallTile, (startX + x), (startY - 2), layerIndex);
+        DrawWallBlock(wallTile, (startX + x), (startY + mazeH), layerIndex);
+    }
+
+    /* Left & right */
+    for (y = 0; y < mazeH; y += 2) {
+        DrawWallBlock(wallTile, (startX - 2), (startY + y), layerIndex);
+        DrawWallBlock(wallTile, (startX + mazeW), (startY + y), layerIndex);
+    }
+
+    /* ---- 4. Draw maze ---- */
+    for (cy = 0; cy < MAZE_CELLS_Y; cy++) {
+        for (cx = 0; cx < MAZE_CELLS_X; cx++) {
+            tx = startX + ((cx * 2) + 1);
+            ty = startY + ((cy * 2) + 1);
+
+            if (tx <= 0 || tx >= (roomW - 1) ||
+                ty <= 0 || ty >= (roomH - 1))
+                continue;
+
+            /* Cell center (floor already exists, but safe to enforce) */
+            SetTileType(floorTile, TILE_POS(tx, ty), layerIndex);
+
+            /* Walls */
+            if (state->maze[cy][cx].walls & 1) { // north
+                DrawWallBlock(wallTile, tx, ty - 2, layerIndex);
+            }
+            if (state->maze[cy][cx].walls & 2) { // east
+                DrawWallBlock(wallTile, tx + 1, ty, layerIndex);
+            }
+            if (state->maze[cy][cx].walls & 4) { // south
+                DrawWallBlock(wallTile, tx, ty + 1, layerIndex);
+            }
+            if (state->maze[cy][cx].walls & 8) { // west
+                DrawWallBlock(wallTile, tx - 2, ty, layerIndex);
             }
 
-            // East wall
-            if (state->maze[cy][cx].walls & 2)
-            {
-                SetTileType(
-                    wallTile,
-                    TILE_POS((tx + 1), (ty)),
-                            layerIndex
-                );
-            }
-
-            // South wall
-            if (state->maze[cy][cx].walls & 4)
-            {
-                SetTileType(
-                    wallTile,
-                    TILE_POS((tx), (ty + 1)),
-                            layerIndex
-                );
-            }
-
-            // West wall
-            if (state->maze[cy][cx].walls & 8)
-            {
-                SetTileType(
-                    wallTile,
-                    TILE_POS((tx - 1), (ty)),
-                            layerIndex
-                );
-            }
         }
     }
 
