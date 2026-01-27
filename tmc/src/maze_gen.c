@@ -104,35 +104,35 @@ static void carve_between(MazeGenState* s, int x, int y, int d) {
     s->maze[ny][nx].walls &= ~OPP_BIT[d];
 }
 /*
-static void generate_cells(MazeGenState* s, u32 seed) {
-    int sx, sy, dirs[4], n, ri, d, nx, ny;
-    CellPos cur;
-
-    s->rng_state = seed ? seed : 0xA5A5A5A5u;
-    init_cells(s);
-
-    sx = (int)local_rng_range(s, MAZE_CELLS_X);
-    sy = (int)local_rng_range(s, MAZE_CELLS_Y);
-
-    s->maze[sy][sx].visited = 1;
-    push_cell(s, sx, sy);
-
-    while (s->stackTop > 0) {
-        cur = s->stack[s->stackTop - 1];
-        n = count_unvisited_neighbors(s, cur.x, cur.y, dirs);
-        if (n == 0) {
-            pop_cell(s);
-            continue;
-        }
-        ri = (int)local_rng_range(s, (u32)n);
-        d = dirs[ri];
-        carve_between(s, cur.x, cur.y, d);
-        nx = cur.x + DIR_DX[d];
-        ny = cur.y + DIR_DY[d];
-        s->maze[ny][nx].visited = 1;
-        push_cell(s, nx, ny);
-    }
-}*/
+ * static void generate_cells(MazeGenState* s, u32 seed) {
+ *    int sx, sy, dirs[4], n, ri, d, nx, ny;
+ *    CellPos cur;
+ *
+ *    s->rng_state = seed ? seed : 0xA5A5A5A5u;
+ *    init_cells(s);
+ *
+ *    sx = (int)local_rng_range(s, MAZE_CELLS_X);
+ *    sy = (int)local_rng_range(s, MAZE_CELLS_Y);
+ *
+ *    s->maze[sy][sx].visited = 1;
+ *    push_cell(s, sx, sy);
+ *
+ *    while (s->stackTop > 0) {
+ *        cur = s->stack[s->stackTop - 1];
+ *        n = count_unvisited_neighbors(s, cur.x, cur.y, dirs);
+ *        if (n == 0) {
+ *            pop_cell(s);
+ *            continue;
+ *        }
+ *        ri = (int)local_rng_range(s, (u32)n);
+ *        d = dirs[ri];
+ *        carve_between(s, cur.x, cur.y, d);
+ *        nx = cur.x + DIR_DX[d];
+ *        ny = cur.y + DIR_DY[d];
+ *        s->maze[ny][nx].visited = 1;
+ *        push_cell(s, nx, ny);
+ *    }
+ * }*/
 static void DrawWallBlock(u16 tile, int x, int y, int layer) {
     SetTileType(tile, TILE_POS(x, y), layer);
     SetTileType(tile, TILE_POS((x+1), y), layer);
@@ -156,7 +156,7 @@ static void generate_cells(MazeGenState* s, u32 seed) {
 
     while (s->stackTop > 0) {
 
-        if (++iter > MAZE_DEBUG_LIMIT)
+        if (++iter > 512)
             break;
 
         cur = s->stack[s->stackTop - 1];
@@ -270,8 +270,10 @@ void GenerateAndApplyMaze(int layerIndex, u32 seed) {
     if (roomH > 64) roomH = 64;
 
     /* ---- 1. Sample center tiles ---- */
+    /* ---- 1. Sample center tiles ---- */
     floorTile = SampleCenterFloorTile(layerIndex, roomW, roomH);
     wallTile = SampleWallTile(layerIndex, roomW, roomH);
+
 
 
     /* ---- 2. Clear entire room ---- */
@@ -285,10 +287,10 @@ void GenerateAndApplyMaze(int layerIndex, u32 seed) {
 
     if (startX < 1) startX = 1;
     if (startY < 1) startY = 1;
-     mazeW = (MAZE_CELLS_X * 2) + 1;
-     mazeH = (MAZE_CELLS_Y * 2) + 1;
+    mazeW = (MAZE_CELLS_X * 2) + 1;
+    mazeH = (MAZE_CELLS_Y * 2) + 1;
 
-    for (x = 0; x < mazeW; x += 2) {
+    for (x = -2; x < (mazeW + 2); x += 2) {
         DrawWallBlock(wallTile, (startX + x), (startY - 2), layerIndex);
         DrawWallBlock(wallTile, (startX + x), (startY + mazeH), layerIndex);
     }
