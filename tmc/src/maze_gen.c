@@ -330,7 +330,6 @@ void GenerateAndApplyMaze(int layerIndex, u32 seed) {
 
         }
     }
-
     gUpdateVisibleTiles = 1;
 }
 
