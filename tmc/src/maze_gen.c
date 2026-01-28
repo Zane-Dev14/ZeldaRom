@@ -233,7 +233,7 @@ void GenerateAndApplyMaze(int layerIndex, u32 seed) {
     int roomW, roomH;
     int startX, startY;
     int mazeW, mazeH;
-    int cx, cy, tx, ty;
+    int cx, cy, tx, ty ,ex ,ey ,exitX ,exitY;
     int x, y;
     u16 floorTile, wallTile;
 
@@ -315,15 +315,11 @@ void GenerateAndApplyMaze(int layerIndex, u32 seed) {
     /* ===================================================== */
     /* 4) BOTTOM ENTRANCE OPENING (CENTERED)                  */
     /* ===================================================== */
+    ex = startX + (mazeW >> 1);
+    ey =( startY + mazeH);
 
-    {
-        int ex = startX + (mazeW >> 1);
-        int ey =( startY + mazeH);
-
-        SetTileType(floorTile, TILE_POS(ex, ey), layerIndex);
-        SetTileType(floorTile, TILE_POS(ex, (ey - 1)), layerIndex);
-
-    }
+    SetTileType(floorTile, TILE_POS(ex, ey), layerIndex);
+    SetTileType(floorTile, TILE_POS(ex, (ey - 1)), layerIndex);
 
     /* ===================================================== */
     /* 5) TOP-RIGHT 5x3 CLEAR FOR LEVER                       */
@@ -342,18 +338,15 @@ void GenerateAndApplyMaze(int layerIndex, u32 seed) {
     /* ===================================================== */
     /* 6) EXIT BLOCK / UNBLOCK BASED ON LEVER FLAG             */
     /* ===================================================== */
+    exitX = (startX + mazeW )- 2;
+    exitY = startY;
 
-    {
-        int exitX = (startX + mazeW )- 2;
-        int exitY = startY;
-
-        if (!CheckLocalFlag(MAZE_EXIT_FLAG)) {
-            SetTileType(wallTile, TILE_POS(exitX, exitY), layerIndex);
-            SetTileType(wallTile, TILE_POS((exitX - 1), exitY), layerIndex);
-        } else {
-            SetTileType(floorTile, TILE_POS(exitX, exitY), layerIndex);
-            SetTileType(floorTile, TILE_POS((exitX - 1), exitY), layerIndex);
-        }
+    if (!CheckLocalFlag(MAZE_EXIT_FLAG)) {
+        SetTileType(wallTile, TILE_POS(exitX, exitY), layerIndex);
+        SetTileType(wallTile, TILE_POS((exitX - 1), exitY), layerIndex);
+    } else {
+        SetTileType(floorTile, TILE_POS(exitX, exitY), layerIndex);
+        SetTileType(floorTile, TILE_POS((exitX - 1), exitY), layerIndex);
     }
 
     gUpdateVisibleTiles = 1;
