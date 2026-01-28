@@ -2183,7 +2183,7 @@ void sub_StateChange_DeepwoodShrine_DoubleStatue(void) {
 u32 sub_unk3_DeepwoodShrine_Map(void) {
     int x;
     for (x = 0; x < 64; x++) {
-        SetTileType(TILE_TYPE_372, TILE_POS(x, 10), LAYER_BOTTOM);
+        SetTileType(0, TILE_POS(x, 10), LAYER_BOTTOM);
     }
     return 1;
 }
@@ -2237,13 +2237,96 @@ u32 sub_unk3_DeepwoodShrine_Pillars(void) {
 }
 void sub_StateChange_DeepwoodShrine_Pillars(void) {
 }
+#include "enemy.h"
+#include "room.h"
+#include "flags.h"
 
 u32 sub_unk3_DeepwoodShrine_Lever(void) {
+    Entity* e;
+    int roomW;
+    int roomH;
+
+    /* Only spawn once */
+    if (CheckLocalFlag(0x60)) {
+        return 1;
+    }
+    SetLocalFlag(0x60);
+
+    roomW = (gRoomControls.width >> 4);
+    roomH = (gRoomControls.height >> 4);
+
+    /* ===============================
+     * 1) Dark Nut – top right corner
+     * =============================== */
+    e = CreateEnemy(DARK_NUT, 0);
+    if (e != NULL) {
+        e->x.HALF.HI = ((roomW - 3) << 4);
+        e->y.HALF.HI = ((2) << 4);
+    }
+
+    /* ===============================
+     * 2) Five Wizzrobe Fires – scattered
+     * =============================== */
+    e = CreateEnemy(WIZZROBE_FIRE, 0);
+    if (e != NULL) {
+        e->x.HALF.HI = ((roomW >> 1) << 4);
+        e->y.HALF.HI = ((roomH >> 1) << 4);
+    }
+
+    e = CreateEnemy(WIZZROBE_FIRE, 0);
+    if (e != NULL) {
+        e->x.HALF.HI = ((4) << 4);
+        e->y.HALF.HI = ((4) << 4);
+    }
+
+    e = CreateEnemy(WIZZROBE_FIRE, 0);
+    if (e != NULL) {
+        e->x.HALF.HI = ((roomW - 5) << 4);
+        e->y.HALF.HI = ((4) << 4);
+    }
+
+    e = CreateEnemy(WIZZROBE_FIRE, 0);
+    if (e != NULL) {
+        e->x.HALF.HI = ((4) << 4);
+        e->y.HALF.HI = ((roomH - 5) << 4);
+    }
+
+    e = CreateEnemy(WIZZROBE_FIRE, 0);
+    if (e != NULL) {
+        e->x.HALF.HI = ((roomW - 5) << 4);
+        e->y.HALF.HI = ((roomH - 5) << 4);
+    }
+
+    /* ===============================
+     * 3) Three Bow Moblins – perimeter
+     * =============================== */
+    e = CreateEnemy(BOW_MOBLIN, 0);
+    if (e != NULL) {
+        e->x.HALF.HI = ((roomW >> 1) << 4);
+        e->y.HALF.HI = ((3) << 4);
+    }
+
+    e = CreateEnemy(BOW_MOBLIN, 0);
+    if (e != NULL) {
+        e->x.HALF.HI = ((3) << 4);
+        e->y.HALF.HI = ((roomH >> 1) << 4);
+    }
+
+    e = CreateEnemy(BOW_MOBLIN, 0);
+    if (e != NULL) {
+        e->x.HALF.HI = ((roomW - 4) << 4);
+        e->y.HALF.HI = ((roomH >> 1) << 4);
+    }
+
     return 1;
 }
 
 void sub_StateChange_DeepwoodShrine_Lever(void) {
+    /* Nothing needed here.
+     * All logic handled in sub_unk3_DeepwoodShrine_Lever.
+     */
 }
+
 u32 sub_unk3_DeepwoodShrine_Entrance(void) {
 
     return 1;

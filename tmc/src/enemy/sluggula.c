@@ -83,7 +83,7 @@ void sub_08023C8C(Entity* this) {
         }
     }
 }
-
+/*
 void sub_08023CE0(Entity* this) {
     switch (this->action) {
         case 0:
@@ -128,7 +128,7 @@ void sub_08023CE0(Entity* this) {
             GetNextFrame(this);
             if (this->frame) {
                 if (this->frame & ANIM_DONE) {
-                    Entity* entity = CreateEnemy(SLUGGULA, 1);
+                    Entity* entity = CreateEnemy(DARK_NUT, 0);
                     if (entity != NULL) {
                         EnemyCopyParams(this, entity);
                         DeleteThisEntity();
@@ -139,6 +139,121 @@ void sub_08023CE0(Entity* this) {
                 }
             }
             break;
+    }
+}*/
+#define ROOMFLAG_MAZE_SPAWN_STAGE  0x10
+
+#include "flags.h"
+void sub_08023CE0(Entity* this) {
+    Entity* entity;
+    int i;
+
+    /* pixel offsets (small spread, safe) */
+    static const s8 offsets[9][2] = {
+        {  0,   0 },   /* Darknut (center) */
+
+        { -16, -16 },  /* Wizzrobes */
+        {  16, -16 },
+        { -16,  16 },
+        {  16,  16 },
+        {   0,  24 },
+
+        { -24,   0 },  /* Bow Moblins */
+        {  24,   0 },
+        {   0, -24 },
+    };
+    switch (this->action) {
+        case 0:
+            sub_0804A720(this);
+            if (this->type2 == 1) {
+                this->action = 2;
+                if (this->timer == 0) {
+                    this->timer = 1;
+                }
+                this->spriteSettings.draw = 3;
+            } else {
+                this->action = 1;
+            }
+            this->z.HALF.HI = -0x80;
+            this->spriteRendering.b3 = 1;
+            this->spriteOrientation.flipY = 1;
+            InitializeAnimation(this, 6);
+            break;
+
+        case 1:
+            if (PlayerInRange(this, 1, 0x20)) {
+                this->action = 2;
+                if (this->timer == 0) {
+                    this->timer = 8;
+                }
+                this->spriteSettings.draw = 3;
+            }
+            break;
+
+        case 2:
+            if (this->timer != 0) {
+                if (--this->timer == 0) {
+                    EnqueueSFX(SFX_12D);
+                    InitializeAnimation(this, 4);
+                }
+            } else if (!GravityUpdate(this, Q_8_8(24))) {
+                this->action = 3;
+                this->spriteSettings.draw = 1;
+                EnqueueSFX(SFX_WATER_SPLASH);
+                UpdateSpriteForCollisionLayer(this);
+            }
+            break;
+        default:
+            GetNextFrame(this);
+            if (this->frame) {
+                if (this->frame & ANIM_DONE) {
+                    Entity* entity;
+                    int i;
+
+                    /* ---- Stage 0: Darknut ---- */
+                    if (!CheckRoomFlag(ROOMFLAG_MAZE_SPAWN_STAGE)) {
+                        entity = CreateEnemy(DARK_NUT, 0);
+                        if (entity) {
+                            EnemyCopyParams(this, entity);
+                            SetRoomFlag(ROOMFLAG_MAZE_SPAWN_STAGE);
+                        }
+                    }
+                    /* ---- Stage 1: 6 Wizzrobes ---- */
+                    else if (!CheckRoomFlag(ROOMFLAG_MAZE_SPAWN_STAGE + 1)) {
+                        for (i = 0; i < 6; i++) {
+                            entity = CreateEnemy(WIZZROBE_FIRE, 0);
+                            if (entity) {
+                                EnemyCopyParams(this, entity);
+                                entity->x.HALF.HI += offsets[i + 1][0];
+                                entity->y.HALF.HI += offsets[i + 1][1];
+                            }
+                        }
+                        SetRoomFlag(ROOMFLAG_MAZE_SPAWN_STAGE + 1);
+                    }
+                    /* ---- Stage 2: 3 Bow Moblins ---- */
+                    else if (!CheckRoomFlag(ROOMFLAG_MAZE_SPAWN_STAGE + 2)) {
+                        for (i = 0; i < 3; i++) {
+                            entity = CreateEnemy(BOW_MOBLIN, 0);
+                            if (entity) {
+                                EnemyCopyParams(this, entity);
+                                entity->x.HALF.HI += offsets[i + 7][0];
+                                entity->y.HALF.HI += offsets[i + 7][1];
+                            }
+                        }
+                        SetRoomFlag(ROOMFLAG_MAZE_SPAWN_STAGE + 2);
+                    }
+
+                    DeleteThisEntity();
+                } else {
+                    this->y.HALF.HI += gUnk_080CBDF4[this->frame - 1];
+                    this->frame = 0;
+                }
+            }
+            break;
+
+
+
+
     }
 }
 
@@ -155,17 +270,32 @@ void sub_08023E10(Entity* this) {
 }
 
 void sub_08023E54(Entity* this) {
-    Entity* entity;
+    Entity* e;
+    int i;
+    static const s8 offsets[5][2] = {
+        { -16, -16 },
+        {  16, -16 },
+        { -16,  16 },
+        {  16,  16 },
+        {   0,   0 },
+    };
 
-    if (this->subtimer++ > 27) {
-        this->subtimer = 0;
-        entity = CreateEnemy(SLUGGULA, 2);
-        if (entity != NULL) {
-            const s8* ptr = &gUnk_080CBDF7[this->animationState * 2];
-            PositionRelative(this, entity, Q_16_16(ptr[0]), Q_16_16(ptr[1]));
+
+    SetLocalFlag(0x60);
+
+    for (i = 0; i < 1; i++) {
+        e = CreateEnemy(WIZZROBE_FIRE, 0);
+        if (e != NULL) {
+            PositionRelative(
+                this,
+                e,
+                Q_16_16(offsets[i][0]),
+                             Q_16_16(offsets[i][1])
+            );
         }
     }
 }
+
 
 extern Entity* gUnk_020000B0;
 

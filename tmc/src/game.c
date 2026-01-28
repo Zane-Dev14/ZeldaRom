@@ -197,7 +197,11 @@ static void GameMain_ChangeRoom(void) {
     UpdateBgAnimations();
 
     if (gRoomControls.area == AREA_DEEPWOOD_SHRINE) {
-         GenerateAndApplyMaze(LAYER_BOTTOM, gRand);
+        seed = gRand;
+        seed ^= gMain.ticks;
+        seed ^= (gRoomControls.room << 8);
+        seed ^= (gRoomControls.area << 16);
+         GenerateAndApplyMaze(LAYER_BOTTOM, seed);
 
     }
     UpdateScrollVram();
