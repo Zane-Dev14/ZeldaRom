@@ -234,7 +234,7 @@ void GenerateAndApplyMaze(int layerIndex, u32 seed) {
     int startX, startY;
     int mazeW, mazeH;
     int cx, cy, tx, ty ,ex ,ey ,exitX ,exitY;
-    int x, y;
+    int x, y,wx;
     u16 floorTile, wallTile;
 
     layer = GetLayerByIndex(layerIndex);
@@ -271,8 +271,17 @@ void GenerateAndApplyMaze(int layerIndex, u32 seed) {
         for (x = 0; x < roomW; x++) {
             if (x < startX || x >= (startX + mazeW) ||
                 y < startY || y >= (startY + mazeH)) {
-                SetTileType(wallTile, TILE_POS(x, y), layerIndex);
+
+                /* Skip top-right 6x3 lever space */
+                if (x >= (((startX + mazeW) - 6)) &&
+                    y >= startY &&
+                    y < (startY + 3)) {
+                    continue;
+                    }
+
+                    SetTileType(wallTile, TILE_POS(x, y), layerIndex);
                 }
+
         }
     }
 
@@ -301,16 +310,21 @@ void GenerateAndApplyMaze(int layerIndex, u32 seed) {
     /* ===================================================== */
     /* 3) FIX NORTH + SOUTH BORDERS (THE BUG YOU SAW)         */
     /* ===================================================== */
-
     for (x = 0; x < mazeW; x++) {
-        SetTileType(wallTile,
-                    TILE_POS((startX + x), startY),
-                    layerIndex);
+        wx = (startX + x);
 
-        SetTileType(wallTile,
-                    TILE_POS((startX + x), ((startY + mazeH) - 1)),
-                    layerIndex);
+        /* Skip top-right 6x3 lever area */
+        if (wx >= (((startX + mazeW )- 6)))
+            continue;
+
+        SetTileType(
+            wallTile,
+            TILE_POS(wx, startY),
+                    layerIndex
+        );
     }
+
+
 
     /* ===================================================== */
     /* 4) BOTTOM ENTRANCE OPENING (CENTERED)                  */
