@@ -235,6 +235,7 @@ void GenerateAndApplyMaze(int layerIndex, u32 seed) {
     int mazeW, mazeH;
     int cx, cy, tx, ty ,ex ,ey ,exitX ,exitY;
     int x, y,wx;
+    int  SAFE_X_MIN, SAFE_Y_MIN,SAFE_X_MAX,SAFE_Y_MAX;
     u16 floorTile, wallTile;
 
     layer = GetLayerByIndex(layerIndex);
@@ -248,42 +249,25 @@ void GenerateAndApplyMaze(int layerIndex, u32 seed) {
 
     floorTile = SampleCenterFloorTile(layerIndex, roomW, roomH);
     wallTile  = SampleWallTile(layerIndex, roomW, roomH);
-
-    /* clear entire room to floor FIRST */
-    ClearRoomWithTile(layerIndex, floorTile);
-
-    /* generate maze (UNCHANGED) */
-    generate_cells(state, seed);
-
     mazeW = (MAZE_CELLS_X * 2) + 1;
     mazeH = (MAZE_CELLS_Y * 2) + 1;
 
     startX = (roomW - mazeW) >> 1;
     startY = (roomH - mazeH) >> 1;
+
     if (startX < 1) startX = 1;
     if (startY < 1) startY = 1;
+    SAFE_X_MIN = 2;
+    SAFE_Y_MIN = 2;
+    SAFE_X_MAX = (roomW - 3);
+    SAFE_Y_MAX = (roomH - 3);
 
-    /* ===================================================== */
-    /* 1) FILL OUTSIDE OF MAZE (THIS WAS MISSING)             */
-    /* ===================================================== */
+    /* clear entire room to floor FIRST */
+    ClearRoomWithTile(layerIndex, floorTile);
 
-    for (y = 0; y < roomH; y++) {
-        for (x = 0; x < roomW; x++) {
-            if (x < startX || x >= (startX + mazeW) ||
-                y < startY || y >= (startY + mazeH)) {
 
-                /* Skip top-right 6x3 lever space */
-                if (x >= (((startX + mazeW) - 6)) &&
-                    y >= startY &&
-                    y < (startY + 3)) {
-                    continue;
-                    }
-
-                    SetTileType(wallTile, TILE_POS(x, y), layerIndex);
-                }
-
-        }
-    }
+    /* generate maze (UNCHANGED) */
+    generate_cells(state, seed);
 
     /* ===================================================== */
     /* 2) DRAW MAZE (UNCHANGED LOGIC)                         */
@@ -330,15 +314,15 @@ void GenerateAndApplyMaze(int layerIndex, u32 seed) {
     /* 4) BOTTOM ENTRANCE OPENING (CENTERED)                  */
     /* ===================================================== */
     ex = startX + (mazeW >> 1);
-    ey =( startY + mazeH);
+    ey =( (startY + mazeH) -1);
 
     SetTileType(floorTile, TILE_POS(ex, ey), layerIndex);
     SetTileType(floorTile, TILE_POS(ex, (ey - 1)), layerIndex);
 
     /* ===================================================== */
-    /* 5) TOP-RIGHT 5x3 CLEAR FOR LEVER                       */
+    /* 5) TOP-RIGHT 6x3 CLEAR FOR LEVER                       */
     /* ===================================================== */
-    for (y = 0; y < 4; y++) {
+    for (y = 1; y <=4; y++) {
         for (x = 0; x < 6; x++) {
             SetTileType(
                 floorTile,
@@ -347,6 +331,15 @@ void GenerateAndApplyMaze(int layerIndex, u32 seed) {
             );
         }
     }
+    /* Clear lever pull path (downwards) */
+    for (y = 4; y <= 7; y++) {
+        SetTileType(
+            floorTile,
+            TILE_POS(((startX + mazeW) - 3), (startY + y)),
+                    layerIndex
+        );
+    }
+
 
 
     /* ===================================================== */
@@ -355,12 +348,40 @@ void GenerateAndApplyMaze(int layerIndex, u32 seed) {
     exitX = (startX + mazeW )- 2;
     exitY = startY;
 
-    if (!CheckLocalFlag(MAZE_EXIT_FLAG)) {
+    if (!CheckLocalFlag(0xC6)) {
         SetTileType(wallTile, TILE_POS(exitX, exitY), layerIndex);
         SetTileType(wallTile, TILE_POS((exitX - 1), exitY), layerIndex);
     } else {
         SetTileType(floorTile, TILE_POS(exitX, exitY), layerIndex);
         SetTileType(floorTile, TILE_POS((exitX - 1), exitY), layerIndex);
+    }
+    /* ===================================================== */
+    /* 7) FILL OUTSIDE MAZE (MUST BE LAST)                    */
+    /* ===================================================== */
+    for (y = 0; y < roomH; y++) {
+        for (x = 0; x < roomW; x++) {
+
+            /* outside maze footprint */
+            if (x < startX || x > (((startX + mazeW) - 1)) ||
+                y < startY || y > (((startY + mazeH) - 1))) {
+
+                /* skip bottom entrance (3 wide) */
+                if (y == (startY + mazeH - 1) &&
+                    x >= (((startX + (mazeW >> 1)) - 1)) &&
+                    x <= (((startX + (mazeW >> 1)) + 1))) {
+                    continue;
+                    }
+
+                    /* skip top-right 6x3 lever area */
+                    if (x >= (startX + mazeW - 6) &&
+                        y >= startY &&
+                        y <  (startY + 3)) {
+                        continue;
+                        }
+
+                        SetTileType(wallTile, TILE_POS(x, y), layerIndex);
+                }
+        }
     }
 
     gUpdateVisibleTiles = 1;
